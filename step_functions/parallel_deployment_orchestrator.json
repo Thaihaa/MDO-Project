@@ -1,0 +1,327 @@
+{
+  "Comment": "Parallel Microservices Deployment Orchestrator with Dynamic Dependencies",
+  "StartAt": "InitializeDeployment",
+  "States": {
+    "InitializeDeployment": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "deployment-initializer",
+        "Payload.$": "$"
+      },
+      "ResultPath": "$.initResult",
+      "Next": "AnalyzeDependencies",
+      "Retry": [
+        {
+          "ErrorEquals": ["States.TaskFailed"],
+          "IntervalSeconds": 2,
+          "MaxAttempts": 3,
+          "BackoffRate": 2.0
+        }
+      ],
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "DeploymentFailed",
+          "ResultPath": "$.error"
+        }
+      ]
+    },
+    "AnalyzeDependencies": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "dependency-analyzer",
+        "Payload": {
+          "services.$": "$.services",
+          "deployment_context.$": "$.initResult.Payload.deployment_context",
+          "strategy.$": "$.strategy"
+        }
+      },
+      "ResultPath": "$.dependencyAnalysis",
+      "Next": "DeploymentWaveChoice"
+    },
+    "DeploymentWaveChoice": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.dependencyAnalysis.Payload.strategy",
+          "StringEquals": "parallel_optimized",
+          "Next": "ParallelWaveDeployment"
+        },
+        {
+          "Variable": "$.dependencyAnalysis.Payload.strategy", 
+          "StringEquals": "sequential",
+          "Next": "SequentialDeployment"
+        }
+      ],
+      "Default": "ParallelWaveDeployment"
+    },
+    "ParallelWaveDeployment": {
+      "Type": "Map",
+      "ItemsPath": "$.dependencyAnalysis.Payload.deployment_waves",
+      "MaxConcurrency": 1,
+      "ResultPath": "$.waveResults",
+      "Iterator": {
+        "StartAt": "ProcessWave",
+        "States": {
+          "ProcessWave": {
+            "Type": "Choice",
+            "Choices": [
+              {
+                "Variable": "$.allow_parallel",
+                "BooleanEquals": true,
+                "Next": "ParallelServiceDeployment"
+              }
+            ],
+            "Default": "SequentialServiceDeployment"
+          },
+          "ParallelServiceDeployment": {
+            "Type": "Parallel",
+            "Branches": [
+              {
+                "StartAt": "DeployService1",
+                "States": {
+                  "DeployService1": {
+                    "Type": "Task",
+                    "Resource": "arn:aws:states:::lambda:invoke",
+                    "Parameters": {
+                      "FunctionName": "microservice-deployer",
+                      "Payload": {
+                        "service_name.$": "$.services[0]",
+                        "deployment_context.$": "$.deployment_context"
+                      }
+                    },
+                    "ResultPath": "$.deployResult",
+                    "Next": "HealthCheckService1"
+                  },
+                  "HealthCheckService1": {
+                    "Type": "Task",
+                    "Resource": "arn:aws:states:::lambda:invoke",
+                    "Parameters": {
+                      "FunctionName": "health-checker",
+                      "Payload": {
+                        "service_name.$": "$.services[0]",
+                        "deployment_result.$": "$.deployResult.Payload"
+                      }
+                    },
+                    "End": true
+                  }
+                }
+              },
+              {
+                "StartAt": "DeployService2",
+                "States": {
+                  "DeployService2": {
+                    "Type": "Task",
+                    "Resource": "arn:aws:states:::lambda:invoke",
+                    "Parameters": {
+                      "FunctionName": "microservice-deployer",
+                      "Payload": {
+                        "service_name.$": "$.services[1]",
+                        "deployment_context.$": "$.deployment_context"
+                      }
+                    },
+                    "ResultPath": "$.deployResult",
+                    "Next": "HealthCheckService2",
+                    "Catch": [
+                      {
+                        "ErrorEquals": ["States.ALL"],
+                        "Next": "ServiceDeployFailed",
+                        "ResultPath": "$.error"
+                      }
+                    ]
+                  },
+                  "HealthCheckService2": {
+                    "Type": "Task",
+                    "Resource": "arn:aws:states:::lambda:invoke",
+                    "Parameters": {
+                      "FunctionName": "health-checker",
+                      "Payload": {
+                        "service_name.$": "$.services[1]",
+                        "deployment_result.$": "$.deployResult.Payload"
+                      }
+                    },
+                    "End": true
+                  },
+                  "ServiceDeployFailed": {
+                    "Type": "Fail",
+                    "Cause": "Service deployment failed"
+                  }
+                }
+              }
+            ],
+            "ResultPath": "$.parallelResults",
+            "Next": "ValidateWaveSuccess"
+          },
+          "SequentialServiceDeployment": {
+            "Type": "Map",
+            "ItemsPath": "$.services",
+            "MaxConcurrency": 1,
+            "ResultPath": "$.sequentialResults",
+            "Iterator": {
+              "StartAt": "DeploySequentialService",
+              "States": {
+                "DeploySequentialService": {
+                  "Type": "Task",
+                  "Resource": "arn:aws:states:::lambda:invoke",
+                  "Parameters": {
+                    "FunctionName": "microservice-deployer",
+                    "Payload": {
+                      "service_name.$": "$",
+                      "deployment_context.$": "$$.Execution.Input.initResult.Payload.deployment_context"
+                    }
+                  },
+                  "ResultPath": "$.deployResult",
+                  "Next": "HealthCheckSequentialService"
+                },
+                "HealthCheckSequentialService": {
+                  "Type": "Task",
+                  "Resource": "arn:aws:states:::lambda:invoke",
+                  "Parameters": {
+                    "FunctionName": "health-checker",
+                    "Payload": {
+                      "service_name.$": "$",
+                      "deployment_result.$": "$.deployResult.Payload"
+                    }
+                  },
+                  "End": true
+                }
+              }
+            },
+            "Next": "ValidateWaveSuccess"
+          },
+          "ValidateWaveSuccess": {
+            "Type": "Task",
+            "Resource": "arn:aws:states:::lambda:invoke",
+            "Parameters": {
+              "FunctionName": "wave-validator",
+              "Payload": {
+                "wave_number.$": "$.wave_number",
+                "services.$": "$.services",
+                "results.$": "$.sequentialResults"
+              }
+            },
+            "End": true
+          }
+        }
+      },
+      "Next": "FinalSystemValidation"
+    },
+    "SequentialDeployment": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "sequential-deployer",
+        "Payload": {
+          "services.$": "$.services",
+          "deployment_context.$": "$.initResult.Payload.deployment_context"
+        }
+      },
+      "ResultPath": "$.sequentialResult",
+      "Next": "FinalSystemValidation"
+    },
+    "FinalSystemValidation": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "final-health-checker",
+        "Payload": {
+          "deployment_context.$": "$.initResult.Payload.deployment_context",
+          "all_services.$": "$.services",
+          "deployment_results.$": "$.waveResults"
+        }
+      },
+      "ResultPath": "$.finalValidation",
+      "Next": "FinalValidationChoice",
+      "Retry": [
+        {
+          "ErrorEquals": ["States.TaskFailed"],
+          "IntervalSeconds": 10,
+          "MaxAttempts": 3,
+          "BackoffRate": 1.5
+        }
+      ]
+    },
+    "FinalValidationChoice": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.finalValidation.Payload.statusCode",
+          "NumericEquals": 200,
+          "Next": "GenerateDeploymentReport"
+        }
+      ],
+      "Default": "DeploymentFailed"
+    },
+    "GenerateDeploymentReport": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "deployment-reporter",
+        "Payload": {
+          "deployment_context.$": "$.initResult.Payload.deployment_context",
+          "wave_results.$": "$.waveResults",
+          "final_validation.$": "$.finalValidation.Payload",
+          "strategy.$": "$.dependencyAnalysis.Payload.strategy"
+        }
+      },
+      "ResultPath": "$.deploymentReport",
+      "Next": "SendSuccessNotification"
+    },
+    "SendSuccessNotification": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "deployment-notifier",
+        "Payload": {
+          "deployment_context.$": "$.initResult.Payload.deployment_context",
+          "status": "SUCCESS",
+          "message": "Parallel deployment completed successfully",
+          "deployment_report.$": "$.deploymentReport.Payload",
+          "parallel_optimization": true
+        }
+      },
+      "ResultPath": "$.notificationResult",
+      "Next": "DeploymentSuccess"
+    },
+    "DeploymentSuccess": {
+      "Type": "Succeed",
+      "Comment": "Parallel deployment completed successfully"
+    },
+    "DeploymentFailed": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "deployment-rollback",
+        "Payload": {
+          "deployment_context.$": "$.initResult.Payload.deployment_context",
+          "error.$": "$.error",
+          "partial_results.$": "$.waveResults",
+          "rollback_strategy": "intelligent"
+        }
+      },
+      "ResultPath": "$.rollbackResult",
+      "Next": "SendFailureNotification"
+    },
+    "SendFailureNotification": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "deployment-notifier",
+        "Payload": {
+          "deployment_context.$": "$.initResult.Payload.deployment_context",
+          "status": "FAILED",
+          "message": "Parallel deployment failed and rollback initiated",
+          "error_details.$": "$.error",
+          "rollback_result.$": "$.rollbackResult.Payload"
+        }
+      },
+      "Next": "DeploymentFailedEnd"
+    },
+    "DeploymentFailedEnd": {
+      "Type": "Fail",
+      "Comment": "Parallel deployment failed after rollback"
+    }
+  }
+} 

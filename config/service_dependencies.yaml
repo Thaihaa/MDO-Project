@@ -1,0 +1,67 @@
+# Service Dependencies Configuration
+# Định nghĩa dependencies động cho microservices deployment
+
+services:
+  auth-service:
+    dependencies: []  # Không phụ thuộc service nào
+    priority: 1       # Ưu tiên cao nhất
+    parallel_group: 1 # Nhóm deployment đầu tiên
+    
+  menu-service:
+    dependencies: ["auth-service"]  # Phụ thuộc auth-service
+    priority: 2
+    parallel_group: 2
+    
+  order-service:
+    dependencies: ["auth-service", "menu-service"]  # Phụ thuộc auth và menu
+    priority: 3
+    parallel_group: 3
+    
+  payment-service:
+    dependencies: ["auth-service"]  # Chỉ phụ thuộc auth, có thể deploy song song với menu
+    priority: 2
+    parallel_group: 2
+    
+  notification-service:
+    dependencies: ["auth-service"]  # Service mới có thể thêm vào
+    priority: 2
+    parallel_group: 2
+    
+  analytics-service:
+    dependencies: ["order-service", "payment-service"]  # Phụ thuộc order và payment
+    priority: 4
+    parallel_group: 4
+
+# Deployment strategies
+deployment_strategies:
+  sequential:
+    description: "Deploy theo thứ tự strict dependencies"
+    allow_parallel: false
+    
+  parallel_optimized:
+    description: "Deploy song song các services trong cùng parallel_group"
+    allow_parallel: true
+    max_concurrent: 3
+    
+  priority_based:
+    description: "Deploy theo priority, song song trong cùng priority level"
+    allow_parallel: true
+    max_concurrent: 2
+
+# Health check dependencies
+health_check_dependencies:
+  auth-service: []
+  menu-service: ["auth-service"]
+  order-service: ["auth-service", "menu-service"]
+  payment-service: ["auth-service"]
+  notification-service: ["auth-service"]
+  analytics-service: ["order-service", "payment-service"]
+
+# Rollback dependencies (reverse order)
+rollback_order:
+  - "analytics-service"
+  - "notification-service"
+  - "order-service" 
+  - "payment-service"
+  - "menu-service"
+  - "auth-service" 

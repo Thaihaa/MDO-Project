@@ -1,0 +1,355 @@
+{
+  "Comment": "Restaurant Microservices Deployment Orchestrator - Working Version",
+  "StartAt": "InitializeDeployment",
+  "States": {
+    "InitializeDeployment": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "deployment-initializer",
+        "Payload.$": "$"
+      },
+      "ResultPath": "$.initResult",
+      "Next": "DeployAuthService",
+      "Retry": [
+        {
+          "ErrorEquals": ["States.TaskFailed"],
+          "IntervalSeconds": 2,
+          "MaxAttempts": 3,
+          "BackoffRate": 2.0
+        }
+      ],
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "DeploymentFailed",
+          "ResultPath": "$.error"
+        }
+      ]
+    },
+    "DeployAuthService": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "microservice-deployer",
+        "Payload": {
+          "service_name": "auth-service",
+          "deployment_context.$": "$.initResult.Payload.deployment_context"
+        }
+      },
+      "ResultPath": "$.authServiceResult",
+      "Next": "CheckAuthHealth",
+      "Retry": [
+        {
+          "ErrorEquals": ["States.TaskFailed"],
+          "IntervalSeconds": 5,
+          "MaxAttempts": 3,
+          "BackoffRate": 2.0
+        }
+      ],
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "DeploymentFailed",
+          "ResultPath": "$.error"
+        }
+      ]
+    },
+    "CheckAuthHealth": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "health-checker",
+        "Payload": {
+          "service_name": "auth-service",
+          "deployment_result.$": "$.authServiceResult.Payload"
+        }
+      },
+      "ResultPath": "$.authHealthCheck",
+      "Next": "AuthHealthChoice",
+      "Retry": [
+        {
+          "ErrorEquals": ["States.TaskFailed"],
+          "IntervalSeconds": 10,
+          "MaxAttempts": 3,
+          "BackoffRate": 1.5
+        }
+      ]
+    },
+    "AuthHealthChoice": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.authHealthCheck.Payload.statusCode",
+          "NumericEquals": 200,
+          "Next": "DeployMenuService"
+        }
+      ],
+      "Default": "DeploymentFailed"
+    },
+    "DeployMenuService": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "microservice-deployer",
+        "Payload": {
+          "service_name": "menu-service",
+          "deployment_context.$": "$.initResult.Payload.deployment_context"
+        }
+      },
+      "ResultPath": "$.menuServiceResult",
+      "Next": "CheckMenuHealth",
+      "Retry": [
+        {
+          "ErrorEquals": ["States.TaskFailed"],
+          "IntervalSeconds": 5,
+          "MaxAttempts": 3,
+          "BackoffRate": 2.0
+        }
+      ],
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "DeploymentFailed",
+          "ResultPath": "$.error"
+        }
+      ]
+    },
+    "CheckMenuHealth": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "health-checker",
+        "Payload": {
+          "service_name": "menu-service",
+          "deployment_result.$": "$.menuServiceResult.Payload"
+        }
+      },
+      "ResultPath": "$.menuHealthCheck",
+      "Next": "MenuHealthChoice",
+      "Retry": [
+        {
+          "ErrorEquals": ["States.TaskFailed"],
+          "IntervalSeconds": 10,
+          "MaxAttempts": 3,
+          "BackoffRate": 1.5
+        }
+      ]
+    },
+    "MenuHealthChoice": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.menuHealthCheck.Payload.statusCode",
+          "NumericEquals": 200,
+          "Next": "DeployOrderService"
+        }
+      ],
+      "Default": "DeploymentFailed"
+    },
+    "DeployOrderService": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "microservice-deployer",
+        "Payload": {
+          "service_name": "order-service",
+          "deployment_context.$": "$.initResult.Payload.deployment_context"
+        }
+      },
+      "ResultPath": "$.orderServiceResult",
+      "Next": "CheckOrderHealth",
+      "Retry": [
+        {
+          "ErrorEquals": ["States.TaskFailed"],
+          "IntervalSeconds": 5,
+          "MaxAttempts": 3,
+          "BackoffRate": 2.0
+        }
+      ],
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "DeploymentFailed",
+          "ResultPath": "$.error"
+        }
+      ]
+    },
+    "CheckOrderHealth": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "health-checker",
+        "Payload": {
+          "service_name": "order-service",
+          "deployment_result.$": "$.orderServiceResult.Payload"
+        }
+      },
+      "ResultPath": "$.orderHealthCheck",
+      "Next": "OrderHealthChoice",
+      "Retry": [
+        {
+          "ErrorEquals": ["States.TaskFailed"],
+          "IntervalSeconds": 10,
+          "MaxAttempts": 3,
+          "BackoffRate": 1.5
+        }
+      ]
+    },
+    "OrderHealthChoice": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.orderHealthCheck.Payload.statusCode",
+          "NumericEquals": 200,
+          "Next": "DeployPaymentService"
+        }
+      ],
+      "Default": "DeploymentFailed"
+    },
+    "DeployPaymentService": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "microservice-deployer",
+        "Payload": {
+          "service_name": "payment-service",
+          "deployment_context.$": "$.initResult.Payload.deployment_context"
+        }
+      },
+      "ResultPath": "$.paymentServiceResult",
+      "Next": "CheckPaymentHealth",
+      "Retry": [
+        {
+          "ErrorEquals": ["States.TaskFailed"],
+          "IntervalSeconds": 5,
+          "MaxAttempts": 3,
+          "BackoffRate": 2.0
+        }
+      ],
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "DeploymentFailed",
+          "ResultPath": "$.error"
+        }
+      ]
+    },
+    "CheckPaymentHealth": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "health-checker",
+        "Payload": {
+          "service_name": "payment-service",
+          "deployment_result.$": "$.paymentServiceResult.Payload"
+        }
+      },
+      "ResultPath": "$.paymentHealthCheck",
+      "Next": "PaymentHealthChoice",
+      "Retry": [
+        {
+          "ErrorEquals": ["States.TaskFailed"],
+          "IntervalSeconds": 10,
+          "MaxAttempts": 3,
+          "BackoffRate": 1.5
+        }
+      ]
+    },
+    "PaymentHealthChoice": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.paymentHealthCheck.Payload.statusCode",
+          "NumericEquals": 200,
+          "Next": "FinalHealthCheck"
+        }
+      ],
+      "Default": "DeploymentFailed"
+    },
+    "FinalHealthCheck": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "final-health-checker",
+        "Payload": {
+          "deployment_context.$": "$.initResult.Payload.deployment_context",
+          "all_services": [
+            "auth-service",
+            "menu-service", 
+            "order-service",
+            "payment-service"
+          ]
+        }
+      },
+      "ResultPath": "$.finalHealthCheck",
+      "Next": "FinalHealthChoice",
+      "Retry": [
+        {
+          "ErrorEquals": ["States.TaskFailed"],
+          "IntervalSeconds": 10,
+          "MaxAttempts": 3,
+          "BackoffRate": 1.5
+        }
+      ]
+    },
+    "FinalHealthChoice": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.finalHealthCheck.Payload.statusCode",
+          "NumericEquals": 200,
+          "Next": "SendSuccessNotification"
+        }
+      ],
+      "Default": "DeploymentFailed"
+    },
+    "SendSuccessNotification": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "deployment-notifier",
+        "Payload": {
+          "deployment_context.$": "$.initResult.Payload.deployment_context",
+          "status": "SUCCESS",
+          "message": "All microservices deployed successfully"
+        }
+      },
+      "ResultPath": "$.notificationResult",
+      "Next": "DeploymentSuccess"
+    },
+    "DeploymentSuccess": {
+      "Type": "Succeed",
+      "Comment": "Deployment completed successfully"
+    },
+    "DeploymentFailed": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "deployment-rollback",
+        "Payload": {
+          "deployment_context.$": "$.initResult.Payload.deployment_context",
+          "error.$": "$.error"
+        }
+      },
+      "Next": "SendFailureNotification"
+    },
+    "SendFailureNotification": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "deployment-notifier",
+        "Payload": {
+          "deployment_context.$": "$.initResult.Payload.deployment_context",
+          "status": "FAILED",
+          "message": "Deployment failed and rollback initiated"
+        }
+      },
+      "Next": "DeploymentFailedEnd"
+    },
+    "DeploymentFailedEnd": {
+      "Type": "Fail",
+      "Comment": "Deployment failed after rollback"
+    }
+  }
+} 

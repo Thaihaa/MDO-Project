@@ -1,0 +1,60 @@
+{
+  "Comment": "Restaurant Microservices Deployment Orchestrator - Fixed Version",
+  "StartAt": "InitializeDeployment",
+  "States": {
+    "InitializeDeployment": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "deployment-initializer",
+        "Payload.$": "$"
+      },
+      "ResultPath": "$.initResult",
+      "Next": "DeployAuthService"
+    },
+    "DeployAuthService": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "microservice-deployer",
+        "Payload": {
+          "service_name": "auth-service",
+          "deployment_context.$": "$.initResult.Payload.deployment_context"
+        }
+      },
+      "ResultPath": "$.authServiceResult",
+      "Next": "CheckAuthHealth"
+    },
+    "CheckAuthHealth": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "health-checker",
+        "Payload": {
+          "service_name": "auth-service"
+        }
+      },
+      "ResultPath": "$.authHealthCheck",
+      "Next": "AuthHealthChoice"
+    },
+    "AuthHealthChoice": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.authHealthCheck.Payload.statusCode",
+          "NumericEquals": 200,
+          "Next": "DeploymentSuccess"
+        }
+      ],
+      "Default": "DeploymentFailed"
+    },
+    "DeploymentSuccess": {
+      "Type": "Succeed",
+      "Comment": "Deployment completed successfully"
+    },
+    "DeploymentFailed": {
+      "Type": "Fail",
+      "Comment": "Deployment failed"
+    }
+  }
+} 

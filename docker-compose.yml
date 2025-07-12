@@ -1,0 +1,77 @@
+version: '3.8'
+
+services:
+  # Main deployment orchestrator service
+  deployment-orchestrator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: restaurant-deployment-orchestrator
+    environment:
+      - AWS_REGION=${AWS_REGION:-us-east-1}
+      - AWS_PROFILE=${AWS_PROFILE:-default}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN}
+    volumes:
+      - ~/.aws:/home/deployuser/.aws:ro
+      - ./config:/app/config
+      - ./logs:/app/logs
+      - ./temp:/app/temp
+    networks:
+      - deployment-network
+    command: ["python", "src/deployment_orchestrator.py", "--help"]
+
+  # Dashboard service
+  deployment-dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: restaurant-deployment-dashboard
+    environment:
+      - AWS_REGION=${AWS_REGION:-us-east-1}
+      - AWS_PROFILE=${AWS_PROFILE:-default}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN}
+    volumes:
+      - ~/.aws:/home/deployuser/.aws:ro
+      - ./config:/app/config
+      - ./logs:/app/logs
+    ports:
+      - "8080:8080"
+    networks:
+      - deployment-network
+    command: ["python", "src/deployment_dashboard.py", "dashboard", "--refresh", "30"]
+
+  # Lambda functions deployment service
+  lambda-deployer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: restaurant-lambda-deployer
+    environment:
+      - AWS_REGION=${AWS_REGION:-us-east-1}
+      - AWS_PROFILE=${AWS_PROFILE:-default}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN}
+    volumes:
+      - ~/.aws:/home/deployuser/.aws:ro
+      - ./config:/app/config
+      - ./lambda_functions:/app/lambda_functions
+      - ./scripts:/app/scripts
+    networks:
+      - deployment-network
+    command: ["python", "scripts/deploy_lambda_functions.py", "--update-stepfunctions"]
+    profiles:
+      - setup
+
+networks:
+  deployment-network:
+    driver: bridge
+
+volumes:
+  aws-credentials:
+  app-logs:
+  app-temp: 

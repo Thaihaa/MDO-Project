@@ -1,0 +1,47 @@
+# AWS Configuration cho Microservices Deployment Orchestration
+aws:
+  region: "us-east-1"  # Có thể thay đổi theo region bạn sử dụng
+  profile: "default"
+
+# Step Functions Configuration
+step_functions:
+  state_machine_name: "restaurant-deployment-orchestrator2"
+  execution_role_arn: "arn:aws:iam::{account_id}:role/StepFunctionsExecutionRole"
+  
+# Microservices Configuration
+microservices:
+  auth_service:
+    name: "auth-service"
+    repository: "your-ecr-repo/auth-service"
+    health_check_endpoint: "/health"
+    port: 8080
+    
+  menu_service:
+    name: "menu-service"
+    repository: "your-ecr-repo/menu-service"
+    health_check_endpoint: "/health"
+    port: 8081
+    
+  order_service:
+    name: "order-service"
+    repository: "your-ecr-repo/order-service"
+    health_check_endpoint: "/health"
+    port: 8082
+    
+  payment_service:
+    name: "payment-service"
+    repository: "your-ecr-repo/payment-service"
+    health_check_endpoint: "/health"
+    port: 8083
+
+# Deployment Configuration
+deployment:
+  timeout_minutes: 30
+  health_check_retries: 5
+  health_check_interval_seconds: 30
+  rollback_on_failure: true
+  
+# Monitoring
+monitoring:
+  cloudwatch_log_group: "/aws/stepfunctions/restaurant-deployment"
+  notification_topic_arn: "arn:aws:sns:{region}:{account_id}:deployment-notifications" 
