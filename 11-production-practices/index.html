@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.148.0">
+    <meta name="description" content="">
+<meta name="author" content="journeyoftheaverageguy@gmail.com">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>11. Production Best Practices :: Create a new AWS account.</title>
+
+    
+    <link href="/css/nucleus.css?1752194696" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1752194696" rel="stylesheet">
+    <link href="/css/hybrid.css?1752194696" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1752194696" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1752194696" rel="stylesheet">
+    <link href="/css/auto-complete.css?1752194696" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1752194696" rel="stylesheet">
+    <link href="/css/theme.css?1752194696" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1752194696" rel="stylesheet">
+    
+    <link href="/css/theme-workshop.css?1752194696" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1752194696"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/11-production-practices/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="/">
+
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff;}.cls-2{fill:#f90;fill-rule:evenodd;}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09,10.85a4.7,4.7,0,0,0,.19,1.48,7.73,7.73,0,0,0,.54,1.19.77.77,0,0,1,.12.38.64.64,0,0,1-.32.49l-1,.7a.83.83,0,0,1-.44.15.69.69,0,0,1-.49-.23,3.8,3.8,0,0,1-.6-.77q-.25-.42-.51-1a6.14,6.14,0,0,1-4.89,2.3,4.54,4.54,0,0,1-3.32-1.19,4.27,4.27,0,0,1-1.22-3.2A4.28,4.28,0,0,1,3.61,7.75,6.06,6.06,0,0,1,7.69,6.46a12.47,12.47,0,0,1,1.76.13q.92.13,1.91.36V5.73a3.65,3.65,0,0,0-.79-2.66A3.81,3.81,0,0,0,7.86,2.3a7.71,7.71,0,0,0-1.79.22,12.78,12.78,0,0,0-1.79.57,4.55,4.55,0,0,1-.58.22l-.26,0q-.35,0-.35-.52V2a1.09,1.09,0,0,1,.12-.58,1.2,1.2,0,0,1,.47-.35A10.88,10.88,0,0,1,5.77.32,10.19,10.19,0,0,1,8.36,0a6,6,0,0,1,4.35,1.35,5.49,5.49,0,0,1,1.38,4.09ZM7.34,13.38a5.36,5.36,0,0,0,1.72-.31A3.63,3.63,0,0,0,10.63,12,2.62,2.62,0,0,0,11.19,11a5.63,5.63,0,0,0,.16-1.44v-.7a14.35,14.35,0,0,0-1.53-.28,12.37,12.37,0,0,0-1.56-.1,3.84,3.84,0,0,0-2.47.67A2.34,2.34,0,0,0,5,11a2.35,2.35,0,0,0,.61,1.76A2.4,2.4,0,0,0,7.34,13.38Zm13.35,1.8a1,1,0,0,1-.64-.16,1.3,1.3,0,0,1-.35-.65L15.81,1.51a3,3,0,0,1-.15-.67.36.36,0,0,1,.41-.41H17.7a1,1,0,0,1,.65.16,1.4,1.4,0,0,1,.33.65l2.79,11,2.59-11A1.17,1.17,0,0,1,24.39.6a1.1,1.1,0,0,1,.67-.16H26.4a1.1,1.1,0,0,1,.67.16,1.17,1.17,0,0,1,.32.65L30,12.39,32.88,1.25A1.39,1.39,0,0,1,33.22.6a1,1,0,0,1,.65-.16h1.54a.36.36,0,0,1,.41.41,1.36,1.36,0,0,1,0,.26,3.64,3.64,0,0,1-.12.41l-4,12.86a1.3,1.3,0,0,1-.35.65,1,1,0,0,1-.64.16H29.25a1,1,0,0,1-.67-.17,1.26,1.26,0,0,1-.32-.67L25.67,3.64,23.11,14.34a1.26,1.26,0,0,1-.32.67,1,1,0,0,1-.67.17Zm21.36.44a11.28,11.28,0,0,1-2.56-.29,7.44,7.44,0,0,1-1.92-.67,1,1,0,0,1-.61-.93v-.84q0-.52.38-.52a.9.9,0,0,1,.31.06l.42.17a8.77,8.77,0,0,0,1.83.58,9.78,9.78,0,0,0,2,.2,4.48,4.48,0,0,0,2.43-.55,1.76,1.76,0,0,0,.86-1.57,1.61,1.61,0,0,0-.45-1.16A4.29,4.29,0,0,0,43,9.22l-2.41-.76A5.15,5.15,0,0,1,38,6.78a3.94,3.94,0,0,1-.83-2.41,3.7,3.7,0,0,1,.45-1.85,4.47,4.47,0,0,1,1.19-1.37A5.27,5.27,0,0,1,40.51.29,7.4,7.4,0,0,1,42.6,0a8.87,8.87,0,0,1,1.12.07q.57.07,1.08.19t.95.26a4.27,4.27,0,0,1,.7.29,1.59,1.59,0,0,1,.49.41.94.94,0,0,1,.15.55v.79q0,.52-.38.52a1.76,1.76,0,0,1-.64-.2,7.74,7.74,0,0,0-3.2-.64,4.37,4.37,0,0,0-2.21.47,1.6,1.6,0,0,0-.79,1.48,1.58,1.58,0,0,0,.49,1.18,4.94,4.94,0,0,0,1.83.92L44.55,7a5.08,5.08,0,0,1,2.57,1.6A3.76,3.76,0,0,1,47.9,11a4.21,4.21,0,0,1-.44,1.93,4.4,4.4,0,0,1-1.21,1.47,5.43,5.43,0,0,1-1.85.93A8.25,8.25,0,0,1,42.05,15.62Z"></path><path class="cls-2" d="M45.19,23.81C39.72,27.85,31.78,30,25,30A36.64,36.64,0,0,1,.22,20.57c-.51-.46-.06-1.09.56-.74A49.78,49.78,0,0,0,25.53,26.4,49.23,49.23,0,0,0,44.4,22.53C45.32,22.14,46.1,23.14,45.19,23.81Z"></path><path class="cls-2" d="M47.47,21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74,3.13-2.2,8.27-1.57,8.86-.83s-.16,5.89-3.09,8.35c-.45.38-.88.18-.68-.32C46.69,25.8,48.17,22.11,47.47,21.21Z"></path></svg>
+
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1752194696"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1752194696"></script>
+<script type="text/javascript">
+    
+        var baseurl = "\/\/localhost:1313\/";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1752194696"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/1-introduction/" title="Giới thiệu Workshop" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/1-introduction/">
+          <b>1. </b>Giới thiệu Workshop
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-orchestration-theory/" title="Service Orchestration Theory" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-orchestration-theory/">
+          <b>2. </b>Service Orchestration Theory
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/3-business-domain/" title="Restaurant Business Domain" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/3-business-domain/">
+          <b>3. </b>Restaurant Business Domain
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/4-architecture-overview/" title="Architecture Overview" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/4-architecture-overview/">
+          <b>4. </b>Architecture Overview
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/5-setup/" title="Setup và Chuẩn bị" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/5-setup/">
+          <b>5. </b>Setup và Chuẩn bị
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/6-lambda-development/" title="6. Lambda Functions Development" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/6-lambda-development/">
+          <b>6. </b>6. Lambda Functions Development
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/7-stepfunctions-workflow/" title="7. Step Functions Workflow" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/7-stepfunctions-workflow/">
+          <b>7. </b>7. Step Functions Workflow
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/8-error-handling/" title="8. Error Handling và Rollback" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/8-error-handling/">
+          <b>8. </b>8. Error Handling và Rollback
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/9-monitoring/" title="9. Monitoring và Observability" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/9-monitoring/">
+          <b>9. </b>9. Monitoring và Observability
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/10-scalability-testing/" title="10. Scalability Testing" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/10-scalability-testing/">
+          <b>10. </b>10. Scalability Testing
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/11-production-practices/" title="11. Production Best Practices" class="dd-item 
+        
+        active
+        
+        ">
+      <a href="/11-production-practices/">
+          <b>11. </b>11. Production Best Practices
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/12-demo-qa/" title="12. Demo và Q&amp;A" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/12-demo-qa/">
+          <b>12. </b>12. Demo và Q&amp;A
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://aws.amazon.com/blogs"><i class='fab fa-aws'></i> AWS Study Group - Blog</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://www.facebook.com/groups/awsstudygroupfcj"><i class='fab fa-facebook'></i> AWS Study Group - FB Group</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="en" value="//localhost:1313/11-production-practices/" selected>English</option>
+                    
+                  
+              
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <left>
+    
+     <b> Workshop</b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830891&style=0038&nbdigits=9&type=page&initCount=0" title="Migrate" Alt="web counter"   border="0" /></a>  <br>
+     <b> <a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830807&style=0038&nbdigits=9&type=page&initCount=0" title="Total CLoud Journey" Alt="web counter"   border="0"   />
+     
+</left>
+<left>
+    <br>
+    <br>
+        <b> Last Updated </b> <br>
+        <i><font color=orange>26-11-2023</font></i>
+    </left>
+    <left>
+        <br>
+        <br>
+            <b> Team </b> <br>
+           
+            <i>
+                <a href="https://www.linkedin.com/in/jotaguy"  style="color:orange">Gia Hưng</a>
+        </i>
+        </left>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            <a href='/'>Microservices Deployment và Orchestration với AWS Step Functions</a> > 11. Production Best Practices
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#production-best-practices">Production Best Practices</a></li>
+    <li><a href="#111-security-configuration">11.1 Security Configuration</a>
+      <ul>
+        <li><a href="#iam-security-best-practices">IAM Security Best Practices</a></li>
+        <li><a href="#network-security">Network Security</a></li>
+        <li><a href="#secrets-management">Secrets Management</a></li>
+      </ul>
+    </li>
+    <li><a href="#112-cost-optimization">11.2 Cost Optimization</a>
+      <ul>
+        <li><a href="#cost-analysis">Cost Analysis</a></li>
+        <li><a href="#cost-optimization-strategies">Cost Optimization Strategies</a></li>
+        <li><a href="#resource-optimization">Resource Optimization</a></li>
+      </ul>
+    </li>
+    <li><a href="#113-operational-procedures">11.3 Operational Procedures</a>
+      <ul>
+        <li><a href="#deployment-checklist">Deployment Checklist</a></li>
+        <li><a href="#incident-response-procedures">Incident Response Procedures</a></li>
+        <li><a href="#change-management">Change Management</a></li>
+      </ul>
+    </li>
+    <li><a href="#114-documentation-standards">11.4 Documentation Standards</a>
+      <ul>
+        <li><a href="#runbook-template">Runbook Template</a></li>
+        <li><a href="#monitor-deployment">Monitor Deployment</a></li>
+      </ul>
+    </li>
+    <li><a href="#troubleshooting">Troubleshooting</a>
+      <ul>
+        <li><a href="#common-issues">Common Issues</a></li>
+        <li><a href="#emergency-procedures">Emergency Procedures</a></li>
+      </ul>
+    </li>
+    <li><a href="#contacts">Contacts</a></li>
+    <li><a href="#115-compliance-và-governance">11.5 Compliance và Governance</a>
+      <ul>
+        <li><a href="#compliance-requirements">Compliance Requirements</a></li>
+        <li><a href="#governance-framework">Governance Framework</a></li>
+      </ul>
+    </li>
+    <li><a href="#116-disaster-recovery">11.6 Disaster Recovery</a>
+      <ul>
+        <li><a href="#backup-strategy">Backup Strategy</a></li>
+        <li><a href="#recovery-procedures">Recovery Procedures</a></li>
+      </ul>
+    </li>
+    <li><a href="#117-performance-optimization">11.7 Performance Optimization</a>
+      <ul>
+        <li><a href="#production-tuning">Production Tuning</a></li>
+        <li><a href="#monitoring-production-performance">Monitoring Production Performance</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              11. Production Best Practices
+            </h1>
+          
+
+        
+
+
+
+	<h2 id="production-best-practices">Production Best Practices</h2>
+<p>Trong phần này, chúng ta sẽ tìm hiểu về các best practices để deploy và maintain hệ thống microservices orchestration trong production environment.</p>
+
+<div class="notices info" ><p><strong>Mục tiêu phần này:</strong></p>
+<ul>
+<li>Implement security best practices</li>
+<li>Optimize costs và performance</li>
+<li>Thiết lập operational procedures</li>
+<li>Tạo comprehensive documentation</li>
+</ul>
+</div>
+
+<h2 id="111-security-configuration">11.1 Security Configuration</h2>
+<h3 id="iam-security-best-practices">IAM Security Best Practices</h3>
+<h4 id="principle-of-least-privilege">Principle of Least Privilege</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;Version&#34;</span>: <span style="color:#e6db74">&#34;2012-10-17&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;Statement&#34;</span>: [
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Effect&#34;</span>: <span style="color:#e6db74">&#34;Allow&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Action&#34;</span>: [
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;lambda:InvokeFunction&#34;</span>
+</span></span><span style="display:flex;"><span>      ],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Resource&#34;</span>: [
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;arn:aws:lambda:us-east-1:ACCOUNT:function:restaurant-health-check&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;arn:aws:lambda:us-east-1:ACCOUNT:function:restaurant-notification&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;arn:aws:lambda:us-east-1:ACCOUNT:function:rollback-coordinator&#34;</span>
+</span></span><span style="display:flex;"><span>      ],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Condition&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;StringEquals&#34;</span>: {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;aws:RequestedRegion&#34;</span>: <span style="color:#e6db74">&#34;us-east-1&#34;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Effect&#34;</span>: <span style="color:#e6db74">&#34;Allow&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Action&#34;</span>: [
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;logs:CreateLogGroup&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;logs:CreateLogStream&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;logs:PutLogEvents&#34;</span>
+</span></span><span style="display:flex;"><span>      ],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Resource&#34;</span>: <span style="color:#e6db74">&#34;arn:aws:logs:us-east-1:ACCOUNT:log-group:/aws/stepfunctions/*&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="resource-tagging-strategy">Resource Tagging Strategy</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;Tags&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;Environment&#34;</span>: <span style="color:#e6db74">&#34;production&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;Project&#34;</span>: <span style="color:#e6db74">&#34;restaurant-microservices&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;Owner&#34;</span>: <span style="color:#e6db74">&#34;devops-team&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;CostCenter&#34;</span>: <span style="color:#e6db74">&#34;engineering&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;Compliance&#34;</span>: <span style="color:#e6db74">&#34;required&#34;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="network-security">Network Security</h3>
+<h4 id="vpc-configuration-cho-enterprise-environments">VPC Configuration (cho enterprise environments)</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;VpcConfig&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;SubnetIds&#34;</span>: [
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#34;subnet-12345678&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#34;subnet-87654321&#34;</span>
+</span></span><span style="display:flex;"><span>    ],
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;SecurityGroupIds&#34;</span>: [
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#34;sg-abcdef12&#34;</span>
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="security-group-rules">Security Group Rules</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;SecurityGroupRules&#34;</span>: [
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;IpProtocol&#34;</span>: <span style="color:#e6db74">&#34;tcp&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;FromPort&#34;</span>: <span style="color:#ae81ff">443</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;ToPort&#34;</span>: <span style="color:#ae81ff">443</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;CidrIp&#34;</span>: <span style="color:#e6db74">&#34;10.0.0.0/8&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Description&#34;</span>: <span style="color:#e6db74">&#34;HTTPS traffic from VPC&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="secrets-management">Secrets Management</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// Using AWS Secrets Manager
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">AWS</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;aws-sdk&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">secretsManager</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">AWS</span>.<span style="color:#a6e22e">SecretsManager</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getSecret</span>(<span style="color:#a6e22e">secretId</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">secretsManager</span>.<span style="color:#a6e22e">getSecretValue</span>({
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">SecretId</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">secretId</span>
+</span></span><span style="display:flex;"><span>        }).<span style="color:#a6e22e">promise</span>();
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">parse</span>(<span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">SecretString</span>);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#39;Failed to retrieve secret:&#39;</span>, <span style="color:#a6e22e">error</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">throw</span> <span style="color:#a6e22e">error</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Usage trong Lambda function
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">handler</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">event</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">secrets</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">getSecret</span>(<span style="color:#e6db74">&#39;restaurant-app-secrets&#39;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">apiKey</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">secrets</span>.<span style="color:#a6e22e">apiKey</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Use API key securely
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">makeApiCall</span>(<span style="color:#a6e22e">apiKey</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">result</span>;
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h2 id="112-cost-optimization">11.2 Cost Optimization</h2>
+<h3 id="cost-analysis">Cost Analysis</h3>
+<h4 id="step-functions-pricing">Step Functions Pricing</h4>
+<ul>
+<li><strong>Standard Workflows</strong>: $0.025 per 1,000 state transitions</li>
+<li><strong>Express Workflows</strong>: $1.00 per 1M requests + duration</li>
+</ul>
+<h4 id="example-cost-calculation">Example Cost Calculation</h4>
+<pre tabindex="0"><code>Monthly Deployments: 1,000
+Average States per Workflow: 12
+Total State Transitions: 1,000 × 12 = 12,000
+
+Cost = (12,000 / 1,000) × $0.025 = $0.30/month
+</code></pre><h4 id="lambda-pricing">Lambda Pricing</h4>
+<ul>
+<li><strong>Requests</strong>: $0.20 per 1M requests</li>
+<li><strong>Duration</strong>: $0.0000166667 per GB-second</li>
+</ul>
+<h3 id="cost-optimization-strategies">Cost Optimization Strategies</h3>
+<ol>
+<li><strong>Right-size Lambda functions</strong>: Optimize memory allocation</li>
+<li><strong>Minimize state transitions</strong>: Combine related operations</li>
+<li><strong>Use Express Workflows</strong>: For high-volume, short-duration workflows</li>
+<li><strong>Implement caching</strong>: Reduce redundant operations</li>
+</ol>
+<h4 id="budget-alerts">Budget Alerts</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Create budget for Step Functions</span>
+</span></span><span style="display:flex;"><span>aws budgets create-budget <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --account-id ACCOUNT_ID <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --budget <span style="color:#e6db74">&#39;{
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;BudgetName&#34;: &#34;StepFunctionsMonthly&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;BudgetLimit&#34;: {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      &#34;Amount&#34;: &#34;10.00&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      &#34;Unit&#34;: &#34;USD&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    },
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;TimeUnit&#34;: &#34;MONTHLY&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;BudgetType&#34;: &#34;COST&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  }&#39;</span>
+</span></span></code></pre></div><h3 id="resource-optimization">Resource Optimization</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// Optimized Lambda configuration
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">optimizedConfig</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">memorySize</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">512</span>, <span style="color:#75715e">// Right-sized based on profiling
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">timeout</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">30</span>,     <span style="color:#75715e">// Fail fast strategy
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">reservedConcurrency</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">10</span>, <span style="color:#75715e">// Prevent throttling
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">environment</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">NODE_OPTIONS</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;--enable-source-maps&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">AWS_NODEJS_CONNECTION_REUSE_ENABLED</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;1&#39;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h2 id="113-operational-procedures">11.3 Operational Procedures</h2>
+<h3 id="deployment-checklist">Deployment Checklist</h3>
+<h4 id="pre-deployment">Pre-Deployment</h4>
+<ul>
+<li><input disabled="" type="checkbox"> IAM roles và permissions verified</li>
+<li><input disabled="" type="checkbox"> Lambda functions tested independently</li>
+<li><input disabled="" type="checkbox"> State machine definition validated</li>
+<li><input disabled="" type="checkbox"> Monitoring alerts configured</li>
+<li><input disabled="" type="checkbox"> Rollback procedures documented</li>
+</ul>
+<h4 id="during-deployment">During Deployment</h4>
+<ul>
+<li><input disabled="" type="checkbox"> Monitor execution in real-time</li>
+<li><input disabled="" type="checkbox"> Watch CloudWatch metrics</li>
+<li><input disabled="" type="checkbox"> Verify each service health check</li>
+<li><input disabled="" type="checkbox"> Confirm parallel execution performance</li>
+<li><input disabled="" type="checkbox"> Validate error handling paths</li>
+</ul>
+<h4 id="post-deployment">Post-Deployment</h4>
+<ul>
+<li><input disabled="" type="checkbox"> Run end-to-end system validation</li>
+<li><input disabled="" type="checkbox"> Check all monitoring dashboards</li>
+<li><input disabled="" type="checkbox"> Verify alerting functionality</li>
+<li><input disabled="" type="checkbox"> Update documentation</li>
+<li><input disabled="" type="checkbox"> Conduct post-deployment review</li>
+</ul>
+<h3 id="incident-response-procedures">Incident Response Procedures</h3>
+<h4 id="severity-levels">Severity Levels</h4>
+<ul>
+<li><strong>P0 - Critical</strong>: Complete system failure, immediate response required</li>
+<li><strong>P1 - High</strong>: Major functionality broken, 1-hour response</li>
+<li><strong>P2 - Medium</strong>: Partial functionality affected, 4-hour response</li>
+<li><strong>P3 - Low</strong>: Minor issues, next business day response</li>
+</ul>
+<h4 id="response-playbook">Response Playbook</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># P0 Incident Response</span>
+</span></span><span style="display:flex;"><span>1. Immediate Assessment:
+</span></span><span style="display:flex;"><span>   aws stepfunctions list-executions --state-machine-arn STATE_MACHINE_ARN --status-filter FAILED
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>2. Quick Rollback <span style="color:#f92672">(</span><span style="color:#66d9ef">if</span> needed<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>   aws stepfunctions start-execution <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>     --state-machine-arn ROLLBACK_STATE_MACHINE_ARN <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>     --name emergency-rollback-<span style="color:#66d9ef">$(</span>date +%s<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>3. Notify Stakeholders:
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e"># Send alert to on-call engineer</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e"># Update status page</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e"># Inform stakeholders</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>4. Investigation:
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e"># Check CloudWatch logs</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e"># Review error patterns</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e"># Identify root cause</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>5. Resolution:
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e"># Implement fix</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e"># Test thoroughly  </span>
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e"># Gradual rollout</span>
+</span></span></code></pre></div><h3 id="change-management">Change Management</h3>
+<h4 id="change-approval-process">Change Approval Process</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># change-request-template.yml</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">change_request</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">id</span>: <span style="color:#ae81ff">CR-2024-001</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">title</span>: <span style="color:#e6db74">&#34;Update restaurant health check timeout&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">description</span>: <span style="color:#e6db74">&#34;Increase timeout from 30s to 45s&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">impact</span>: <span style="color:#e6db74">&#34;Low - improves reliability&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">risk</span>: <span style="color:#e6db74">&#34;Low - backward compatible&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">rollback_plan</span>: <span style="color:#e6db74">&#34;Revert timeout to 30s&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">approvers</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">tech_lead</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">devops_manager</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">testing</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">unit_tests</span>: <span style="color:#ae81ff">passed</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">integration_tests</span>: <span style="color:#ae81ff">passed</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">load_tests</span>: <span style="color:#ae81ff">passed</span>
+</span></span></code></pre></div><h2 id="114-documentation-standards">11.4 Documentation Standards</h2>
+<h3 id="runbook-template">Runbook Template</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span># Restaurant Microservices Deployment Runbook
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Overview
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>Step Functions workflow for orchestrating restaurant microservices deployment
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Architecture
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">-</span> Auth Service (Foundation)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">-</span> Menu <span style="color:#960050;background-color:#1e0010">&amp;</span> Restaurant Services (Business Layer)  
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">-</span> Order Service (Transaction Layer)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">-</span> Review Service (Experience Layer)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Dependencies
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>Auth → Menu/Restaurant → Order → Review
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Normal Operations
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### Start Deployment
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>```bash
+</span></span><span style="display:flex;"><span>aws stepfunctions start-execution \
+</span></span><span style="display:flex;"><span>  --state-machine-arn arn:aws:states:us-east-1:ACCOUNT:stateMachine:restaurant-deployment-orchestrator \
+</span></span><span style="display:flex;"><span>  --name production-deployment-$(date +%Y%m%d-%H%M%S)
+</span></span></code></pre></div><h3 id="monitor-deployment">Monitor Deployment</h3>
+<ul>
+<li>CloudWatch Dashboard: [Link]</li>
+<li>Step Functions Console: [Link]</li>
+<li>Logs: CloudWatch Logs Groups</li>
+</ul>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="common-issues">Common Issues</h3>
+<ol>
+<li><strong>Lambda Timeout</strong>: Increase timeout in function configuration</li>
+<li><strong>Permission Denied</strong>: Check IAM role policies</li>
+<li><strong>Service Unavailable</strong>: Verify service endpoints</li>
+</ol>
+<h3 id="emergency-procedures">Emergency Procedures</h3>
+<ol>
+<li><strong>Complete Failure</strong>: Execute emergency rollback</li>
+<li><strong>Partial Failure</strong>: Use selective rollback</li>
+<li><strong>Performance Issues</strong>: Scale Lambda concurrency</li>
+</ol>
+<h2 id="contacts">Contacts</h2>
+<ul>
+<li>On-call Engineer: [Phone]</li>
+<li>DevOps Team: [Email]</li>
+<li>Manager: [Phone]</li>
+</ul>
+<pre tabindex="0"><code>
+### API Documentation
+
+```javascript
+/**
+ * Restaurant Health Check Function
+ * 
+ * @description Performs health check for restaurant microservices
+ * @param {Object} event - Input event
+ * @param {string} event.serviceName - Name of service to check
+ * @param {string} event.serviceUrl - Health check endpoint URL
+ * @param {Array} event.dependencies - List of service dependencies
+ * @param {number} event.timeout - Request timeout in milliseconds
+ * 
+ * @returns {Object} Health check result
+ * @returns {number} returns.statusCode - HTTP status code
+ * @returns {Object} returns.body - Health check details
+ * @returns {string} returns.body.serviceName - Service name
+ * @returns {string} returns.body.status - Health status (HEALTHY/UNHEALTHY/DEGRADED)
+ * @returns {number} returns.body.responseTime - Response time in milliseconds
+ * @returns {string} returns.body.timestamp - Check timestamp
+ * 
+ * @example
+ * const event = {
+ *   serviceName: &#34;auth&#34;,
+ *   serviceUrl: &#34;https://api.restaurant.com/auth/health&#34;,
+ *   dependencies: [&#34;database&#34;, &#34;redis&#34;],
+ *   timeout: 30000
+ * };
+ * 
+ * const result = await handler(event);
+ * console.log(result.body.status); // &#34;HEALTHY&#34;
+ */
+</code></pre><h2 id="115-compliance-và-governance">11.5 Compliance và Governance</h2>
+<h3 id="compliance-requirements">Compliance Requirements</h3>
+<h4 id="data-protection">Data Protection</h4>
+<ul>
+<li><strong>GDPR Compliance</strong>: Personal data handling</li>
+<li><strong>PCI DSS</strong>: Payment card data security</li>
+<li><strong>SOC 2</strong>: Security controls và procedures</li>
+</ul>
+<h4 id="audit-logging">Audit Logging</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// Compliance logging function
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">logComplianceEvent</span>(<span style="color:#a6e22e">action</span>, <span style="color:#a6e22e">resource</span>, <span style="color:#a6e22e">user</span>, <span style="color:#a6e22e">result</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">complianceLog</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">timestamp</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">new</span> Date().<span style="color:#a6e22e">toISOString</span>(),
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">action</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">resource</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">user</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">result</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">source</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;step-functions-orchestrator&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">compliance</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">gdpr</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">action</span>.<span style="color:#a6e22e">includes</span>(<span style="color:#e6db74">&#39;personal_data&#39;</span>),
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">pci</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">action</span>.<span style="color:#a6e22e">includes</span>(<span style="color:#e6db74">&#39;payment&#39;</span>),
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">sox</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">action</span>.<span style="color:#a6e22e">includes</span>(<span style="color:#e6db74">&#39;financial&#39;</span>)
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Send to compliance logging system
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;COMPLIANCE_LOG:&#39;</span>, <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">complianceLog</span>));
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="governance-framework">Governance Framework</h3>
+<h4 id="resource-governance">Resource Governance</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># governance-policy.yml</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">resource_governance</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">naming_convention</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">pattern</span>: <span style="color:#e6db74">&#34;${environment}-${project}-${service}-${resource}&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">example</span>: <span style="color:#e6db74">&#34;prod-restaurant-auth-lambda&#34;</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">tagging_policy</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">required_tags</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">Environment</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">Project</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">Owner</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">CostCenter</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">access_control</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">principle</span>: <span style="color:#e6db74">&#34;least_privilege&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">review_frequency</span>: <span style="color:#e6db74">&#34;quarterly&#34;</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">change_management</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">approval_required</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">testing_required</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">rollback_plan_required</span>: <span style="color:#66d9ef">true</span>
+</span></span></code></pre></div><h2 id="116-disaster-recovery">11.6 Disaster Recovery</h2>
+<h3 id="backup-strategy">Backup Strategy</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// State machine backup
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">backupStateMachine</span>(<span style="color:#a6e22e">stateMachineArn</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">stepfunctions</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">AWS</span>.<span style="color:#a6e22e">StepFunctions</span>();
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">definition</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">stepfunctions</span>.<span style="color:#a6e22e">describeStateMachine</span>({
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">stateMachineArn</span>
+</span></span><span style="display:flex;"><span>        }).<span style="color:#a6e22e">promise</span>();
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">backup</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">timestamp</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">new</span> Date().<span style="color:#a6e22e">toISOString</span>(),
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">stateMachineArn</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">definition</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">definition</span>.<span style="color:#a6e22e">definition</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">roleArn</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">definition</span>.<span style="color:#a6e22e">roleArn</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">tags</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">definition</span>.<span style="color:#a6e22e">tags</span>
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Store backup in S3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">storeBackup</span>(<span style="color:#a6e22e">backup</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;✅ State machine backed up successfully&#39;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">backup</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#39;❌ Backup failed:&#39;</span>, <span style="color:#a6e22e">error</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">throw</span> <span style="color:#a6e22e">error</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="recovery-procedures">Recovery Procedures</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e"># Disaster recovery script</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;🚨 Starting disaster recovery procedure...&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 1. Assess damage</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;📊 Assessing system status...&#34;</span>
+</span></span><span style="display:flex;"><span>aws stepfunctions list-state-machines --query <span style="color:#e6db74">&#39;stateMachines[?status==`ACTIVE`]&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2. Restore from backup</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;🔄 Restoring from backup...&#34;</span>
+</span></span><span style="display:flex;"><span>aws stepfunctions create-state-machine <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --name restaurant-deployment-orchestrator-recovery <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --definition file://backup-definition.json <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --role-arn arn:aws:iam::ACCOUNT:role/StepFunctionsExecutionRole
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 3. Validate recovery</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;✅ Validating recovery...&#34;</span>
+</span></span><span style="display:flex;"><span>aws stepfunctions start-execution <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --state-machine-arn arn:aws:states:us-east-1:ACCOUNT:stateMachine:restaurant-deployment-orchestrator-recovery <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --name recovery-validation-<span style="color:#66d9ef">$(</span>date +%s<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;🎉 Disaster recovery completed&#34;</span>
+</span></span></code></pre></div><h2 id="117-performance-optimization">11.7 Performance Optimization</h2>
+<h3 id="production-tuning">Production Tuning</h3>
+
+<div class="notices tip" ><p><strong>Performance Best Practices:</strong></p>
+<ul>
+<li>Monitor cold start impacts</li>
+<li>Optimize Lambda memory allocation</li>
+<li>Implement connection pooling</li>
+<li>Use provisioned concurrency for critical functions</li>
+<li>Cache frequently accessed data</li>
+</ul>
+</div>
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// Production-optimized Lambda function
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">handler</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">event</span>, <span style="color:#a6e22e">context</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Optimize context
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">callbackWaitsForEmptyEventLoop</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Connection pooling
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">global</span>.<span style="color:#a6e22e">connectionPool</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">global</span>.<span style="color:#a6e22e">connectionPool</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">http</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">AWS</span>.<span style="color:#a6e22e">HttpClient</span>({
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">maxSockets</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">50</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">keepAlive</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>            }),
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">cache</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Map</span>()
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Caching strategy
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">cacheKey</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">`health-check-</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">serviceName</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">cachedResult</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">global</span>.<span style="color:#a6e22e">connectionPool</span>.<span style="color:#a6e22e">cache</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">cacheKey</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">cachedResult</span> <span style="color:#f92672">&amp;&amp;</span> Date.<span style="color:#a6e22e">now</span>() <span style="color:#f92672">-</span> <span style="color:#a6e22e">cachedResult</span>.<span style="color:#a6e22e">timestamp</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">30000</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">cachedResult</span>.<span style="color:#a6e22e">result</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Perform health check
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">performHealthCheck</span>(<span style="color:#a6e22e">event</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Cache result
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">global</span>.<span style="color:#a6e22e">connectionPool</span>.<span style="color:#a6e22e">cache</span>.<span style="color:#a6e22e">set</span>(<span style="color:#a6e22e">cacheKey</span>, {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">result</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">timestamp</span><span style="color:#f92672">:</span> Date.<span style="color:#a6e22e">now</span>()
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">result</span>;
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h3 id="monitoring-production-performance">Monitoring Production Performance</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// Performance monitoring
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">performanceMetrics</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">coldStarts</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">warmStarts</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">totalExecutions</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">averageResponseTime</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">errorRate</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">trackPerformance</span>(<span style="color:#a6e22e">startTime</span>, <span style="color:#a6e22e">isWarmStart</span>, <span style="color:#a6e22e">hasError</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">duration</span> <span style="color:#f92672">=</span> Date.<span style="color:#a6e22e">now</span>() <span style="color:#f92672">-</span> <span style="color:#a6e22e">startTime</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">performanceMetrics</span>.<span style="color:#a6e22e">totalExecutions</span><span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">isWarmStart</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">performanceMetrics</span>.<span style="color:#a6e22e">warmStarts</span><span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">performanceMetrics</span>.<span style="color:#a6e22e">coldStarts</span><span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">hasError</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">performanceMetrics</span>.<span style="color:#a6e22e">errorRate</span> <span style="color:#f92672">=</span> 
+</span></span><span style="display:flex;"><span>            (<span style="color:#a6e22e">performanceMetrics</span>.<span style="color:#a6e22e">errorRate</span> <span style="color:#f92672">*</span> (<span style="color:#a6e22e">performanceMetrics</span>.<span style="color:#a6e22e">totalExecutions</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">performanceMetrics</span>.<span style="color:#a6e22e">totalExecutions</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">performanceMetrics</span>.<span style="color:#a6e22e">averageResponseTime</span> <span style="color:#f92672">=</span> 
+</span></span><span style="display:flex;"><span>        (<span style="color:#a6e22e">performanceMetrics</span>.<span style="color:#a6e22e">averageResponseTime</span> <span style="color:#f92672">*</span> (<span style="color:#a6e22e">performanceMetrics</span>.<span style="color:#a6e22e">totalExecutions</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">duration</span>) <span style="color:#f92672">/</span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">performanceMetrics</span>.<span style="color:#a6e22e">totalExecutions</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<p><strong>Tiếp theo:</strong> Trong phần 12, chúng ta sẽ thực hiện Demo session và Q&amp;A để consolidate tất cả kiến thức đã học.</p>
+
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/10-scalability-testing/" title="10. Scalability Testing"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/12-demo-qa/" title="12. Demo và Q&amp;A" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1752194696"></script>
+    <script src="/js/perfect-scrollbar.min.js?1752194696"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1752194696"></script>
+    <script src="/js/jquery.sticky.js?1752194696"></script>
+    <script src="/js/featherlight.min.js?1752194696"></script>
+    <script src="/js/highlight.pack.js?1752194696"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1752194696"></script>
+    <script src="/js/learn.js?1752194696"></script>
+    <script src="/js/hugo-learn.js?1752194696"></script>
+
+    <link href="/mermaid/mermaid.css?1752194696" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1752194696"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-158079754-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>

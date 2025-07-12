@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.148.0">
+    <meta name="description" content="">
+<meta name="author" content="journeyoftheaverageguy@gmail.com">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>9. Monitoring và Observability :: Create a new AWS account.</title>
+
+    
+    <link href="/css/nucleus.css?1752194696" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1752194696" rel="stylesheet">
+    <link href="/css/hybrid.css?1752194696" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1752194696" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1752194696" rel="stylesheet">
+    <link href="/css/auto-complete.css?1752194696" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1752194696" rel="stylesheet">
+    <link href="/css/theme.css?1752194696" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1752194696" rel="stylesheet">
+    
+    <link href="/css/theme-workshop.css?1752194696" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1752194696"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/9-monitoring/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="/">
+
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff;}.cls-2{fill:#f90;fill-rule:evenodd;}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09,10.85a4.7,4.7,0,0,0,.19,1.48,7.73,7.73,0,0,0,.54,1.19.77.77,0,0,1,.12.38.64.64,0,0,1-.32.49l-1,.7a.83.83,0,0,1-.44.15.69.69,0,0,1-.49-.23,3.8,3.8,0,0,1-.6-.77q-.25-.42-.51-1a6.14,6.14,0,0,1-4.89,2.3,4.54,4.54,0,0,1-3.32-1.19,4.27,4.27,0,0,1-1.22-3.2A4.28,4.28,0,0,1,3.61,7.75,6.06,6.06,0,0,1,7.69,6.46a12.47,12.47,0,0,1,1.76.13q.92.13,1.91.36V5.73a3.65,3.65,0,0,0-.79-2.66A3.81,3.81,0,0,0,7.86,2.3a7.71,7.71,0,0,0-1.79.22,12.78,12.78,0,0,0-1.79.57,4.55,4.55,0,0,1-.58.22l-.26,0q-.35,0-.35-.52V2a1.09,1.09,0,0,1,.12-.58,1.2,1.2,0,0,1,.47-.35A10.88,10.88,0,0,1,5.77.32,10.19,10.19,0,0,1,8.36,0a6,6,0,0,1,4.35,1.35,5.49,5.49,0,0,1,1.38,4.09ZM7.34,13.38a5.36,5.36,0,0,0,1.72-.31A3.63,3.63,0,0,0,10.63,12,2.62,2.62,0,0,0,11.19,11a5.63,5.63,0,0,0,.16-1.44v-.7a14.35,14.35,0,0,0-1.53-.28,12.37,12.37,0,0,0-1.56-.1,3.84,3.84,0,0,0-2.47.67A2.34,2.34,0,0,0,5,11a2.35,2.35,0,0,0,.61,1.76A2.4,2.4,0,0,0,7.34,13.38Zm13.35,1.8a1,1,0,0,1-.64-.16,1.3,1.3,0,0,1-.35-.65L15.81,1.51a3,3,0,0,1-.15-.67.36.36,0,0,1,.41-.41H17.7a1,1,0,0,1,.65.16,1.4,1.4,0,0,1,.33.65l2.79,11,2.59-11A1.17,1.17,0,0,1,24.39.6a1.1,1.1,0,0,1,.67-.16H26.4a1.1,1.1,0,0,1,.67.16,1.17,1.17,0,0,1,.32.65L30,12.39,32.88,1.25A1.39,1.39,0,0,1,33.22.6a1,1,0,0,1,.65-.16h1.54a.36.36,0,0,1,.41.41,1.36,1.36,0,0,1,0,.26,3.64,3.64,0,0,1-.12.41l-4,12.86a1.3,1.3,0,0,1-.35.65,1,1,0,0,1-.64.16H29.25a1,1,0,0,1-.67-.17,1.26,1.26,0,0,1-.32-.67L25.67,3.64,23.11,14.34a1.26,1.26,0,0,1-.32.67,1,1,0,0,1-.67.17Zm21.36.44a11.28,11.28,0,0,1-2.56-.29,7.44,7.44,0,0,1-1.92-.67,1,1,0,0,1-.61-.93v-.84q0-.52.38-.52a.9.9,0,0,1,.31.06l.42.17a8.77,8.77,0,0,0,1.83.58,9.78,9.78,0,0,0,2,.2,4.48,4.48,0,0,0,2.43-.55,1.76,1.76,0,0,0,.86-1.57,1.61,1.61,0,0,0-.45-1.16A4.29,4.29,0,0,0,43,9.22l-2.41-.76A5.15,5.15,0,0,1,38,6.78a3.94,3.94,0,0,1-.83-2.41,3.7,3.7,0,0,1,.45-1.85,4.47,4.47,0,0,1,1.19-1.37A5.27,5.27,0,0,1,40.51.29,7.4,7.4,0,0,1,42.6,0a8.87,8.87,0,0,1,1.12.07q.57.07,1.08.19t.95.26a4.27,4.27,0,0,1,.7.29,1.59,1.59,0,0,1,.49.41.94.94,0,0,1,.15.55v.79q0,.52-.38.52a1.76,1.76,0,0,1-.64-.2,7.74,7.74,0,0,0-3.2-.64,4.37,4.37,0,0,0-2.21.47,1.6,1.6,0,0,0-.79,1.48,1.58,1.58,0,0,0,.49,1.18,4.94,4.94,0,0,0,1.83.92L44.55,7a5.08,5.08,0,0,1,2.57,1.6A3.76,3.76,0,0,1,47.9,11a4.21,4.21,0,0,1-.44,1.93,4.4,4.4,0,0,1-1.21,1.47,5.43,5.43,0,0,1-1.85.93A8.25,8.25,0,0,1,42.05,15.62Z"></path><path class="cls-2" d="M45.19,23.81C39.72,27.85,31.78,30,25,30A36.64,36.64,0,0,1,.22,20.57c-.51-.46-.06-1.09.56-.74A49.78,49.78,0,0,0,25.53,26.4,49.23,49.23,0,0,0,44.4,22.53C45.32,22.14,46.1,23.14,45.19,23.81Z"></path><path class="cls-2" d="M47.47,21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74,3.13-2.2,8.27-1.57,8.86-.83s-.16,5.89-3.09,8.35c-.45.38-.88.18-.68-.32C46.69,25.8,48.17,22.11,47.47,21.21Z"></path></svg>
+
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1752194696"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1752194696"></script>
+<script type="text/javascript">
+    
+        var baseurl = "\/\/localhost:1313\/";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1752194696"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/1-introduction/" title="Giới thiệu Workshop" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/1-introduction/">
+          <b>1. </b>Giới thiệu Workshop
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-orchestration-theory/" title="Service Orchestration Theory" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-orchestration-theory/">
+          <b>2. </b>Service Orchestration Theory
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/3-business-domain/" title="Restaurant Business Domain" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/3-business-domain/">
+          <b>3. </b>Restaurant Business Domain
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/4-architecture-overview/" title="Architecture Overview" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/4-architecture-overview/">
+          <b>4. </b>Architecture Overview
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/5-setup/" title="Setup và Chuẩn bị" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/5-setup/">
+          <b>5. </b>Setup và Chuẩn bị
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/6-lambda-development/" title="6. Lambda Functions Development" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/6-lambda-development/">
+          <b>6. </b>6. Lambda Functions Development
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/7-stepfunctions-workflow/" title="7. Step Functions Workflow" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/7-stepfunctions-workflow/">
+          <b>7. </b>7. Step Functions Workflow
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/8-error-handling/" title="8. Error Handling và Rollback" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/8-error-handling/">
+          <b>8. </b>8. Error Handling và Rollback
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/9-monitoring/" title="9. Monitoring và Observability" class="dd-item 
+        
+        active
+        
+        ">
+      <a href="/9-monitoring/">
+          <b>9. </b>9. Monitoring và Observability
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/10-scalability-testing/" title="10. Scalability Testing" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/10-scalability-testing/">
+          <b>10. </b>10. Scalability Testing
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/11-production-practices/" title="11. Production Best Practices" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/11-production-practices/">
+          <b>11. </b>11. Production Best Practices
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/12-demo-qa/" title="12. Demo và Q&amp;A" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/12-demo-qa/">
+          <b>12. </b>12. Demo và Q&amp;A
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://aws.amazon.com/blogs"><i class='fab fa-aws'></i> AWS Study Group - Blog</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://www.facebook.com/groups/awsstudygroupfcj"><i class='fab fa-facebook'></i> AWS Study Group - FB Group</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="en" value="//localhost:1313/9-monitoring/" selected>English</option>
+                    
+                  
+              
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <left>
+    
+     <b> Workshop</b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830891&style=0038&nbdigits=9&type=page&initCount=0" title="Migrate" Alt="web counter"   border="0" /></a>  <br>
+     <b> <a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830807&style=0038&nbdigits=9&type=page&initCount=0" title="Total CLoud Journey" Alt="web counter"   border="0"   />
+     
+</left>
+<left>
+    <br>
+    <br>
+        <b> Last Updated </b> <br>
+        <i><font color=orange>26-11-2023</font></i>
+    </left>
+    <left>
+        <br>
+        <br>
+            <b> Team </b> <br>
+           
+            <i>
+                <a href="https://www.linkedin.com/in/jotaguy"  style="color:orange">Gia Hưng</a>
+        </i>
+        </left>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            <a href='/'>Microservices Deployment và Orchestration với AWS Step Functions</a> > 9. Monitoring và Observability
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#monitoring-và-observability">Monitoring và Observability</a></li>
+    <li><a href="#91-cloudwatch-integration">9.1 CloudWatch Integration</a>
+      <ul>
+        <li><a href="#automatic-monitoring-setup">Automatic Monitoring Setup</a></li>
+        <li><a href="#key-metrics-to-monitor">Key Metrics to Monitor</a></li>
+      </ul>
+    </li>
+    <li><a href="#92-cloudwatch-dashboard-setup">9.2 CloudWatch Dashboard Setup</a>
+      <ul>
+        <li><a href="#dashboard-creation">Dashboard Creation</a></li>
+        <li><a href="#dashboard-configuration">Dashboard Configuration</a></li>
+      </ul>
+    </li>
+    <li><a href="#93-alerting-và-notifications">9.3 Alerting và Notifications</a>
+      <ul>
+        <li><a href="#cloudwatch-alarms-setup">CloudWatch Alarms Setup</a></li>
+        <li><a href="#sns-integration">SNS Integration</a></li>
+      </ul>
+    </li>
+    <li><a href="#94-structured-logging-strategy">9.4 Structured Logging Strategy</a>
+      <ul>
+        <li><a href="#enhanced-logging-function">Enhanced Logging Function</a></li>
+        <li><a href="#log-analysis-queries">Log Analysis Queries</a></li>
+      </ul>
+    </li>
+    <li><a href="#95-custom-metrics-implementation">9.5 Custom Metrics Implementation</a>
+      <ul>
+        <li><a href="#publishing-custom-metrics">Publishing Custom Metrics</a></li>
+        <li><a href="#business-metrics-dashboard">Business Metrics Dashboard</a></li>
+      </ul>
+    </li>
+    <li><a href="#96-distributed-tracing">9.6 Distributed Tracing</a>
+      <ul>
+        <li><a href="#x-ray-integration">X-Ray Integration</a></li>
+        <li><a href="#trace-analysis">Trace Analysis</a></li>
+      </ul>
+    </li>
+    <li><a href="#97-performance-monitoring">9.7 Performance Monitoring</a>
+      <ul>
+        <li><a href="#key-performance-indicators">Key Performance Indicators</a></li>
+        <li><a href="#automated-monitoring-setup">Automated Monitoring Setup</a></li>
+      </ul>
+    </li>
+    <li><a href="#98-troubleshooting-guide">9.8 Troubleshooting Guide</a>
+      <ul>
+        <li><a href="#common-issues-và-solutions">Common Issues và Solutions</a></li>
+        <li><a href="#monitoring-checklist">Monitoring Checklist</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              9. Monitoring và Observability
+            </h1>
+          
+
+        
+
+
+
+	<h2 id="monitoring-và-observability">Monitoring và Observability</h2>
+<p>Trong phần này, chúng ta sẽ thiết lập comprehensive monitoring và observability cho hệ thống microservices orchestration.</p>
+
+<div class="notices info" ><p><strong>Mục tiêu phần này:</strong></p>
+<ul>
+<li>Thiết lập CloudWatch monitoring và dashboards</li>
+<li>Implement structured logging và metrics</li>
+<li>Tạo alerting và notification systems</li>
+<li>Analyze performance patterns và troubleshooting</li>
+</ul>
+</div>
+
+<h2 id="91-cloudwatch-integration">9.1 CloudWatch Integration</h2>
+<h3 id="automatic-monitoring-setup">Automatic Monitoring Setup</h3>
+<p>AWS Step Functions tự động integrate với CloudWatch để provide:</p>
+<ul>
+<li><strong>Execution metrics</strong>: Success/failure rates, duration</li>
+<li><strong>Error tracking</strong>: Detailed error information</li>
+<li><strong>Performance monitoring</strong>: Response times, throughput</li>
+<li><strong>Custom business metrics</strong>: Service-specific KPIs</li>
+</ul>
+<h3 id="key-metrics-to-monitor">Key Metrics to Monitor</h3>
+<h4 id="step-functions-metrics">Step Functions Metrics</h4>
+<pre tabindex="0"><code>ExecutionsFailed: Number of failed executions
+ExecutionsSucceeded: Number of successful executions  
+ExecutionsStarted: Total executions started
+ExecutionTime: Duration of executions
+ExecutionsTimedOut: Number of timed out executions
+</code></pre><h4 id="lambda-metrics">Lambda Metrics</h4>
+<pre tabindex="0"><code>Duration: Function execution time
+Invocations: Number of function calls
+Errors: Number of function errors
+Throttles: Number of throttled invocations
+ConcurrentExecutions: Concurrent execution count
+</code></pre><h4 id="custom-business-metrics">Custom Business Metrics</h4>
+<pre tabindex="0"><code>DeploymentSuccessRate: Percentage of successful deployments
+ServiceHealthScore: Aggregate health across all services
+RollbackFrequency: Number of rollbacks per time period
+MeanTimeToDeployment: Average deployment duration
+</code></pre><h2 id="92-cloudwatch-dashboard-setup">9.2 CloudWatch Dashboard Setup</h2>
+<h3 id="dashboard-creation">Dashboard Creation</h3>
+<p><strong>Bước 1: Navigate to CloudWatch</strong></p>
+<ol>
+<li>AWS Console → CloudWatch</li>
+<li>Dashboards → Create dashboard</li>
+<li><strong>Dashboard name</strong>: <code>Restaurant-Microservices-Monitoring</code></li>
+</ol>
+<h3 id="dashboard-configuration">Dashboard Configuration</h3>
+<h4 id="widget-1-step-functions-execution-overview">Widget 1: Step Functions Execution Overview</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;metrics&#34;</span>: [
+</span></span><span style="display:flex;"><span>    [<span style="color:#e6db74">&#34;AWS/States&#34;</span>, <span style="color:#e6db74">&#34;ExecutionsSucceeded&#34;</span>, <span style="color:#e6db74">&#34;StateMachineArn&#34;</span>, <span style="color:#e6db74">&#34;arn:aws:states:us-east-1:ACCOUNT:stateMachine:restaurant-deployment-orchestrator&#34;</span>],
+</span></span><span style="display:flex;"><span>    [<span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;ExecutionsFailed&#34;</span>, <span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;.&#34;</span>],
+</span></span><span style="display:flex;"><span>    [<span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;ExecutionsStarted&#34;</span>, <span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;.&#34;</span>]
+</span></span><span style="display:flex;"><span>  ],
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;view&#34;</span>: <span style="color:#e6db74">&#34;timeSeries&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;stacked&#34;</span>: <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;region&#34;</span>: <span style="color:#e6db74">&#34;us-east-1&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;title&#34;</span>: <span style="color:#e6db74">&#34;Step Functions Execution Status&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;period&#34;</span>: <span style="color:#ae81ff">300</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="widget-2-lambda-performance-metrics">Widget 2: Lambda Performance Metrics</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;metrics&#34;</span>: [
+</span></span><span style="display:flex;"><span>    [<span style="color:#e6db74">&#34;AWS/Lambda&#34;</span>, <span style="color:#e6db74">&#34;Duration&#34;</span>, <span style="color:#e6db74">&#34;FunctionName&#34;</span>, <span style="color:#e6db74">&#34;restaurant-health-check&#34;</span>],
+</span></span><span style="display:flex;"><span>    [<span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;restaurant-notification&#34;</span>],
+</span></span><span style="display:flex;"><span>    [<span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;rollback-coordinator&#34;</span>]
+</span></span><span style="display:flex;"><span>  ],
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;view&#34;</span>: <span style="color:#e6db74">&#34;timeSeries&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;region&#34;</span>: <span style="color:#e6db74">&#34;us-east-1&#34;</span>, 
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;title&#34;</span>: <span style="color:#e6db74">&#34;Lambda Function Performance&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;yAxis&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;left&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;min&#34;</span>: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="widget-3-error-rate-monitoring">Widget 3: Error Rate Monitoring</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;metrics&#34;</span>: [
+</span></span><span style="display:flex;"><span>    [<span style="color:#e6db74">&#34;AWS/Lambda&#34;</span>, <span style="color:#e6db74">&#34;Errors&#34;</span>, <span style="color:#e6db74">&#34;FunctionName&#34;</span>, <span style="color:#e6db74">&#34;restaurant-health-check&#34;</span>],
+</span></span><span style="display:flex;"><span>    [<span style="color:#e6db74">&#34;AWS/States&#34;</span>, <span style="color:#e6db74">&#34;ExecutionsFailed&#34;</span>, <span style="color:#e6db74">&#34;StateMachineArn&#34;</span>, <span style="color:#e6db74">&#34;arn:aws:states:us-east-1:ACCOUNT:stateMachine:restaurant-deployment-orchestrator&#34;</span>]
+</span></span><span style="display:flex;"><span>  ],
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;view&#34;</span>: <span style="color:#e6db74">&#34;number&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;region&#34;</span>: <span style="color:#e6db74">&#34;us-east-1&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;title&#34;</span>: <span style="color:#e6db74">&#34;Error Counts&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;period&#34;</span>: <span style="color:#ae81ff">300</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="93-alerting-và-notifications">9.3 Alerting và Notifications</h2>
+<h3 id="cloudwatch-alarms-setup">CloudWatch Alarms Setup</h3>
+<h4 id="alarm-1-high-failure-rate">Alarm 1: High Failure Rate</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;AlarmName&#34;</span>: <span style="color:#e6db74">&#34;RestaurantDeployment-HighFailureRate&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;AlarmDescription&#34;</span>: <span style="color:#e6db74">&#34;Alert when deployment failure rate exceeds 20%&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;MetricName&#34;</span>: <span style="color:#e6db74">&#34;ExecutionsFailed&#34;</span>, 
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;Namespace&#34;</span>: <span style="color:#e6db74">&#34;AWS/States&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;Statistic&#34;</span>: <span style="color:#e6db74">&#34;Sum&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;Period&#34;</span>: <span style="color:#ae81ff">300</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;EvaluationPeriods&#34;</span>: <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;Threshold&#34;</span>: <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;ComparisonOperator&#34;</span>: <span style="color:#e6db74">&#34;GreaterThanThreshold&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;Dimensions&#34;</span>: [
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Name&#34;</span>: <span style="color:#e6db74">&#34;StateMachineArn&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Value&#34;</span>: <span style="color:#e6db74">&#34;arn:aws:states:us-east-1:ACCOUNT:stateMachine:restaurant-deployment-orchestrator&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="alarm-2-long-execution-time">Alarm 2: Long Execution Time</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;AlarmName&#34;</span>: <span style="color:#e6db74">&#34;RestaurantDeployment-LongExecutionTime&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;MetricName&#34;</span>: <span style="color:#e6db74">&#34;ExecutionTime&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;Threshold&#34;</span>: <span style="color:#ae81ff">300000</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;ComparisonOperator&#34;</span>: <span style="color:#e6db74">&#34;GreaterThanThreshold&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;AlarmDescription&#34;</span>: <span style="color:#e6db74">&#34;Alert when deployment takes longer than 5 minutes&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="sns-integration">SNS Integration</h3>
+<p>Để setup email notifications:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Create SNS topic</span>
+</span></span><span style="display:flex;"><span>aws sns create-topic --name restaurant-deployment-alerts
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Subscribe email  </span>
+</span></span><span style="display:flex;"><span>aws sns subscribe <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --topic-arn arn:aws:sns:us-east-1:ACCOUNT:restaurant-deployment-alerts <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --protocol email <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --notification-endpoint your-email@example.com
+</span></span></code></pre></div><h2 id="94-structured-logging-strategy">9.4 Structured Logging Strategy</h2>
+<h3 id="enhanced-logging-function">Enhanced Logging Function</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// Utility function for structured logging
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">logEvent</span>(<span style="color:#a6e22e">level</span>, <span style="color:#a6e22e">event</span>, <span style="color:#a6e22e">context</span>, <span style="color:#a6e22e">metadata</span> <span style="color:#f92672">=</span> {}) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">logEntry</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">timestamp</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">new</span> Date().<span style="color:#a6e22e">toISOString</span>(),
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">level</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">level</span>.<span style="color:#a6e22e">toUpperCase</span>(),
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">event</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">context</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">metadata</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">requestId</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">awsRequestId</span> <span style="color:#f92672">||</span> <span style="color:#e6db74">&#39;unknown&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">functionName</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">functionName</span> <span style="color:#f92672">||</span> <span style="color:#e6db74">&#39;unknown&#39;</span>
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">logEntry</span>));
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Usage trong Lambda functions
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">handler</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">event</span>, <span style="color:#a6e22e">context</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">logEvent</span>(<span style="color:#e6db74">&#39;info&#39;</span>, <span style="color:#e6db74">&#39;function_started&#39;</span>, <span style="color:#a6e22e">context</span>, { 
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">inputEvent</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">event</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">serviceName</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">serviceName</span> 
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">processHealthCheck</span>(<span style="color:#a6e22e">event</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">logEvent</span>(<span style="color:#e6db74">&#39;info&#39;</span>, <span style="color:#e6db74">&#39;health_check_completed&#39;</span>, <span style="color:#a6e22e">context</span>, {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">serviceName</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">serviceName</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">status</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">status</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">responseTime</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">responseTime</span>
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">result</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">logEvent</span>(<span style="color:#e6db74">&#39;error&#39;</span>, <span style="color:#e6db74">&#39;health_check_failed&#39;</span>, <span style="color:#a6e22e">context</span>, {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">serviceName</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">serviceName</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">errorMessage</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">error</span>.<span style="color:#a6e22e">message</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">errorStack</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">error</span>.<span style="color:#a6e22e">stack</span>
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">throw</span> <span style="color:#a6e22e">error</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h3 id="log-analysis-queries">Log Analysis Queries</h3>
+<h4 id="cloudwatch-insights-queries">CloudWatch Insights Queries</h4>
+<p><strong>Query 1: Deployment Success Rate</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>fields <span style="color:#f92672">@</span><span style="color:#66d9ef">timestamp</span>, <span style="color:#66d9ef">level</span>, event, metadata.serviceName, metadata.status
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span> filter event <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;health_check_completed&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span> stats <span style="color:#66d9ef">count</span>() <span style="color:#66d9ef">as</span> total, 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">count</span>(metadata.status <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;HEALTHY&#34;</span>) <span style="color:#66d9ef">as</span> healthy
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">by</span> bin(<span style="color:#ae81ff">5</span>m)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span> eval success_rate <span style="color:#f92672">=</span> (healthy <span style="color:#f92672">/</span> total) <span style="color:#f92672">*</span> <span style="color:#ae81ff">100</span>
+</span></span></code></pre></div><p><strong>Query 2: Error Pattern Analysis</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>fields <span style="color:#f92672">@</span><span style="color:#66d9ef">timestamp</span>, <span style="color:#66d9ef">level</span>, event, metadata.serviceName, metadata.errorMessage
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span> filter <span style="color:#66d9ef">level</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ERROR&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span> stats <span style="color:#66d9ef">count</span>() <span style="color:#66d9ef">by</span> metadata.serviceName, metadata.errorMessage
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span> sort <span style="color:#66d9ef">count</span> <span style="color:#66d9ef">desc</span>
+</span></span></code></pre></div><p><strong>Query 3: Performance Trends</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>fields <span style="color:#f92672">@</span><span style="color:#66d9ef">timestamp</span>, metadata.serviceName, metadata.responseTime
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span> filter event <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;health_check_completed&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">|</span> stats <span style="color:#66d9ef">avg</span>(metadata.responseTime) <span style="color:#66d9ef">as</span> avg_response_time <span style="color:#66d9ef">by</span> metadata.serviceName, bin(<span style="color:#ae81ff">1</span>h)
+</span></span></code></pre></div><h2 id="95-custom-metrics-implementation">9.5 Custom Metrics Implementation</h2>
+<h3 id="publishing-custom-metrics">Publishing Custom Metrics</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">AWS</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;aws-sdk&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">cloudwatch</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">AWS</span>.<span style="color:#a6e22e">CloudWatch</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">publishCustomMetrics</span>(<span style="color:#a6e22e">serviceName</span>, <span style="color:#a6e22e">status</span>, <span style="color:#a6e22e">responseTime</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">params</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Namespace</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;RestaurantServices/Deployment&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">MetricData</span><span style="color:#f92672">:</span> [
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">MetricName</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;DeploymentStatus&#39;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">Dimensions</span><span style="color:#f92672">:</span> [
+</span></span><span style="display:flex;"><span>                    {
+</span></span><span style="display:flex;"><span>                        <span style="color:#a6e22e">Name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;ServiceName&#39;</span>,
+</span></span><span style="display:flex;"><span>                        <span style="color:#a6e22e">Value</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">serviceName</span>
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                ],
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">Unit</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Count&#39;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">Value</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">status</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;HEALTHY&#39;</span> <span style="color:#f92672">?</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">Timestamp</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">new</span> Date()
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">MetricName</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;ResponseTime&#39;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">Dimensions</span><span style="color:#f92672">:</span> [
+</span></span><span style="display:flex;"><span>                    {
+</span></span><span style="display:flex;"><span>                        <span style="color:#a6e22e">Name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;ServiceName&#39;</span>,
+</span></span><span style="display:flex;"><span>                        <span style="color:#a6e22e">Value</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">serviceName</span>
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                ],
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">Unit</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Milliseconds&#39;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">Value</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">responseTime</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">Timestamp</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">new</span> Date()
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        ]
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">cloudwatch</span>.<span style="color:#a6e22e">putMetricData</span>(<span style="color:#a6e22e">params</span>).<span style="color:#a6e22e">promise</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`📊 Custom metrics published for </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">serviceName</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#39;❌ Failed to publish metrics:&#39;</span>, <span style="color:#a6e22e">error</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="business-metrics-dashboard">Business Metrics Dashboard</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;widgets&#34;</span>: [
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;metric&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;properties&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;metrics&#34;</span>: [
+</span></span><span style="display:flex;"><span>          [<span style="color:#e6db74">&#34;RestaurantServices/Deployment&#34;</span>, <span style="color:#e6db74">&#34;DeploymentStatus&#34;</span>, <span style="color:#e6db74">&#34;ServiceName&#34;</span>, <span style="color:#e6db74">&#34;auth&#34;</span>],
+</span></span><span style="display:flex;"><span>          [<span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;menu&#34;</span>],
+</span></span><span style="display:flex;"><span>          [<span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;restaurant&#34;</span>],
+</span></span><span style="display:flex;"><span>          [<span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;order&#34;</span>],
+</span></span><span style="display:flex;"><span>          [<span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;review&#34;</span>]
+</span></span><span style="display:flex;"><span>        ],
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;view&#34;</span>: <span style="color:#e6db74">&#34;timeSeries&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;stacked&#34;</span>: <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;region&#34;</span>: <span style="color:#e6db74">&#34;us-east-1&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;title&#34;</span>: <span style="color:#e6db74">&#34;Service Health Status&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;period&#34;</span>: <span style="color:#ae81ff">300</span>
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;metric&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;properties&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;metrics&#34;</span>: [
+</span></span><span style="display:flex;"><span>          [<span style="color:#e6db74">&#34;RestaurantServices/Deployment&#34;</span>, <span style="color:#e6db74">&#34;ResponseTime&#34;</span>, <span style="color:#e6db74">&#34;ServiceName&#34;</span>, <span style="color:#e6db74">&#34;auth&#34;</span>],
+</span></span><span style="display:flex;"><span>          [<span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;menu&#34;</span>],
+</span></span><span style="display:flex;"><span>          [<span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;restaurant&#34;</span>],
+</span></span><span style="display:flex;"><span>          [<span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;order&#34;</span>],
+</span></span><span style="display:flex;"><span>          [<span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;review&#34;</span>]
+</span></span><span style="display:flex;"><span>        ],
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;view&#34;</span>: <span style="color:#e6db74">&#34;timeSeries&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;region&#34;</span>: <span style="color:#e6db74">&#34;us-east-1&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;title&#34;</span>: <span style="color:#e6db74">&#34;Service Response Times&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;period&#34;</span>: <span style="color:#ae81ff">300</span>
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="96-distributed-tracing">9.6 Distributed Tracing</h2>
+<h3 id="x-ray-integration">X-Ray Integration</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">AWSXRay</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;aws-xray-sdk-core&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">AWS</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">AWSXRay</span>.<span style="color:#a6e22e">captureAWS</span>(<span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;aws-sdk&#39;</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">handler</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">event</span>, <span style="color:#a6e22e">context</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">segment</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">AWSXRay</span>.<span style="color:#a6e22e">getSegment</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">subsegment</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">segment</span>.<span style="color:#a6e22e">addNewSubsegment</span>(<span style="color:#e6db74">&#39;health-check-operation&#39;</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">subsegment</span>.<span style="color:#a6e22e">addAnnotation</span>(<span style="color:#e6db74">&#39;serviceName&#39;</span>, <span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">serviceName</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">subsegment</span>.<span style="color:#a6e22e">addAnnotation</span>(<span style="color:#e6db74">&#39;operation&#39;</span>, <span style="color:#e6db74">&#39;health-check&#39;</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">performHealthCheck</span>(<span style="color:#a6e22e">event</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">subsegment</span>.<span style="color:#a6e22e">addMetadata</span>(<span style="color:#e6db74">&#39;result&#39;</span>, {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">status</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">status</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">responseTime</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">responseTime</span>
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">subsegment</span>.<span style="color:#a6e22e">close</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">result</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">subsegment</span>.<span style="color:#a6e22e">addError</span>(<span style="color:#a6e22e">error</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">subsegment</span>.<span style="color:#a6e22e">close</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">throw</span> <span style="color:#a6e22e">error</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h3 id="trace-analysis">Trace Analysis</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// Trace correlation
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">addTraceContext</span>(<span style="color:#a6e22e">event</span>, <span style="color:#a6e22e">context</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">traceId</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">awsRequestId</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">spanId</span> <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">random</span>().<span style="color:#a6e22e">toString</span>(<span style="color:#ae81ff">36</span>).<span style="color:#a6e22e">substring</span>(<span style="color:#ae81ff">7</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>        ...<span style="color:#a6e22e">event</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">traceContext</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">traceId</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">spanId</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">timestamp</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">new</span> Date().<span style="color:#a6e22e">toISOString</span>()
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="97-performance-monitoring">9.7 Performance Monitoring</h2>
+<h3 id="key-performance-indicators">Key Performance Indicators</h3>
+
+<div class="notices tip" ><p><strong>Monitoring Best Practices:</strong></p>
+<ul>
+<li>Set up proactive alerting</li>
+<li>Monitor both technical và business metrics</li>
+<li>Use correlation analysis để identify root causes</li>
+<li>Implement automated remediation where possible</li>
+</ul>
+</div>
+
+<h4 id="technical-kpis">Technical KPIs</h4>
+<ul>
+<li><strong>Availability</strong>: Uptime percentage</li>
+<li><strong>Latency</strong>: Response time percentiles</li>
+<li><strong>Throughput</strong>: Requests per second</li>
+<li><strong>Error Rate</strong>: Percentage of failed requests</li>
+</ul>
+<h4 id="business-kpis">Business KPIs</h4>
+<ul>
+<li><strong>Deployment Success Rate</strong>: Percentage of successful deployments</li>
+<li><strong>Mean Time to Recovery</strong>: Average time to fix issues</li>
+<li><strong>Service Dependency Health</strong>: Health of critical dependencies</li>
+<li><strong>Rollback Frequency</strong>: Number of rollbacks per time period</li>
+</ul>
+<h3 id="automated-monitoring-setup">Automated Monitoring Setup</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e"># Setup monitoring infrastructure</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create CloudWatch dashboard</span>
+</span></span><span style="display:flex;"><span>aws cloudwatch put-dashboard <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --dashboard-name <span style="color:#e6db74">&#34;Restaurant-Microservices-Monitoring&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --dashboard-body file://dashboard-config.json
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create alarms</span>
+</span></span><span style="display:flex;"><span>aws cloudwatch put-metric-alarm <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --alarm-name <span style="color:#e6db74">&#34;RestaurantDeployment-HighFailureRate&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --alarm-description <span style="color:#e6db74">&#34;Alert when deployment failure rate exceeds 20%&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --metric-name <span style="color:#e6db74">&#34;ExecutionsFailed&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --namespace <span style="color:#e6db74">&#34;AWS/States&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --statistic <span style="color:#e6db74">&#34;Sum&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --period <span style="color:#ae81ff">300</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --threshold <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --comparison-operator <span style="color:#e6db74">&#34;GreaterThanThreshold&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create SNS topic for alerts</span>
+</span></span><span style="display:flex;"><span>aws sns create-topic --name restaurant-deployment-alerts
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;✅ Monitoring setup completed&#34;</span>
+</span></span></code></pre></div><h2 id="98-troubleshooting-guide">9.8 Troubleshooting Guide</h2>
+<h3 id="common-issues-và-solutions">Common Issues và Solutions</h3>
+<h4 id="issue-1-high-latency">Issue 1: High Latency</h4>
+<p><strong>Symptoms</strong>: Long execution times, timeout errors
+<strong>Investigation</strong>: Check CloudWatch metrics, Lambda cold starts
+<strong>Solution</strong>: Optimize Lambda memory, implement connection pooling</p>
+<h4 id="issue-2-intermittent-failures">Issue 2: Intermittent Failures</h4>
+<p><strong>Symptoms</strong>: Random execution failures
+<strong>Investigation</strong>: Check error patterns, dependency health
+<strong>Solution</strong>: Implement circuit breakers, improve retry logic</p>
+<h4 id="issue-3-resource-exhaustion">Issue 3: Resource Exhaustion</h4>
+<p><strong>Symptoms</strong>: Throttling errors, capacity exceeded
+<strong>Investigation</strong>: Monitor concurrent executions, resource utilization
+<strong>Solution</strong>: Implement backpressure, scale resources</p>
+<h3 id="monitoring-checklist">Monitoring Checklist</h3>
+
+<div class="notices warning" ><p><strong>Production Readiness:</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> CloudWatch dashboards configured</li>
+<li><input disabled="" type="checkbox"> Critical alerts set up</li>
+<li><input disabled="" type="checkbox"> Log aggregation working</li>
+<li><input disabled="" type="checkbox"> Custom metrics implemented</li>
+<li><input disabled="" type="checkbox"> Runbooks documented</li>
+<li><input disabled="" type="checkbox"> On-call procedures defined</li>
+</ul>
+</div>
+
+<hr>
+<p><strong>Tiếp theo:</strong> Trong phần 10, chúng ta sẽ thực hiện Scalability Testing để đánh giá performance của hệ thống dưới load.</p>
+
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/8-error-handling/" title="8. Error Handling và Rollback"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/10-scalability-testing/" title="10. Scalability Testing" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1752194696"></script>
+    <script src="/js/perfect-scrollbar.min.js?1752194696"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1752194696"></script>
+    <script src="/js/jquery.sticky.js?1752194696"></script>
+    <script src="/js/featherlight.min.js?1752194696"></script>
+    <script src="/js/highlight.pack.js?1752194696"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1752194696"></script>
+    <script src="/js/learn.js?1752194696"></script>
+    <script src="/js/hugo-learn.js?1752194696"></script>
+
+    <link href="/mermaid/mermaid.css?1752194696" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1752194696"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-158079754-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>

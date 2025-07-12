@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.148.0">
+    <meta name="description" content="Learn to orchestrate microservices deployment with AWS Step Functions">
+<meta name="author" content="AWS Workshop Team">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>6. Parallel Processing &amp; Optimization :: Restaurant Microservices Deployment Orchestration Workshop</title>
+
+    
+    <link href="/css/nucleus.css?1752267495" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1752267495" rel="stylesheet">
+    <link href="/css/hybrid.css?1752267495" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1752267495" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1752267495" rel="stylesheet">
+    <link href="/css/auto-complete.css?1752267495" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1752267495" rel="stylesheet">
+    <link href="/css/theme.css?1752267495" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1752267495" rel="stylesheet">
+    
+    <link href="/css/theme-workshop.css?1752267495" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1752267495"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/en/6-parallel-processing/">
+    <nav id="sidebar" class="">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="/">
+
+    <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff;}.cls-2{fill:#f90;fill-rule:evenodd;}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09,10.85a4.7,4.7,0,0,0,.19,1.48,7.73,7.73,0,0,0,.54,1.19.77.77,0,0,1,.12.38.64.64,0,0,1-.32.49l-1,.7a.83.83,0,0,1-.44.15.69.69,0,0,1-.49-.23,3.8,3.8,0,0,1-.6-.77q-.25-.42-.51-1a6.14,6.14,0,0,1-4.89,2.3,4.54,4.54,0,0,1-3.32-1.19,4.27,4.27,0,0,1-1.22-3.2A4.28,4.28,0,0,1,3.61,7.75,6.06,6.06,0,0,1,7.69,6.46a12.47,12.47,0,0,1,1.76.13q.92.13,1.91.36V5.73a3.65,3.65,0,0,0-.79-2.66A3.81,3.81,0,0,0,7.86,2.3a7.71,7.71,0,0,0-1.79.22,12.78,12.78,0,0,0-1.79.57,4.55,4.55,0,0,1-.58.22l-.26,0q-.35,0-.35-.52V2a1.09,1.09,0,0,1,.12-.58,1.2,1.2,0,0,1,.47-.35A10.88,10.88,0,0,1,5.77.32,10.19,10.19,0,0,1,8.36,0a6,6,0,0,1,4.35,1.35,5.49,5.49,0,0,1,1.38,4.09ZM7.34,13.38a5.36,5.36,0,0,0,1.72-.31A3.63,3.63,0,0,0,10.63,12,2.62,2.62,0,0,0,11.19,11a5.63,5.63,0,0,0,.16-1.44v-.7a14.35,14.35,0,0,0-1.53-.28,12.37,12.37,0,0,0-1.56-.1,3.84,3.84,0,0,0-2.47.67A2.34,2.34,0,0,0,5,11a2.35,2.35,0,0,0,.61,1.76A2.4,2.4,0,0,0,7.34,13.38Zm13.35,1.8a1,1,0,0,1-.64-.16,1.3,1.3,0,0,1-.35-.65L15.81,1.51a3,3,0,0,1-.15-.67.36.36,0,0,1,.41-.41H17.7a1,1,0,0,1,.65.16,1.4,1.4,0,0,1,.33.65l2.79,11,2.59-11A1.17,1.17,0,0,1,24.39.6a1.1,1.1,0,0,1,.67-.16H26.4a1.1,1.1,0,0,1,.67.16,1.17,1.17,0,0,1,.32.65L30,12.39,32.88,1.25A1.39,1.39,0,0,1,33.22.6a1,1,0,0,1,.65-.16h1.54a.36.36,0,0,1,.41.41,1.36,1.36,0,0,1,0,.26,3.64,3.64,0,0,1-.12.41l-4,12.86a1.3,1.3,0,0,1-.35.65,1,1,0,0,1-.64.16H29.25a1,1,0,0,1-.67-.17,1.26,1.26,0,0,1-.32-.67L25.67,3.64,23.11,14.34a1.26,1.26,0,0,1-.32.67,1,1,0,0,1-.67.17Zm21.36.44a11.28,11.28,0,0,1-2.56-.29,7.44,7.44,0,0,1-1.92-.67,1,1,0,0,1-.61-.93v-.84q0-.52.38-.52a.9.9,0,0,1,.31.06l.42.17a8.77,8.77,0,0,0,1.83.58,9.78,9.78,0,0,0,2,.2,4.48,4.48,0,0,0,2.43-.55,1.76,1.76,0,0,0,.86-1.57,1.61,1.61,0,0,0-.45-1.16A4.29,4.29,0,0,0,43,9.22l-2.41-.76A5.15,5.15,0,0,1,38,6.78a3.94,3.94,0,0,1-.83-2.41,3.7,3.7,0,0,1,.45-1.85,4.47,4.47,0,0,1,1.19-1.37A5.27,5.27,0,0,1,40.51.29,7.4,7.4,0,0,1,42.6,0a8.87,8.87,0,0,1,1.12.07q.57.07,1.08.19t.95.26a4.27,4.27,0,0,1,.7.29,1.59,1.59,0,0,1,.49.41.94.94,0,0,1,.15.55v.79q0,.52-.38.52a1.76,1.76,0,0,1-.64-.2,7.74,7.74,0,0,0-3.2-.64,4.37,4.37,0,0,0-2.21.47,1.6,1.6,0,0,0-.79,1.48,1.58,1.58,0,0,0,.49,1.18,4.94,4.94,0,0,0,1.83.92L44.55,7a5.08,5.08,0,0,1,2.57,1.6A3.76,3.76,0,0,1,47.9,11a4.21,4.21,0,0,1-.44,1.93,4.4,4.4,0,0,1-1.21,1.47,5.43,5.43,0,0,1-1.85.93A8.25,8.25,0,0,1,42.05,15.62Z"></path><path class="cls-2" d="M45.19,23.81C39.72,27.85,31.78,30,25,30A36.64,36.64,0,0,1,.22,20.57c-.51-.46-.06-1.09.56-.74A49.78,49.78,0,0,0,25.53,26.4,49.23,49.23,0,0,0,44.4,22.53C45.32,22.14,46.1,23.14,45.19,23.81Z"></path><path class="cls-2" d="M47.47,21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74,3.13-2.2,8.27-1.57,8.86-.83s-.16,5.89-3.09,8.35c-.45.38-.88.18-.68-.32C46.69,25.8,48.17,22.11,47.47,21.21Z"></path></svg>
+    
+    </a>
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1752267495"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1752267495"></script>
+<script type="text/javascript">
+    
+        var baseurl = "\/\/localhost:1313\/\/en";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1752267495"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/1-introduction/" title="1. Introduction to the Workshop" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/en/1-introduction/">
+          1. Introduction to the Workshop
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/2-environment-prep/" title="2. Environment Preparation" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/en/2-environment-prep/">
+          2. Environment Preparation
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/3-service-dispatch/" title="3. Service Dispatch" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/en/3-service-dispatch/">
+          3. Service Dispatch
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/4-workflow-orchestration/" title="4. Workflow Orchestration" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/en/4-workflow-orchestration/">
+          4. Workflow Orchestration
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/5-error-handling/" title="5. Error Handling &amp; Resilience" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/en/5-error-handling/">
+          5. Error Handling &amp; Resilience
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/6-parallel-processing/" title="6. Parallel Processing &amp; Optimization" class="dd-item 
+        
+        active
+        
+        ">
+      <a href="/en/6-parallel-processing/">
+          6. Parallel Processing &amp; Optimization
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/7-advanced-features/" title="7. Advanced Features &amp; Best Practices" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/en/7-advanced-features/">
+          7. Advanced Features &amp; Best Practices
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/en/8-cleanup/" title="8. Resource Cleanup" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/en/8-cleanup/">
+          8. Resource Cleanup
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://github.com/aws-samples/restaurant-deployment-workshop"><i class='fab fa-github'></i> GitHub Repo</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://github.com/aws-samples/restaurant-deployment-workshop/tree/main/images"><i class='fas fa-camera'></i> Workshop Images</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://aws.amazon.com/step-functions/"><i class='fas fa-bookmark'></i> AWS Step Functions</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="//localhost:1313/en/credits"><i class='fas fa-bullhorn'></i> Credits</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="en" value="//localhost:1313/en/6-parallel-processing/" selected>English</option>
+                    
+                  
+              
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+      
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <left>
+    
+     <b> Workshop</b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830891&style=0038&nbdigits=9&type=page&initCount=0" title="Migrate" Alt="web counter"   border="0" /></a>  <br>
+     <b> <a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830807&style=0038&nbdigits=9&type=page&initCount=0" title="Total CLoud Journey" Alt="web counter"   border="0"   />
+     
+</left>
+<left>
+    <br>
+    <br>
+        <b> Last Updated </b> <br>
+        <i><font color=orange>26-11-2023</font></i>
+    </left>
+    <left>
+        <br>
+        <br>
+            <b> Team </b> <br>
+           
+            <i>
+                <a href="https://www.linkedin.com/in/jotaguy"  style="color:orange">Gia Hưng</a>
+        </i>
+        </left>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                   6. Parallel Processing &amp; Optimization
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#dependency-analysis-10-phút">Dependency Analysis (10 phút)</a>
+      <ul>
+        <li><a href="#analyze-service-dependencies">Analyze Service Dependencies</a></li>
+        <li><a href="#dependency-graph-output">Dependency Graph Output</a></li>
+        <li><a href="#dependency-configuration">Dependency Configuration</a></li>
+      </ul>
+    </li>
+    <li><a href="#parallel-workflow-implementation-20-phút">Parallel Workflow Implementation (20 phút)</a>
+      <ul>
+        <li><a href="#enhanced-parallel-state-machine">Enhanced Parallel State Machine</a></li>
+        <li><a href="#parallel-state-machine-definition">Parallel State Machine Definition</a></li>
+        <li><a href="#dependency-analyzer-lambda-function">Dependency Analyzer Lambda Function</a></li>
+      </ul>
+    </li>
+    <li><a href="#performance-testing--validation-10-phút">Performance Testing &amp; Validation (10 phút)</a>
+      <ul>
+        <li><a href="#performance-testing-suite">Performance Testing Suite</a></li>
+        <li><a href="#scalability-tester-implementation">Scalability Tester Implementation</a></li>
+        <li><a href="#expected-performance-results">Expected Performance Results</a></li>
+        <li><a href="#performance-monitoring">Performance Monitoring</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              6. Parallel Processing &amp; Optimization
+            </h1>
+          
+
+        
+
+
+
+	<h2 id="dependency-analysis-10-phút">Dependency Analysis (10 phút)</h2>
+<h3 id="analyze-service-dependencies">Analyze Service Dependencies</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Analyze service dependencies</span>
+</span></span><span style="display:flex;"><span>python -c <span style="color:#e6db74">&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">from src.dependency_manager import DependencyManager
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">dm = DependencyManager()
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">dm.print_dependency_graph()
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">dm.visualize_dependencies()  # Tạo PNG file
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># View optimization opportunities  </span>
+</span></span><span style="display:flex;"><span>python -c <span style="color:#e6db74">&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">from src.dependency_manager import DependencyManager
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">dm = DependencyManager()
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">plan = dm.get_deployment_plan(&#39;parallel_optimized&#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">print(&#39;Sequential time:&#39;, plan[&#39;estimated_time&#39;][&#39;sequential&#39;])
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">print(&#39;Optimized time:&#39;, plan[&#39;estimated_time&#39;][&#39;parallel_optimized&#39;])
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">print(&#39;Time saved:&#39;, plan[&#39;time_saved&#39;])
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;</span>
+</span></span></code></pre></div><h3 id="dependency-graph-output">Dependency Graph Output</h3>
+<pre tabindex="0"><code>🔍 Restaurant Microservices Dependency Analysis
+
+┌─────────────────────────────────────────────────────────────────┐
+│                    DEPENDENCY GRAPH                             │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  ┌─────────────────┐    ┌──────────────────────┐                │
+│  │   Auth Service  │    │ Notification Service │                │
+│  │  (Foundation)   │    │   (Independent)      │                │
+│  └─────────┬───────┘    └──────────────────────┘                │
+│           │                                                     │
+│           ▼                                                     │
+│  ┌─────────────────┐    ┌──────────────────────┐                │
+│  │  Order Service  │    │  Payment Service     │                │
+│  │ (Depends: Auth) │    │ (Depends: Auth)      │                │
+│  └─────────────────┘    └──────────────────────┘                │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+
+📊 OPTIMIZATION ANALYSIS
+├── Sequential Deployment: 8m 30s
+├── Parallel Optimized:   4m 15s  
+├── Time Saved:          4m 15s (50% improvement)
+└── Parallel Capacity:   3 concurrent deployments
+</code></pre><h3 id="dependency-configuration">Dependency Configuration</h3>
+<p><strong>File: config/service_dependencies.yaml</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">service_groups</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">core_services</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">priority</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">parallel_limit</span>: <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">services</span>: [<span style="color:#ae81ff">auth-service, notification-service]</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">business_services</span>:  
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">priority</span>: <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">parallel_limit</span>: <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">dependencies</span>: [<span style="color:#ae81ff">core_services]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">services</span>: [<span style="color:#ae81ff">order-service, payment-service]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">deployment_strategies</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">parallel_optimized</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">max_parallel_executions</span>: <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">dependency_timeout</span>: <span style="color:#ae81ff">300</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">health_check_interval</span>: <span style="color:#ae81ff">30</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">sequential</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">max_parallel_executions</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">dependency_timeout</span>: <span style="color:#ae81ff">600</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">health_check_interval</span>: <span style="color:#ae81ff">60</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">optimization_settings</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">enable_smart_parallelization</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">dependency_check_interval</span>: <span style="color:#ae81ff">15</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">max_wait_time_for_dependencies</span>: <span style="color:#ae81ff">300</span>
+</span></span></code></pre></div><h2 id="parallel-workflow-implementation-20-phút">Parallel Workflow Implementation (20 phút)</h2>
+<h3 id="enhanced-parallel-state-machine">Enhanced Parallel State Machine</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Deploy parallel-optimized state machine</span>
+</span></span><span style="display:flex;"><span>aws stepfunctions update-state-machine <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --state-machine-arn arn:aws:states:us-east-1:ACCOUNT:stateMachine:restaurant-deployment-orchestrator <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --definition file://step_functions/parallel_deployment_orchestrator.json <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --role-arn arn:aws:iam::ACCOUNT:role/step-functions-execution-role
+</span></span></code></pre></div><h3 id="parallel-state-machine-definition">Parallel State Machine Definition</h3>
+<p><strong>File: step_functions/parallel_deployment_orchestrator.json</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;Comment&#34;</span>: <span style="color:#e6db74">&#34;Parallel Optimized Restaurant Deployment Orchestrator&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;StartAt&#34;</span>: <span style="color:#e6db74">&#34;InitializeDeployment&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;States&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;InitializeDeployment&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Task&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Resource&#34;</span>: <span style="color:#e6db74">&#34;arn:aws:lambda:us-east-1:ACCOUNT:function:deployment-initializer&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Next&#34;</span>: <span style="color:#e6db74">&#34;AnalyzeDependencies&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;AnalyzeDependencies&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Task&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Resource&#34;</span>: <span style="color:#e6db74">&#34;arn:aws:lambda:us-east-1:ACCOUNT:function:dependency-analyzer&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Next&#34;</span>: <span style="color:#e6db74">&#34;DeployFoundationServicesParallel&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;DeployFoundationServicesParallel&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Parallel&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Branches&#34;</span>: [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;StartAt&#34;</span>: <span style="color:#e6db74">&#34;DeployAuthService&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;States&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;DeployAuthService&#34;</span>: {
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Task&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;Resource&#34;</span>: <span style="color:#e6db74">&#34;arn:aws:lambda:us-east-1:ACCOUNT:function:microservice-deployer&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;Parameters&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;service_name&#34;</span>: <span style="color:#e6db74">&#34;auth-service&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;deployment_strategy&#34;</span>: <span style="color:#e6db74">&#34;fast&#34;</span>
+</span></span><span style="display:flex;"><span>              },
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;Retry&#34;</span>: [
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                  <span style="color:#f92672">&#34;ErrorEquals&#34;</span>: [<span style="color:#e6db74">&#34;States.TaskFailed&#34;</span>],
+</span></span><span style="display:flex;"><span>                  <span style="color:#f92672">&#34;IntervalSeconds&#34;</span>: <span style="color:#ae81ff">5</span>,
+</span></span><span style="display:flex;"><span>                  <span style="color:#f92672">&#34;MaxAttempts&#34;</span>: <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>                  <span style="color:#f92672">&#34;BackoffRate&#34;</span>: <span style="color:#ae81ff">2.0</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>              ],
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;End&#34;</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;StartAt&#34;</span>: <span style="color:#e6db74">&#34;DeployNotificationService&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;States&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;DeployNotificationService&#34;</span>: {
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Task&#34;</span>, 
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;Resource&#34;</span>: <span style="color:#e6db74">&#34;arn:aws:lambda:us-east-1:ACCOUNT:function:microservice-deployer&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;Parameters&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;service_name&#34;</span>: <span style="color:#e6db74">&#34;notification-service&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;deployment_strategy&#34;</span>: <span style="color:#e6db74">&#34;fast&#34;</span>
+</span></span><span style="display:flex;"><span>              },
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;Retry&#34;</span>: [
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                  <span style="color:#f92672">&#34;ErrorEquals&#34;</span>: [<span style="color:#e6db74">&#34;States.TaskFailed&#34;</span>],
+</span></span><span style="display:flex;"><span>                  <span style="color:#f92672">&#34;IntervalSeconds&#34;</span>: <span style="color:#ae81ff">5</span>,
+</span></span><span style="display:flex;"><span>                  <span style="color:#f92672">&#34;MaxAttempts&#34;</span>: <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>                  <span style="color:#f92672">&#34;BackoffRate&#34;</span>: <span style="color:#ae81ff">2.0</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>              ],
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;End&#34;</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      ],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Next&#34;</span>: <span style="color:#e6db74">&#34;ValidateFoundationServices&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;ValidateFoundationServices&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Task&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Resource&#34;</span>: <span style="color:#e6db74">&#34;arn:aws:lambda:us-east-1:ACCOUNT:function:health-checker&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Parameters&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;services&#34;</span>: [<span style="color:#e6db74">&#34;auth-service&#34;</span>, <span style="color:#e6db74">&#34;notification-service&#34;</span>],
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;dependency_validation&#34;</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>      },
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Next&#34;</span>: <span style="color:#e6db74">&#34;DeployBusinessServicesParallel&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;DeployBusinessServicesParallel&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Parallel&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Branches&#34;</span>: [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;StartAt&#34;</span>: <span style="color:#e6db74">&#34;DeployOrderService&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;States&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;DeployOrderService&#34;</span>: {
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Task&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;Resource&#34;</span>: <span style="color:#e6db74">&#34;arn:aws:lambda:us-east-1:ACCOUNT:function:microservice-deployer&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;Parameters&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;service_name&#34;</span>: <span style="color:#e6db74">&#34;order-service&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;dependencies&#34;</span>: [<span style="color:#e6db74">&#34;auth-service&#34;</span>],
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;deployment_strategy&#34;</span>: <span style="color:#e6db74">&#34;fast&#34;</span>
+</span></span><span style="display:flex;"><span>              },
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;End&#34;</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;StartAt&#34;</span>: <span style="color:#e6db74">&#34;DeployPaymentService&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;States&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;DeployPaymentService&#34;</span>: {
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Task&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;Resource&#34;</span>: <span style="color:#e6db74">&#34;arn:aws:lambda:us-east-1:ACCOUNT:function:microservice-deployer&#34;</span>, 
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;Parameters&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;service_name&#34;</span>: <span style="color:#e6db74">&#34;payment-service&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;dependencies&#34;</span>: [<span style="color:#e6db74">&#34;auth-service&#34;</span>],
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;deployment_strategy&#34;</span>: <span style="color:#e6db74">&#34;fast&#34;</span>
+</span></span><span style="display:flex;"><span>              },
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;End&#34;</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      ],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Next&#34;</span>: <span style="color:#e6db74">&#34;FinalSystemValidation&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;FinalSystemValidation&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Task&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Resource&#34;</span>: <span style="color:#e6db74">&#34;arn:aws:lambda:us-east-1:ACCOUNT:function:health-checker&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Parameters&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;validate_all&#34;</span>: <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;integration_tests&#34;</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>      },
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Next&#34;</span>: <span style="color:#e6db74">&#34;SendSuccessNotification&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;SendSuccessNotification&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Task&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Resource&#34;</span>: <span style="color:#e6db74">&#34;arn:aws:lambda:us-east-1:ACCOUNT:function:deployment-notifier&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Parameters&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;SUCCESS&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;deployment_summary&#34;</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>      },
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;End&#34;</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="dependency-analyzer-lambda-function">Dependency Analyzer Lambda Function</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Lambda function: dependency-analyzer</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> json
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> boto3
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> Dict, List
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">lambda_handler</span>(event, context):
+</span></span><span style="display:flex;"><span>    services <span style="color:#f92672">=</span> event<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;services&#39;</span>, [])
+</span></span><span style="display:flex;"><span>    strategy <span style="color:#f92672">=</span> event<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;strategy&#39;</span>, <span style="color:#e6db74">&#39;parallel_optimized&#39;</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Analyze dependencies</span>
+</span></span><span style="display:flex;"><span>    dependency_graph <span style="color:#f92672">=</span> build_dependency_graph(services)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Create optimized deployment plan</span>
+</span></span><span style="display:flex;"><span>    deployment_plan <span style="color:#f92672">=</span> optimize_deployment_plan(dependency_graph, strategy)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Calculate estimated times</span>
+</span></span><span style="display:flex;"><span>    time_estimation <span style="color:#f92672">=</span> calculate_deployment_times(deployment_plan)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;dependency_graph&#39;</span>: dependency_graph,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;deployment_plan&#39;</span>: deployment_plan,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;time_estimation&#39;</span>: time_estimation,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;optimization_applied&#39;</span>: <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">build_dependency_graph</span>(services: List[str]) <span style="color:#f92672">-&gt;</span> Dict:
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Build dependency graph for services&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    dependencies <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;auth-service&#39;</span>: [],
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;notification-service&#39;</span>: [],
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;order-service&#39;</span>: [<span style="color:#e6db74">&#39;auth-service&#39;</span>],
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;payment-service&#39;</span>: [<span style="color:#e6db74">&#39;auth-service&#39;</span>]
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;services&#39;</span>: services,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;dependencies&#39;</span>: {svc: dependencies<span style="color:#f92672">.</span>get(svc, []) <span style="color:#66d9ef">for</span> svc <span style="color:#f92672">in</span> services},
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;deployment_groups&#39;</span>: create_deployment_groups(services, dependencies)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_deployment_groups</span>(services: List[str], dependencies: Dict) <span style="color:#f92672">-&gt;</span> List[List[str]]:
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Create groups of services that can be deployed in parallel&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    groups <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    remaining_services <span style="color:#f92672">=</span> services<span style="color:#f92672">.</span>copy()
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> remaining_services:
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Find services with no unmet dependencies</span>
+</span></span><span style="display:flex;"><span>        current_group <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> service <span style="color:#f92672">in</span> remaining_services<span style="color:#f92672">.</span>copy():
+</span></span><span style="display:flex;"><span>            service_deps <span style="color:#f92672">=</span> dependencies<span style="color:#f92672">.</span>get(service, [])
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> all(dep <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> remaining_services <span style="color:#66d9ef">for</span> dep <span style="color:#f92672">in</span> service_deps):
+</span></span><span style="display:flex;"><span>                current_group<span style="color:#f92672">.</span>append(service)
+</span></span><span style="display:flex;"><span>                remaining_services<span style="color:#f92672">.</span>remove(service)
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> current_group:
+</span></span><span style="display:flex;"><span>            groups<span style="color:#f92672">.</span>append(current_group)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># Circular dependency or error</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> groups
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">calculate_deployment_times</span>(deployment_plan: Dict) <span style="color:#f92672">-&gt;</span> Dict:
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Calculate estimated deployment times&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    service_times <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;auth-service&#39;</span>: <span style="color:#ae81ff">90</span>,      <span style="color:#75715e"># seconds</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;notification-service&#39;</span>: <span style="color:#ae81ff">60</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;order-service&#39;</span>: <span style="color:#ae81ff">120</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;payment-service&#39;</span>: <span style="color:#ae81ff">105</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    sequential_time <span style="color:#f92672">=</span> sum(service_times<span style="color:#f92672">.</span>values())
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Calculate parallel time based on groups</span>
+</span></span><span style="display:flex;"><span>    parallel_time <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> group <span style="color:#f92672">in</span> deployment_plan[<span style="color:#e6db74">&#39;deployment_groups&#39;</span>]:
+</span></span><span style="display:flex;"><span>        group_max_time <span style="color:#f92672">=</span> max(service_times<span style="color:#f92672">.</span>get(svc, <span style="color:#ae81ff">60</span>) <span style="color:#66d9ef">for</span> svc <span style="color:#f92672">in</span> group)
+</span></span><span style="display:flex;"><span>        parallel_time <span style="color:#f92672">+=</span> group_max_time
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;sequential&#39;</span>: sequential_time,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;parallel_optimized&#39;</span>: parallel_time,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;time_saved&#39;</span>: sequential_time <span style="color:#f92672">-</span> parallel_time,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;improvement_percentage&#39;</span>: ((sequential_time <span style="color:#f92672">-</span> parallel_time) <span style="color:#f92672">/</span> sequential_time) <span style="color:#f92672">*</span> <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><h2 id="performance-testing--validation-10-phút">Performance Testing &amp; Validation (10 phút)</h2>
+<h3 id="performance-testing-suite">Performance Testing Suite</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Test all deployment strategies</span>
+</span></span><span style="display:flex;"><span>python tests/scalability_tester.py compare-strategies
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Run concurrent deployment test</span>
+</span></span><span style="display:flex;"><span>python tests/scalability_tester.py concurrent-test <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --concurrent <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --duration <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Generate performance report</span>
+</span></span><span style="display:flex;"><span>python tests/scalability_tester.py generate-report <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --output-format html
+</span></span></code></pre></div><h3 id="scalability-tester-implementation">Scalability Tester Implementation</h3>
+<p><strong>File: tests/scalability_tester.py</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env python3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> boto3
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> concurrent.futures
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> json
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> datetime <span style="color:#f92672">import</span> datetime
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ScalabilityTester</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__init__</span>(self):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>stepfunctions <span style="color:#f92672">=</span> boto3<span style="color:#f92672">.</span>client(<span style="color:#e6db74">&#39;stepfunctions&#39;</span>)
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>state_machine_arn <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;arn:aws:states:us-east-1:ACCOUNT:stateMachine:restaurant-deployment-orchestrator&#34;</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">compare_strategies</span>(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34;Compare deployment strategies performance&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        strategies <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;sequential&#39;</span>, <span style="color:#e6db74">&#39;parallel_optimized&#39;</span>]
+</span></span><span style="display:flex;"><span>        results <span style="color:#f92672">=</span> {}
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> strategy <span style="color:#f92672">in</span> strategies:
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">🧪 Testing </span><span style="color:#e6db74">{</span>strategy<span style="color:#e6db74">}</span><span style="color:#e6db74"> strategy...&#34;</span>)
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            start_time <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+</span></span><span style="display:flex;"><span>            execution_arn <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>start_deployment(strategy)
+</span></span><span style="display:flex;"><span>            self<span style="color:#f92672">.</span>wait_for_completion(execution_arn)
+</span></span><span style="display:flex;"><span>            end_time <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            duration <span style="color:#f92672">=</span> end_time <span style="color:#f92672">-</span> start_time
+</span></span><span style="display:flex;"><span>            results[strategy] <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;duration&#39;</span>: duration,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;execution_arn&#39;</span>: execution_arn
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;✅ </span><span style="color:#e6db74">{</span>strategy<span style="color:#e6db74">}</span><span style="color:#e6db74">: </span><span style="color:#e6db74">{</span>duration<span style="color:#e6db74">:</span><span style="color:#e6db74">.1f</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> seconds&#34;</span>)
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>print_comparison(results)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> results
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">concurrent_test</span>(self, concurrent<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, duration<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34;Test concurrent deployments&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">🔄 Testing </span><span style="color:#e6db74">{</span>concurrent<span style="color:#e6db74">}</span><span style="color:#e6db74"> concurrent deployments...&#34;</span>)
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">with</span> concurrent<span style="color:#f92672">.</span>futures<span style="color:#f92672">.</span>ThreadPoolExecutor(max_workers<span style="color:#f92672">=</span>concurrent) <span style="color:#66d9ef">as</span> executor:
+</span></span><span style="display:flex;"><span>            futures <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(concurrent):
+</span></span><span style="display:flex;"><span>                future <span style="color:#f92672">=</span> executor<span style="color:#f92672">.</span>submit(self<span style="color:#f92672">.</span>run_deployment_test, <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;concurrent-</span><span style="color:#e6db74">{</span>i<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>                futures<span style="color:#f92672">.</span>append(future)
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># Wait for all deployments</span>
+</span></span><span style="display:flex;"><span>            results <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> future <span style="color:#f92672">in</span> concurrent<span style="color:#f92672">.</span>futures<span style="color:#f92672">.</span>as_completed(futures):
+</span></span><span style="display:flex;"><span>                result <span style="color:#f92672">=</span> future<span style="color:#f92672">.</span>result()
+</span></span><span style="display:flex;"><span>                results<span style="color:#f92672">.</span>append(result)
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>analyze_concurrent_results(results)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> results
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">start_deployment</span>(self, strategy):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34;Start a deployment execution&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        input_data <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;deployment_id&#39;</span>: <span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;test-</span><span style="color:#e6db74">{</span>strategy<span style="color:#e6db74">}</span><span style="color:#e6db74">-</span><span style="color:#e6db74">{</span>int(time<span style="color:#f92672">.</span>time())<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;services&#39;</span>: [<span style="color:#e6db74">&#39;auth-service&#39;</span>, <span style="color:#e6db74">&#39;notification-service&#39;</span>, <span style="color:#e6db74">&#39;order-service&#39;</span>, <span style="color:#e6db74">&#39;payment-service&#39;</span>],
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;strategy&#39;</span>: strategy,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;environment&#39;</span>: <span style="color:#e6db74">&#39;test&#39;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        response <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>stepfunctions<span style="color:#f92672">.</span>start_execution(
+</span></span><span style="display:flex;"><span>            stateMachineArn<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>state_machine_arn,
+</span></span><span style="display:flex;"><span>            input<span style="color:#f92672">=</span>json<span style="color:#f92672">.</span>dumps(input_data)
+</span></span><span style="display:flex;"><span>        )
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> response[<span style="color:#e6db74">&#39;executionArn&#39;</span>]
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wait_for_completion</span>(self, execution_arn):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34;Wait for execution to complete&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>            response <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>stepfunctions<span style="color:#f92672">.</span>describe_execution(
+</span></span><span style="display:flex;"><span>                executionArn<span style="color:#f92672">=</span>execution_arn
+</span></span><span style="display:flex;"><span>            )
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            status <span style="color:#f92672">=</span> response[<span style="color:#e6db74">&#39;status&#39;</span>]
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> status <span style="color:#f92672">in</span> [<span style="color:#e6db74">&#39;SUCCEEDED&#39;</span>, <span style="color:#e6db74">&#39;FAILED&#39;</span>, <span style="color:#e6db74">&#39;TIMED_OUT&#39;</span>, <span style="color:#e6db74">&#39;ABORTED&#39;</span>]:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> status
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">print_comparison</span>(self, results):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34;Print strategy comparison&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">📊 PERFORMANCE COMPARISON&#34;</span>)
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;=&#34;</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">50</span>)
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        sequential_time <span style="color:#f92672">=</span> results<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;sequential&#39;</span>, {})<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;duration&#39;</span>, <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>        parallel_time <span style="color:#f92672">=</span> results<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;parallel_optimized&#39;</span>, {})<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;duration&#39;</span>, <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> sequential_time <span style="color:#f92672">and</span> parallel_time:
+</span></span><span style="display:flex;"><span>            improvement <span style="color:#f92672">=</span> ((sequential_time <span style="color:#f92672">-</span> parallel_time) <span style="color:#f92672">/</span> sequential_time) <span style="color:#f92672">*</span> <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span>            time_saved <span style="color:#f92672">=</span> sequential_time <span style="color:#f92672">-</span> parallel_time
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Sequential Strategy:     </span><span style="color:#e6db74">{</span>sequential_time<span style="color:#e6db74">:</span><span style="color:#e6db74">.1f</span><span style="color:#e6db74">}</span><span style="color:#e6db74">s&#34;</span>)
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Parallel Optimized:      </span><span style="color:#e6db74">{</span>parallel_time<span style="color:#e6db74">:</span><span style="color:#e6db74">.1f</span><span style="color:#e6db74">}</span><span style="color:#e6db74">s&#34;</span>)
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Time Saved:             </span><span style="color:#e6db74">{</span>time_saved<span style="color:#e6db74">:</span><span style="color:#e6db74">.1f</span><span style="color:#e6db74">}</span><span style="color:#e6db74">s&#34;</span>)
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Performance Improvement: </span><span style="color:#e6db74">{</span>improvement<span style="color:#e6db74">:</span><span style="color:#e6db74">.1f</span><span style="color:#e6db74">}</span><span style="color:#e6db74">%&#34;</span>)
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;=&#34;</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">50</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">import</span> sys
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    tester <span style="color:#f92672">=</span> ScalabilityTester()
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> len(sys<span style="color:#f92672">.</span>argv) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>        command <span style="color:#f92672">=</span> sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> command <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;compare-strategies&#34;</span>:
+</span></span><span style="display:flex;"><span>            tester<span style="color:#f92672">.</span>compare_strategies()
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> command <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;concurrent-test&#34;</span>:
+</span></span><span style="display:flex;"><span>            concurrent <span style="color:#f92672">=</span> int(sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">2</span>]) <span style="color:#66d9ef">if</span> len(sys<span style="color:#f92672">.</span>argv) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">2</span> <span style="color:#66d9ef">else</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>            tester<span style="color:#f92672">.</span>concurrent_test(concurrent<span style="color:#f92672">=</span>concurrent)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#34;Unknown command. Use: compare-strategies or concurrent-test&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;Usage: python scalability_tester.py [compare-strategies|concurrent-test]&#34;</span>)
+</span></span></code></pre></div><h3 id="expected-performance-results">Expected Performance Results</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>📊 PERFORMANCE COMPARISON
+</span></span><span style="display:flex;"><span><span style="color:#f92672">==================================================</span>
+</span></span><span style="display:flex;"><span>Sequential Strategy:     510.2s <span style="color:#f92672">(</span>8m 30s<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>Parallel Optimized:      255.8s <span style="color:#f92672">(</span>4m 16s<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>Time Saved:             254.4s <span style="color:#f92672">(</span>4m 14s<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>Performance Improvement: 49.8%
+</span></span><span style="display:flex;"><span><span style="color:#f92672">==================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>🔄 CONCURRENT DEPLOYMENT TEST <span style="color:#f92672">(</span><span style="color:#ae81ff">3</span> parallel<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">==================================================</span>
+</span></span><span style="display:flex;"><span>Deployment 1: SUCCESS - 4m 18s
+</span></span><span style="display:flex;"><span>Deployment 2: SUCCESS - 4m 22s  
+</span></span><span style="display:flex;"><span>Deployment 3: SUCCESS - 4m 25s
+</span></span><span style="display:flex;"><span>Average Duration: 4m 22s
+</span></span><span style="display:flex;"><span>Success Rate: 100%
+</span></span><span style="display:flex;"><span>Resource Contention: MINIMAL
+</span></span><span style="display:flex;"><span><span style="color:#f92672">==================================================</span>
+</span></span></code></pre></div><h3 id="performance-monitoring">Performance Monitoring</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># CloudWatch custom metrics for performance tracking</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">publish_performance_metrics</span>(strategy, duration, success):
+</span></span><span style="display:flex;"><span>    cloudwatch <span style="color:#f92672">=</span> boto3<span style="color:#f92672">.</span>client(<span style="color:#e6db74">&#39;cloudwatch&#39;</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    cloudwatch<span style="color:#f92672">.</span>put_metric_data(
+</span></span><span style="display:flex;"><span>        Namespace<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Restaurant/Deployment/Performance&#39;</span>,
+</span></span><span style="display:flex;"><span>        MetricData<span style="color:#f92672">=</span>[
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;MetricName&#39;</span>: <span style="color:#e6db74">&#39;DeploymentDuration&#39;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;Dimensions&#39;</span>: [
+</span></span><span style="display:flex;"><span>                    {<span style="color:#e6db74">&#39;Name&#39;</span>: <span style="color:#e6db74">&#39;Strategy&#39;</span>, <span style="color:#e6db74">&#39;Value&#39;</span>: strategy}
+</span></span><span style="display:flex;"><span>                ],
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;Value&#39;</span>: duration,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;Unit&#39;</span>: <span style="color:#e6db74">&#39;Seconds&#39;</span>
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;MetricName&#39;</span>: <span style="color:#e6db74">&#39;DeploymentSuccess&#39;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;Dimensions&#39;</span>: [
+</span></span><span style="display:flex;"><span>                    {<span style="color:#e6db74">&#39;Name&#39;</span>: <span style="color:#e6db74">&#39;Strategy&#39;</span>, <span style="color:#e6db74">&#39;Value&#39;</span>: strategy}
+</span></span><span style="display:flex;"><span>                ],
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;Value&#39;</span>: <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">if</span> success <span style="color:#66d9ef">else</span> <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;Unit&#39;</span>: <span style="color:#e6db74">&#39;Count&#39;</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        ]
+</span></span><span style="display:flex;"><span>    )
+</span></span></code></pre></div><hr>
+<p><strong>Parallel processing optimized successfully?</strong> Ready for advanced features! 🚀</p>
+
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/en/5-error-handling/" title="5. Error Handling &amp; Resilience"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/en/7-advanced-features/" title="7. Advanced Features &amp; Best Practices" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1752267495"></script>
+    <script src="/js/perfect-scrollbar.min.js?1752267495"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1752267495"></script>
+    <script src="/js/jquery.sticky.js?1752267495"></script>
+    <script src="/js/featherlight.min.js?1752267495"></script>
+    <script src="/js/highlight.pack.js?1752267495"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1752267495"></script>
+    <script src="/js/learn.js?1752267495"></script>
+    <script src="/js/hugo-learn.js?1752267495"></script>
+
+    <link href="/mermaid/mermaid.css?1752267495" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1752267495"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-158079754-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>

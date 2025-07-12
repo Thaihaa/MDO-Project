@@ -1,0 +1,304 @@
+<!doctype html><html lang=en class="js csstransforms3d"><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.148.0"><meta name=description content="Learn to orchestrate microservices deployment with AWS Step Functions"><meta name=author content="AWS Workshop Team"><link rel=icon href=/REPOSITORY-NAME/images/favicon.png type=image/png><title>5. Business Case Development :: Restaurant Microservices Deployment Orchestration Workshop</title><link href=/REPOSITORY-NAME/css/nucleus.css?1752346675 rel=stylesheet><link href=/REPOSITORY-NAME/css/fontawesome-all.min.css?1752346675 rel=stylesheet><link href=/REPOSITORY-NAME/css/hybrid.css?1752346675 rel=stylesheet><link href=/REPOSITORY-NAME/css/featherlight.min.css?1752346675 rel=stylesheet><link href=/REPOSITORY-NAME/css/perfect-scrollbar.min.css?1752346675 rel=stylesheet><link href=/REPOSITORY-NAME/css/auto-complete.css?1752346675 rel=stylesheet><link href=/REPOSITORY-NAME/css/atom-one-dark-reasonable.css?1752346675 rel=stylesheet><link href=/REPOSITORY-NAME/css/theme.css?1752346675 rel=stylesheet><link href=/REPOSITORY-NAME/css/hugo-theme.css?1752346675 rel=stylesheet><link href=/REPOSITORY-NAME/css/theme-workshop.css?1752346675 rel=stylesheet><script src=/REPOSITORY-NAME/js/jquery-3.3.1.min.js?1752346675></script><style>:root #header+#content>#left>#rlblock_left{display:none !important}</style></head><body data-url=/REPOSITORY-NAME/en/5-business-case/><nav id=sidebar><div id=header-wrapper><div id=header><a id=logo href=/><svg id="Layer_1" data-name="Layer 1" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff}.cls-2{fill:#f90;fill-rule:evenodd}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09 10.85a4.7 4.7.0 00.19 1.48 7.73 7.73.0 00.54 1.19.77.77.0 01.12.38.64.64.0 01-.32.49l-1 .7a.83.83.0 01-.44.15.69.69.0 01-.49-.23 3.8 3.8.0 01-.6-.77q-.25-.42-.51-1a6.14 6.14.0 01-4.89 2.3 4.54 4.54.0 01-3.32-1.19 4.27 4.27.0 01-1.22-3.2 4.28 4.28.0 011.46-3.4A6.06 6.06.0 017.69 6.46a12.47 12.47.0 011.76.13q.92.13 1.91.36V5.73a3.65 3.65.0 00-.79-2.66A3.81 3.81.0 007.86 2.3a7.71 7.71.0 00-1.79.22 12.78 12.78.0 00-1.79.57 4.55 4.55.0 01-.58.22h-.26q-.35.0-.35-.52V2a1.09 1.09.0 01.12-.58 1.2 1.2.0 01.47-.35A10.88 10.88.0 015.77.32 10.19 10.19.0 018.36.0a6 6 0 014.35 1.35 5.49 5.49.0 011.38 4.09zM7.34 13.38a5.36 5.36.0 001.72-.31A3.63 3.63.0 0010.63 12 2.62 2.62.0 0011.19 11a5.63 5.63.0 00.16-1.44v-.7a14.35 14.35.0 00-1.53-.28 12.37 12.37.0 00-1.56-.1 3.84 3.84.0 00-2.47.67A2.34 2.34.0 005 11a2.35 2.35.0 00.61 1.76A2.4 2.4.0 007.34 13.38zm13.35 1.8a1 1 0 01-.64-.16 1.3 1.3.0 01-.35-.65L15.81 1.51a3 3 0 01-.15-.67.36.36.0 01.41-.41H17.7a1 1 0 01.65.16 1.4 1.4.0 01.33.65l2.79 11 2.59-11A1.17 1.17.0 0124.39.6a1.1 1.1.0 01.67-.16H26.4a1.1 1.1.0 01.67.16 1.17 1.17.0 01.32.65L30 12.39 32.88 1.25A1.39 1.39.0 0133.22.6a1 1 0 01.65-.16h1.54a.36.36.0 01.41.41 1.36 1.36.0 010 .26 3.64 3.64.0 01-.12.41l-4 12.86a1.3 1.3.0 01-.35.65 1 1 0 01-.64.16H29.25a1 1 0 01-.67-.17 1.26 1.26.0 01-.32-.67L25.67 3.64l-2.56 10.7a1.26 1.26.0 01-.32.67 1 1 0 01-.67.17zm21.36.44a11.28 11.28.0 01-2.56-.29 7.44 7.44.0 01-1.92-.67 1 1 0 01-.61-.93v-.84q0-.52.38-.52a.9.9.0 01.31.06l.42.17a8.77 8.77.0 001.83.58 9.78 9.78.0 002 .2 4.48 4.48.0 002.43-.55 1.76 1.76.0 00.86-1.57 1.61 1.61.0 00-.45-1.16A4.29 4.29.0 0043 9.22l-2.41-.76A5.15 5.15.0 0138 6.78a3.94 3.94.0 01-.83-2.41 3.7 3.7.0 01.45-1.85 4.47 4.47.0 011.19-1.37 5.27 5.27.0 011.7-.86A7.4 7.4.0 0142.6.0a8.87 8.87.0 011.12.07q.57.07 1.08.19t.95.26a4.27 4.27.0 01.7.29 1.59 1.59.0 01.49.41.94.94.0 01.15.55v.79q0 .52-.38.52a1.76 1.76.0 01-.64-.2 7.74 7.74.0 00-3.2-.64 4.37 4.37.0 00-2.21.47 1.6 1.6.0 00-.79 1.48 1.58 1.58.0 00.49 1.18 4.94 4.94.0 001.83.92L44.55 7a5.08 5.08.0 012.57 1.6A3.76 3.76.0 0147.9 11a4.21 4.21.0 01-.44 1.93 4.4 4.4.0 01-1.21 1.47 5.43 5.43.0 01-1.85.93A8.25 8.25.0 0142.05 15.62z"/><path class="cls-2" d="M45.19 23.81C39.72 27.85 31.78 30 25 30A36.64 36.64.0 01.22 20.57c-.51-.46-.06-1.09.56-.74A49.78 49.78.0 0025.53 26.4 49.23 49.23.0 0044.4 22.53C45.32 22.14 46.1 23.14 45.19 23.81z"/><path class="cls-2" d="M47.47 21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74 3.13-2.2 8.27-1.57 8.86-.83s-.16 5.89-3.09 8.35c-.45.38-.88.18-.68-.32C46.69 25.8 48.17 22.11 47.47 21.21z"/></svg></a></div><div class=searchbox><label for=search-by><i class="fas fa-search"></i></label>
+<input data-search-input id=search-by type=search placeholder=Search...>
+<span data-search-clear><i class="fas fa-times"></i></span></div><script type=text/javascript src=/REPOSITORY-NAME/js/lunr.min.js?1752346675></script><script type=text/javascript src=/REPOSITORY-NAME/js/auto-complete.js?1752346675></script><script type=text/javascript>var baseurl="https://USERNAME.github.io/REPOSITORY-NAME//en"</script><script type=text/javascript src=/REPOSITORY-NAME/js/search.js?1752346675></script></div><div class=highlightable><ul class=topics><li data-nav-id=/REPOSITORY-NAME/en/1-introduction/ title="1. Introduction" class=dd-item><a href=/REPOSITORY-NAME/en/1-introduction/>1. Introduction</a></li><li data-nav-id=/REPOSITORY-NAME/en/2-requirements-analysis/ title="2. Requirements Analysis & Problem Definition" class=dd-item><a href=/REPOSITORY-NAME/en/2-requirements-analysis/>2. Requirements Analysis & Problem Definition</a></li><li data-nav-id=/REPOSITORY-NAME/en/3-solution-architecture/ title="3. Solution Architecture Design" class=dd-item><a href=/REPOSITORY-NAME/en/3-solution-architecture/>3. Solution Architecture Design</a></li><li data-nav-id=/REPOSITORY-NAME/en/4-prototype-development/ title="4. Prototype Development" class=dd-item><a href=/REPOSITORY-NAME/en/4-prototype-development/>4. Prototype Development</a></li><li data-nav-id=/REPOSITORY-NAME/en/5-business-case/ title="5. Business Case Development" class="dd-item
+active"><a href=/REPOSITORY-NAME/en/5-business-case/>5. Business Case Development</a></li><li data-nav-id=/REPOSITORY-NAME/en/6-executive-presentation/ title="6. Executive Presentation Preparation" class=dd-item><a href=/REPOSITORY-NAME/en/6-executive-presentation/>6. Executive Presentation Preparation</a></li><li data-nav-id=/REPOSITORY-NAME/en/7-proposal-documentation/ title="7. Proposal Documentation" class=dd-item><a href=/REPOSITORY-NAME/en/7-proposal-documentation/>7. Proposal Documentation</a></li><li data-nav-id=/REPOSITORY-NAME/en/8-next-steps/ title="8. Next Steps & Implementation Planning" class=dd-item><a href=/REPOSITORY-NAME/en/8-next-steps/>8. Next Steps & Implementation Planning</a></li></ul><section id=shortcuts><h3>More</h3><ul><li><a class=padding href=https://github.com/aws-samples/restaurant-deployment-workshop><i class='fab fa-github'></i> GitHub Repo</a></li><li><a class=padding href=https://github.com/aws-samples/restaurant-deployment-workshop/tree/main/images><i class='fas fa-camera'></i> Workshop Images</a></li><li><a class=padding href=https://aws.amazon.com/step-functions/><i class='fas fa-bookmark'></i> AWS Step Functions</a></li><li><a class=padding href=https://USERNAME.github.io/en/REPOSITORY-NAME/credits><i class='fas fa-bullhorn'></i> Credits</a></li></ul></section><section id=prefooter><hr><ul><li><a class=padding><i class="fas fa-language fa-fw"></i><div class=select-style><select id=select-language onchange="location=this.value"><option id=en value=https://USERNAME.github.io/REPOSITORY-NAME/en/5-business-case/ selected>English</option></select>
+<svg id="Capa_1" xmlns:xlink="http://www.w3.org/1999/xlink" width="255" height="255" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255"><g><g id="arrow-drop-down"><polygon points="0,63.75 127.5,191.25 255,63.75"/></g></g></svg></div></a></li></ul></section><section id=footer><left><b>Workshop</b><br><img src="https://hitwebcounter.com/counter/counter.php?page=7830891&style=0038&nbdigits=9&type=page&initCount=0" title=Migrate alt="web counter" border=0></a><br><b><a href=https://cloudjourney.awsstudygroup.com/>Cloud Journey</a></b><br><img src="https://hitwebcounter.com/counter/counter.php?page=7830807&style=0038&nbdigits=9&type=page&initCount=0" title="Total CLoud Journey" alt="web counter" border=0>
+</left><left><br><br><b>Last Updated</b><br><i><font color=orange>26-11-2023</font></i>
+</left><left><br><br><b>Team</b><br><i><a href=https://www.linkedin.com/in/jotaguy style=color:orange>Gia Hưng</a>
+</i></left><script async defer src=https://buttons.github.io/buttons.js></script></section></div></nav><section id=body><div id=overlay></div><div class="padding highlightable"><div><div id=top-bar><div id=breadcrumbs itemscope itemtype=http://data-vocabulary.org/Breadcrumb><span id=sidebar-toggle-span><a href=# id=sidebar-toggle data-sidebar-toggle><i class="fas fa-bars"></i>
+</a></span><span id=toc-menu><i class="fas fa-list-alt"></i></span>
+<span class=links>5. Business Case Development</span></div><div class=progress><div class=wrapper><nav id=TableOfContents><ul><li><a href=#learning-objective>Learning Objective</a></li><li><a href=#cost-benefit-analysis-workshop-20-phút>Cost-Benefit Analysis Workshop (20 phút)</a><ul><li><a href=#current-state-cost-analysis-8-phút>Current State Cost Analysis (8 phút)</a></li><li><a href=#proposed-solution-cost-analysis-7-phút>Proposed Solution Cost Analysis (7 phút)</a></li><li><a href=#roi-calculation-workshop-5-phút>ROI Calculation Workshop (5 phút)</a></li></ul></li><li><a href=#risk-assessment-matrix-creation-15-phút>Risk Assessment Matrix Creation (15 phút)</a><ul><li><a href=#risk-identification-workshop-8-phút>Risk Identification Workshop (8 phút)</a></li><li><a href=#risk-mitigation-planning-7-phút>Risk Mitigation Planning (7 phút)</a></li></ul></li><li><a href=#implementation-timeline-development-10-phút>Implementation Timeline Development (10 phút)</a><ul><li><a href=#project-planning-workshop-10-phút>Project Planning Workshop (10 phút)</a></li></ul></li></ul></nav></div></div></div></div><div id=head-tags></div><div id=body-inner><h1>5. Business Case Development</h1><h2 id=learning-objective>Learning Objective</h2><p>Develop compelling financial justification và risk assessment để secure executive approval.</p><h2 id=cost-benefit-analysis-workshop-20-phút>Cost-Benefit Analysis Workshop (20 phút)</h2><p><strong>📸 IMAGE NEEDED: Financial Analysis Spreadsheet Template</strong>
+<em>Chụp Excel template với formulas và calculation areas</em></p><h3 id=current-state-cost-analysis-8-phút>Current State Cost Analysis (8 phút)</h3><h4 id=step-1-direct-labor-costs-3-phút>Step 1: Direct Labor Costs (3 phút)</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown><span style=display:flex><span>Workshop Exercise: Calculate current deployment costs
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Deployment Team:
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Senior Developer: $75/hour × 4 hours = $300 per deployment
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> DevOps Engineer: $85/hour × 4 hours = $340 per deployment  
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> QA Engineer: $60/hour × 2 hours = $120 per deployment
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Operations Manager: $90/hour × 1 hour = $90 per deployment
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Per Deployment Cost: $850
+</span></span><span style=display:flex><span>Annual Deployments: 26 (bi-weekly)
+</span></span><span style=display:flex><span>Annual Labor Cost: $850 × 26 = $22,100
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Weekend Premium (50% of deployments):
+</span></span><span style=display:flex><span>$22,100 × 0.5 × 1.5 = $16,575
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Total Annual Labor: $22,100 + $16,575 = $38,675
+</span></span></code></pre></div><h4 id=step-2-opportunity-cost-analysis-3-phút>Step 2: Opportunity Cost Analysis (3 phút)</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown><span style=display:flex><span>Lost Productivity During Deployments:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Development Team Impact:
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> 3 developers blocked for 2 hours during deployment
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> $75/hour × 3 developers × 2 hours × 26 deployments = $11,700
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Customer Impact:
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Average 30 minutes downtime per deployment
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Revenue impact: $5,000/hour × 0.5 hours × 26 = $65,000
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Customer service calls: 50 calls × $25/call × 26 = $32,500
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Total Opportunity Cost: $109,200
+</span></span></code></pre></div><h4 id=step-3-incident-resolution-costs-2-phút>Step 3: Incident Resolution Costs (2 phút)</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown><span style=display:flex><span>Deployment-Related Incidents:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Historical Data (last 12 months):
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Total incidents: 15
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Average resolution time: 6 hours
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Team involved: 4 people × $75/hour average
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Incident cost: 15 × 6 × 4 × $75 = $27,000
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Customer compensation:
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Service credits: $5,000
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Lost business: $15,000
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Total Incident Cost: $47,000
+</span></span></code></pre></div><h3 id=proposed-solution-cost-analysis-7-phút>Proposed Solution Cost Analysis (7 phút)</h3><h4 id=step-4-aws-service-costs-3-phút>Step 4: AWS Service Costs (3 phút)</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown><span style=display:flex><span>Monthly AWS Costs:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Step Functions:
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> 26 executions × 6 state transitions × $0.025/1000 = $0.04
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Annual: $0.48
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Lambda:
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> 26 executions × 4 functions × 30 seconds × $0.0000166667 = $0.13
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Annual: $1.56
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>CloudWatch Logs:
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> 26 executions × 100MB logs × $0.50/GB = $1.30
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Annual: $15.60
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>SNS Notifications:
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> 26 executions × 5 notifications × $0.50/1000 = $0.065
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Annual: $0.78
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Total AWS Annual Cost: $18.42 ≈ $20
+</span></span></code></pre></div><h4 id=step-5-reduced-labor-costs-2-phút>Step 5: Reduced Labor Costs (2 phút)</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown><span style=display:flex><span>Automated Process Labor:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Monitoring Role:
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> DevOps Engineer: $85/hour × 0.5 hours × 26 = $1,105
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> On-call premium: $1,105 × 0.25 = $276
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Total Annual Labor: $1,381
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Labor Savings: $38,675 - $1,381 = $37,294
+</span></span></code></pre></div><h4 id=step-6-implementation-costs-2-phút>Step 6: Implementation Costs (2 phút)</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown><span style=display:flex><span>One-time Implementation:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Development Team:
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Senior Developer: 200 hours × $75 = $15,000
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> DevOps Engineer: 150 hours × $85 = $12,750
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Architect: 40 hours × $120 = $4,800
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>AWS Professional Services:
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Architecture review: $5,000
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Security assessment: $3,000
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Training và Documentation:
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Team training: $2,500
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Documentation: $1,500
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Total Implementation: $44,550
+</span></span></code></pre></div><h3 id=roi-calculation-workshop-5-phút>ROI Calculation Workshop (5 phút)</h3><p><strong>📸 IMAGE NEEDED: ROI Calculator Spreadsheet</strong>
+<em>Chụp dynamic spreadsheet với scenarios và sensitivity analysis</em></p><h4 id=step-7-three-year-financial-projection>Step 7: Three-Year Financial Projection</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown><span style=display:flex><span>Year 1:
+</span></span><span style=display:flex><span>Revenue/Savings: $194,900 (labor + opportunity + incidents)
+</span></span><span style=display:flex><span>Costs: $44,570 (implementation + AWS)
+</span></span><span style=display:flex><span>Net Benefit: $150,330
+</span></span><span style=display:flex><span>ROI: 337%
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Year 2:
+</span></span><span style=display:flex><span>Revenue/Savings: $194,900
+</span></span><span style=display:flex><span>Costs: $1,401 (labor + AWS)
+</span></span><span style=display:flex><span>Net Benefit: $193,499
+</span></span><span style=display:flex><span>Cumulative ROI: 1,266%
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Year 3:
+</span></span><span style=display:flex><span>Revenue/Savings: $194,900  
+</span></span><span style=display:flex><span>Costs: $1,401
+</span></span><span style=display:flex><span>Net Benefit: $193,499
+</span></span><span style=display:flex><span>3-Year Total ROI: 1,132%
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Break-even: 2.3 months
+</span></span><span style=display:flex><span>Payback period: 10 weeks
+</span></span></code></pre></div><h2 id=risk-assessment-matrix-creation-15-phút>Risk Assessment Matrix Creation (15 phút)</h2><p><strong>📸 IMAGE NEEDED: Risk Assessment Heatmap Template</strong>
+<em>Chụp risk matrix grid với probability vs impact axes</em></p><h3 id=risk-identification-workshop-8-phút>Risk Identification Workshop (8 phút)</h3><h4 id=step-1-technical-risks-3-phút>Step 1: Technical Risks (3 phút)</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown><span style=display:flex><span>Brainstorm potential technical risks:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Implementation Risks:
+</span></span><span style=display:flex><span>├── AWS service limitations
+</span></span><span style=display:flex><span>├── Integration complexity với existing systems
+</span></span><span style=display:flex><span>├── Performance issues under load
+</span></span><span style=display:flex><span>├── Security vulnerabilities
+</span></span><span style=display:flex><span>└── Data migration challenges
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Operational Risks:
+</span></span><span style=display:flex><span>├── Team learning curve
+</span></span><span style=display:flex><span>├── Change management resistance  
+</span></span><span style=display:flex><span>├── Monitoring gaps
+</span></span><span style=display:flex><span>├── Backup và recovery procedures
+</span></span><span style=display:flex><span>└── Vendor dependency
+</span></span></code></pre></div><h4 id=step-2-business-risks-3-phút>Step 2: Business Risks (3 phút)</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown><span style=display:flex><span>Identify business-related risks:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Financial Risks:
+</span></span><span style=display:flex><span>├── Cost overruns
+</span></span><span style=display:flex><span>├── Extended timeline
+</span></span><span style=display:flex><span>├── Hidden AWS charges
+</span></span><span style=display:flex><span>├── Training costs
+</span></span><span style=display:flex><span>└── Opportunity cost of delayed benefits
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Market Risks:
+</span></span><span style=display:flex><span>├── Technology obsolescence
+</span></span><span style=display:flex><span>├── Competitor advancement
+</span></span><span style=display:flex><span>├── Regulatory changes
+</span></span><span style=display:flex><span>├── Business model changes
+</span></span><span style=display:flex><span>└── Economic downturn impact
+</span></span></code></pre></div><h4 id=step-3-risk-assessment-scoring-2-phút>Step 3: Risk Assessment Scoring (2 phút)</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown><span style=display:flex><span>Risk Assessment Framework:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Probability Scale:
+</span></span><span style=display:flex><span>1 = Very Low (0-10%)
+</span></span><span style=display:flex><span>2 = Low (10-30%)  
+</span></span><span style=display:flex><span>3 = Medium (30-60%)
+</span></span><span style=display:flex><span>4 = High (60-85%)
+</span></span><span style=display:flex><span>5 = Very High (85-100%)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Impact Scale:
+</span></span><span style=display:flex><span>1 = Minimal (<span style=color:#960050;background-color:#1e0010>&lt;</span>$5K impact)
+</span></span><span style=display:flex><span>2 = Minor ($5K-$20K impact)
+</span></span><span style=display:flex><span>3 = Moderate ($20K-$50K impact)  
+</span></span><span style=display:flex><span>4 = Major ($50K-$200K impact)
+</span></span><span style=display:flex><span>5 = Critical (&gt;$200K impact)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Risk Score = Probability × Impact
+</span></span></code></pre></div><h3 id=risk-mitigation-planning-7-phút>Risk Mitigation Planning (7 phút)</h3><p><strong>📸 IMAGE NEEDED: Risk Register Template</strong>
+<em>Chụp spreadsheet với risk details, mitigation strategies, và ownership</em></p><h4 id=step-4-high-priority-risk-mitigation-4-phút>Step 4: High-Priority Risk Mitigation (4 phút)</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown><span style=display:flex><span>Top 5 Risks và Mitigation Strategies:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Risk 1: Team Learning Curve (Prob: 4, Impact: 3, Score: 12)
+</span></span><span style=display:flex><span>Mitigation:
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Comprehensive training program (40 hours)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> AWS certification support
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Phased implementation approach
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> External consultant for first month
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Detailed documentation và runbooks
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Risk 2: AWS Service Outage (Prob: 2, Impact: 4, Score: 8)  
+</span></span><span style=display:flex><span>Mitigation:
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Multi-region deployment capability
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Fallback to manual process procedures
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> SLA agreements với AWS
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Regular disaster recovery testing
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Alternative cloud provider evaluation
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Risk 3: Integration Complexity (Prob: 3, Impact: 3, Score: 9)
+</span></span><span style=display:flex><span>Mitigation:
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Proof of concept testing
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Staged integration approach
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Comprehensive testing strategy
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Rollback procedures
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Professional services engagement
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Risk 4: Cost Overrun (Prob: 2, Impact: 3, Score: 6)
+</span></span><span style=display:flex><span>Mitigation:
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Detailed cost monitoring
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Budget alerts và controls
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Monthly cost reviews
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Reserved instance planning
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Cost optimization reviews
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Risk 5: Security Vulnerabilities (Prob: 2, Impact: 4, Score: 8)
+</span></span><span style=display:flex><span>Mitigation:
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Security audit requirements
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> IAM best practices implementation
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Encryption at rest và in transit
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Regular security assessments
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Compliance verification
+</span></span></code></pre></div><h4 id=step-5-risk-monitoring-plan-3-phút>Step 5: Risk Monitoring Plan (3 phút)</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown><span style=display:flex><span>Risk Monitoring Framework:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Weekly Reviews:
+</span></span><span style=display:flex><span>☐ Implementation progress vs timeline
+</span></span><span style=display:flex><span>☐ Budget tracking vs forecast
+</span></span><span style=display:flex><span>☐ Team confidence levels
+</span></span><span style=display:flex><span>☐ Technical issues log
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Monthly Reviews:
+</span></span><span style=display:flex><span>☐ Risk register updates
+</span></span><span style=display:flex><span>☐ Mitigation effectiveness
+</span></span><span style=display:flex><span>☐ New risk identification
+</span></span><span style=display:flex><span>☐ Stakeholder feedback
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Quarterly Reviews:
+</span></span><span style=display:flex><span>☐ Overall risk profile assessment
+</span></span><span style=display:flex><span>☐ Mitigation strategy adjustments
+</span></span><span style=display:flex><span>☐ Business impact evaluation
+</span></span><span style=display:flex><span>☐ Risk tolerance reevaluation
+</span></span></code></pre></div><h2 id=implementation-timeline-development-10-phút>Implementation Timeline Development (10 phút)</h2><p><strong>📸 IMAGE NEEDED: Gantt Chart Template</strong>
+<em>Chụp project timeline với tasks, dependencies, milestones, và resource allocation</em></p><h3 id=project-planning-workshop-10-phút>Project Planning Workshop (10 phút)</h3><h4 id=step-1-work-breakdown-structure-4-phút>Step 1: Work Breakdown Structure (4 phút)</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown><span style=display:flex><span>Phase 1: Foundation (Weeks 1-4)
+</span></span><span style=display:flex><span>├── 1.1 Requirements finalization (Week 1)
+</span></span><span style=display:flex><span>│   ├── Stakeholder sign-off
+</span></span><span style=display:flex><span>│   ├── Technical specification
+</span></span><span style=display:flex><span>│   └── Success criteria definition
+</span></span><span style=display:flex><span>├── 1.2 Environment setup (Week 2)  
+</span></span><span style=display:flex><span>│   ├── AWS account configuration
+</span></span><span style=display:flex><span>│   ├── IAM roles và policies
+</span></span><span style=display:flex><span>│   └── Development environment
+</span></span><span style=display:flex><span>├── 1.3 Team preparation (Week 3)
+</span></span><span style=display:flex><span>│   ├── Training program delivery
+</span></span><span style=display:flex><span>│   ├── Tool setup và access
+</span></span><span style=display:flex><span>│   └── Process documentation
+</span></span><span style=display:flex><span>└── 1.4 Architecture validation (Week 4)
+</span></span><span style=display:flex><span>    ├── Proof of concept
+</span></span><span style=display:flex><span>    ├── Performance testing
+</span></span><span style=display:flex><span>    └── Security review
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Phase 2: Core Development (Weeks 5-8)
+</span></span><span style=display:flex><span>├── 2.1 Lambda functions (Week 5-6)
+</span></span><span style=display:flex><span>├── 2.2 Step Functions workflow (Week 6-7)
+</span></span><span style=display:flex><span>├── 2.3 Integration testing (Week 7-8)
+</span></span><span style=display:flex><span>└── 2.4 Error handling (Week 8)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Phase 3: Advanced Features (Weeks 9-12)
+</span></span><span style=display:flex><span>├── 3.1 Parallel processing (Week 9-10)
+</span></span><span style=display:flex><span>├── 3.2 Monitoring và alerting (Week 10-11)
+</span></span><span style=display:flex><span>├── 3.3 Documentation (Week 11-12)
+</span></span><span style=display:flex><span>└── 3.4 User acceptance testing (Week 12)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Phase 4: Production Deployment (Weeks 13-16)
+</span></span><span style=display:flex><span>├── 4.1 Production setup (Week 13)
+</span></span><span style=display:flex><span>├── 4.2 Gradual rollout (Week 14-15)
+</span></span><span style=display:flex><span>├── 4.3 Full deployment (Week 15-16)
+</span></span><span style=display:flex><span>└── 4.4 Knowledge transfer (Week 16)
+</span></span></code></pre></div><h4 id=step-2-resource-allocation-planning-3-phút>Step 2: Resource Allocation Planning (3 phút)</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown><span style=display:flex><span>Team Assignment Matrix:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Senior Developer (200 hours):
+</span></span><span style=display:flex><span>├── Weeks 1-4: 30 hours (architecture, POC)
+</span></span><span style=display:flex><span>├── Weeks 5-8: 80 hours (core development)
+</span></span><span style=display:flex><span>├── Weeks 9-12: 60 hours (advanced features)
+</span></span><span style=display:flex><span>└── Weeks 13-16: 30 hours (deployment support)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>DevOps Engineer (150 hours):
+</span></span><span style=display:flex><span>├── Weeks 1-4: 40 hours (environment setup)
+</span></span><span style=display:flex><span>├── Weeks 5-8: 50 hours (integration)
+</span></span><span style=display:flex><span>├── Weeks 9-12: 40 hours (monitoring)
+</span></span><span style=display:flex><span>└── Weeks 13-16: 20 hours (production)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Architect (40 hours):
+</span></span><span style=display:flex><span>├── Weeks 1-4: 20 hours (design review)
+</span></span><span style=display:flex><span>├── Weeks 5-8: 10 hours (code review)
+</span></span><span style=display:flex><span>├── Weeks 9-12: 5 hours (optimization)
+</span></span><span style=display:flex><span>└── Weeks 13-16: 5 hours (go-live support)
+</span></span></code></pre></div><h4 id=step-3-critical-path-analysis-3-phút>Step 3: Critical Path Analysis (3 phút)</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown><span style=display:flex><span>Critical Path Dependencies:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Week 1: Requirements → Architecture design
+</span></span><span style=display:flex><span>Week 2: Architecture → Environment setup
+</span></span><span style=display:flex><span>Week 3: Environment → Training completion
+</span></span><span style=display:flex><span>Week 4: Training → Development start
+</span></span><span style=display:flex><span>Week 6: Core Lambda → Step Functions integration
+</span></span><span style=display:flex><span>Week 8: Integration → Advanced features
+</span></span><span style=display:flex><span>Week 12: UAT completion → Production setup
+</span></span><span style=display:flex><span>Week 15: Gradual rollout → Full deployment
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Risk Areas:
+</span></span><span style=display:flex><span>⚠️ Week 3-4: Team training completion critical
+</span></span><span style=display:flex><span>⚠️ Week 8: Integration complexity may extend timeline  
+</span></span><span style=display:flex><span>⚠️ Week 12: UAT approval required for production
+</span></span><span style=display:flex><span>⚠️ Week 15: Business approval for full rollout
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Mitigation:
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Build 10% buffer into each phase
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Have backup resources available
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Pre-approve UAT criteria
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> Establish clear go/no-go criteria
+</span></span></code></pre></div><footer class=footline></footer></div></div><div id=navigation><a class="nav nav-prev" href=/REPOSITORY-NAME/en/4-prototype-development/ title="4. Prototype Development"><i class="fa fa-chevron-left"></i></a>
+<a class="nav nav-next" href=/REPOSITORY-NAME/en/6-executive-presentation/ title="6. Executive Presentation Preparation" style=margin-right:0><i class="fa fa-chevron-right"></i></a></div></section><div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px><div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div></div><script src=/REPOSITORY-NAME/js/clipboard.min.js?1752346676></script><script src=/REPOSITORY-NAME/js/perfect-scrollbar.min.js?1752346676></script><script src=/REPOSITORY-NAME/js/perfect-scrollbar.jquery.min.js?1752346676></script><script src=/REPOSITORY-NAME/js/jquery.sticky.js?1752346676></script><script src=/REPOSITORY-NAME/js/featherlight.min.js?1752346676></script><script src=/REPOSITORY-NAME/js/highlight.pack.js?1752346676></script><script>hljs.initHighlightingOnLoad()</script><script src=/REPOSITORY-NAME/js/modernizr.custom-3.6.0.js?1752346676></script><script src=/REPOSITORY-NAME/js/learn.js?1752346676></script><script src=/REPOSITORY-NAME/js/hugo-learn.js?1752346676></script><link href=/REPOSITORY-NAME/mermaid/mermaid.css?1752346676 rel=stylesheet><script src=/REPOSITORY-NAME/mermaid/mermaid.js?1752346676></script><script>mermaid.initialize({startOnLoad:!0})</script><script>(function(e,t,n,s,o,i,a){e.GoogleAnalyticsObject=o,e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date,i=t.createElement(n),a=t.getElementsByTagName(n)[0],i.async=1,i.src=s,a.parentNode.insertBefore(i,a)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-158079754-2","auto"),ga("send","pageview")</script></body></html>

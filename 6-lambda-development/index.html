@@ -1,0 +1,1473 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.148.0">
+    <meta name="description" content="">
+<meta name="author" content="journeyoftheaverageguy@gmail.com">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>6. Lambda Functions Development :: Create a new AWS account.</title>
+
+    
+    <link href="/css/nucleus.css?1752194696" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1752194696" rel="stylesheet">
+    <link href="/css/hybrid.css?1752194696" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1752194696" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1752194696" rel="stylesheet">
+    <link href="/css/auto-complete.css?1752194696" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1752194696" rel="stylesheet">
+    <link href="/css/theme.css?1752194696" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1752194696" rel="stylesheet">
+    
+    <link href="/css/theme-workshop.css?1752194696" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1752194696"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/6-lambda-development/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="/">
+
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff;}.cls-2{fill:#f90;fill-rule:evenodd;}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09,10.85a4.7,4.7,0,0,0,.19,1.48,7.73,7.73,0,0,0,.54,1.19.77.77,0,0,1,.12.38.64.64,0,0,1-.32.49l-1,.7a.83.83,0,0,1-.44.15.69.69,0,0,1-.49-.23,3.8,3.8,0,0,1-.6-.77q-.25-.42-.51-1a6.14,6.14,0,0,1-4.89,2.3,4.54,4.54,0,0,1-3.32-1.19,4.27,4.27,0,0,1-1.22-3.2A4.28,4.28,0,0,1,3.61,7.75,6.06,6.06,0,0,1,7.69,6.46a12.47,12.47,0,0,1,1.76.13q.92.13,1.91.36V5.73a3.65,3.65,0,0,0-.79-2.66A3.81,3.81,0,0,0,7.86,2.3a7.71,7.71,0,0,0-1.79.22,12.78,12.78,0,0,0-1.79.57,4.55,4.55,0,0,1-.58.22l-.26,0q-.35,0-.35-.52V2a1.09,1.09,0,0,1,.12-.58,1.2,1.2,0,0,1,.47-.35A10.88,10.88,0,0,1,5.77.32,10.19,10.19,0,0,1,8.36,0a6,6,0,0,1,4.35,1.35,5.49,5.49,0,0,1,1.38,4.09ZM7.34,13.38a5.36,5.36,0,0,0,1.72-.31A3.63,3.63,0,0,0,10.63,12,2.62,2.62,0,0,0,11.19,11a5.63,5.63,0,0,0,.16-1.44v-.7a14.35,14.35,0,0,0-1.53-.28,12.37,12.37,0,0,0-1.56-.1,3.84,3.84,0,0,0-2.47.67A2.34,2.34,0,0,0,5,11a2.35,2.35,0,0,0,.61,1.76A2.4,2.4,0,0,0,7.34,13.38Zm13.35,1.8a1,1,0,0,1-.64-.16,1.3,1.3,0,0,1-.35-.65L15.81,1.51a3,3,0,0,1-.15-.67.36.36,0,0,1,.41-.41H17.7a1,1,0,0,1,.65.16,1.4,1.4,0,0,1,.33.65l2.79,11,2.59-11A1.17,1.17,0,0,1,24.39.6a1.1,1.1,0,0,1,.67-.16H26.4a1.1,1.1,0,0,1,.67.16,1.17,1.17,0,0,1,.32.65L30,12.39,32.88,1.25A1.39,1.39,0,0,1,33.22.6a1,1,0,0,1,.65-.16h1.54a.36.36,0,0,1,.41.41,1.36,1.36,0,0,1,0,.26,3.64,3.64,0,0,1-.12.41l-4,12.86a1.3,1.3,0,0,1-.35.65,1,1,0,0,1-.64.16H29.25a1,1,0,0,1-.67-.17,1.26,1.26,0,0,1-.32-.67L25.67,3.64,23.11,14.34a1.26,1.26,0,0,1-.32.67,1,1,0,0,1-.67.17Zm21.36.44a11.28,11.28,0,0,1-2.56-.29,7.44,7.44,0,0,1-1.92-.67,1,1,0,0,1-.61-.93v-.84q0-.52.38-.52a.9.9,0,0,1,.31.06l.42.17a8.77,8.77,0,0,0,1.83.58,9.78,9.78,0,0,0,2,.2,4.48,4.48,0,0,0,2.43-.55,1.76,1.76,0,0,0,.86-1.57,1.61,1.61,0,0,0-.45-1.16A4.29,4.29,0,0,0,43,9.22l-2.41-.76A5.15,5.15,0,0,1,38,6.78a3.94,3.94,0,0,1-.83-2.41,3.7,3.7,0,0,1,.45-1.85,4.47,4.47,0,0,1,1.19-1.37A5.27,5.27,0,0,1,40.51.29,7.4,7.4,0,0,1,42.6,0a8.87,8.87,0,0,1,1.12.07q.57.07,1.08.19t.95.26a4.27,4.27,0,0,1,.7.29,1.59,1.59,0,0,1,.49.41.94.94,0,0,1,.15.55v.79q0,.52-.38.52a1.76,1.76,0,0,1-.64-.2,7.74,7.74,0,0,0-3.2-.64,4.37,4.37,0,0,0-2.21.47,1.6,1.6,0,0,0-.79,1.48,1.58,1.58,0,0,0,.49,1.18,4.94,4.94,0,0,0,1.83.92L44.55,7a5.08,5.08,0,0,1,2.57,1.6A3.76,3.76,0,0,1,47.9,11a4.21,4.21,0,0,1-.44,1.93,4.4,4.4,0,0,1-1.21,1.47,5.43,5.43,0,0,1-1.85.93A8.25,8.25,0,0,1,42.05,15.62Z"></path><path class="cls-2" d="M45.19,23.81C39.72,27.85,31.78,30,25,30A36.64,36.64,0,0,1,.22,20.57c-.51-.46-.06-1.09.56-.74A49.78,49.78,0,0,0,25.53,26.4,49.23,49.23,0,0,0,44.4,22.53C45.32,22.14,46.1,23.14,45.19,23.81Z"></path><path class="cls-2" d="M47.47,21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74,3.13-2.2,8.27-1.57,8.86-.83s-.16,5.89-3.09,8.35c-.45.38-.88.18-.68-.32C46.69,25.8,48.17,22.11,47.47,21.21Z"></path></svg>
+
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1752194696"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1752194696"></script>
+<script type="text/javascript">
+    
+        var baseurl = "\/\/localhost:1313\/";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1752194696"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/1-introduction/" title="Giới thiệu Workshop" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/1-introduction/">
+          <b>1. </b>Giới thiệu Workshop
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-orchestration-theory/" title="Service Orchestration Theory" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-orchestration-theory/">
+          <b>2. </b>Service Orchestration Theory
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/3-business-domain/" title="Restaurant Business Domain" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/3-business-domain/">
+          <b>3. </b>Restaurant Business Domain
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/4-architecture-overview/" title="Architecture Overview" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/4-architecture-overview/">
+          <b>4. </b>Architecture Overview
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/5-setup/" title="Setup và Chuẩn bị" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/5-setup/">
+          <b>5. </b>Setup và Chuẩn bị
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/6-lambda-development/" title="6. Lambda Functions Development" class="dd-item 
+        
+        active
+        
+        ">
+      <a href="/6-lambda-development/">
+          <b>6. </b>6. Lambda Functions Development
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/7-stepfunctions-workflow/" title="7. Step Functions Workflow" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/7-stepfunctions-workflow/">
+          <b>7. </b>7. Step Functions Workflow
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/8-error-handling/" title="8. Error Handling và Rollback" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/8-error-handling/">
+          <b>8. </b>8. Error Handling và Rollback
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/9-monitoring/" title="9. Monitoring và Observability" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/9-monitoring/">
+          <b>9. </b>9. Monitoring và Observability
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/10-scalability-testing/" title="10. Scalability Testing" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/10-scalability-testing/">
+          <b>10. </b>10. Scalability Testing
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/11-production-practices/" title="11. Production Best Practices" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/11-production-practices/">
+          <b>11. </b>11. Production Best Practices
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/12-demo-qa/" title="12. Demo và Q&amp;A" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/12-demo-qa/">
+          <b>12. </b>12. Demo và Q&amp;A
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://aws.amazon.com/blogs"><i class='fab fa-aws'></i> AWS Study Group - Blog</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://www.facebook.com/groups/awsstudygroupfcj"><i class='fab fa-facebook'></i> AWS Study Group - FB Group</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="en" value="//localhost:1313/6-lambda-development/" selected>English</option>
+                    
+                  
+              
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <left>
+    
+     <b> Workshop</b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830891&style=0038&nbdigits=9&type=page&initCount=0" title="Migrate" Alt="web counter"   border="0" /></a>  <br>
+     <b> <a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830807&style=0038&nbdigits=9&type=page&initCount=0" title="Total CLoud Journey" Alt="web counter"   border="0"   />
+     
+</left>
+<left>
+    <br>
+    <br>
+        <b> Last Updated </b> <br>
+        <i><font color=orange>26-11-2023</font></i>
+    </left>
+    <left>
+        <br>
+        <br>
+            <b> Team </b> <br>
+           
+            <i>
+                <a href="https://www.linkedin.com/in/jotaguy"  style="color:orange">Gia Hưng</a>
+        </i>
+        </left>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            <a href='/'>Microservices Deployment và Orchestration với AWS Step Functions</a> > 6. Lambda Functions Development
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#phát-triển-lambda-functions-cho-restaurant-system">Phát triển Lambda Functions cho Restaurant System</a></li>
+    <li><a href="#61-health-check-function">6.1 Health Check Function</a>
+      <ul>
+        <li><a href="#function-purpose">Function Purpose</a></li>
+        <li><a href="#inputoutput-structure">Input/Output Structure</a></li>
+        <li><a href="#implementation">Implementation</a></li>
+      </ul>
+    </li>
+    <li><a href="#62-notification-function">6.2 Notification Function</a>
+      <ul>
+        <li><a href="#function-purpose-1">Function Purpose</a></li>
+        <li><a href="#implementation-1">Implementation</a></li>
+      </ul>
+    </li>
+    <li><a href="#63-rollback-coordinator-function">6.3 Rollback Coordinator Function</a>
+      <ul>
+        <li><a href="#function-purpose-2">Function Purpose</a></li>
+        <li><a href="#implementation-2">Implementation</a></li>
+      </ul>
+    </li>
+    <li><a href="#64-testing-và-validation">6.4 Testing và Validation</a>
+      <ul>
+        <li><a href="#function-testing-strategy">Function Testing Strategy</a></li>
+        <li><a href="#integration-testing">Integration Testing</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              6. Lambda Functions Development
+            </h1>
+          
+
+        
+
+
+
+	<h2 id="phát-triển-lambda-functions-cho-restaurant-system">Phát triển Lambda Functions cho Restaurant System</h2>
+<p>Trong phần này, chúng ta sẽ phát triển các Lambda functions cần thiết cho hệ thống restaurant microservices. Mỗi function sẽ đảm nhận một vai trò cụ thể trong quy trình deployment và orchestration.</p>
+
+<div class="notices info" ><p><strong>Mục tiêu phần này:</strong></p>
+<ul>
+<li>Phát triển Health Check Function để kiểm tra trạng thái services</li>
+<li>Tạo Notification Function để gửi thông báo deployment</li>
+<li>Xây dựng Rollback Coordinator để xử lý rollback</li>
+<li>Test và validate các functions</li>
+</ul>
+</div>
+
+<h2 id="61-health-check-function">6.1 Health Check Function</h2>
+<h3 id="function-purpose">Function Purpose</h3>
+<p>Health Check Function là thành phần quan trọng trong việc:</p>
+<ul>
+<li>Kiểm tra trạng thái health của từng microservice</li>
+<li>Validate dependencies và external services</li>
+<li>Đo lường response time và performance</li>
+<li>Cung cấp detailed health metrics</li>
+</ul>
+<h3 id="inputoutput-structure">Input/Output Structure</h3>
+<p><strong>Input Event Structure:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;serviceName&#34;</span>: <span style="color:#e6db74">&#34;auth&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;serviceUrl&#34;</span>: <span style="color:#e6db74">&#34;https://api.restaurant.com/auth/health&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;dependencies&#34;</span>: [<span style="color:#e6db74">&#34;database&#34;</span>, <span style="color:#e6db74">&#34;redis&#34;</span>],
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;timeout&#34;</span>: <span style="color:#ae81ff">30000</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>Output Structure:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;statusCode&#34;</span>: <span style="color:#ae81ff">200</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;body&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;serviceName&#34;</span>: <span style="color:#e6db74">&#34;auth&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;HEALTHY&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;responseTime&#34;</span>: <span style="color:#ae81ff">150</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;timestamp&#34;</span>: <span style="color:#e6db74">&#34;2024-01-20T10:00:00.000Z&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;dependencies&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;database&#34;</span>: <span style="color:#e6db74">&#34;HEALTHY&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;redis&#34;</span>: <span style="color:#e6db74">&#34;HEALTHY&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="implementation">Implementation</h3>
+<p><strong>Bước 1: Tạo Lambda Function</strong></p>
+<ol>
+<li>Truy cập Lambda Console → Create function</li>
+<li><strong>Function name</strong>: <code>restaurant-health-check</code></li>
+<li><strong>Runtime</strong>: Node.js 18.x</li>
+<li><strong>Execution role</strong>: <code>Lambda-RestaurantServices-Role</code></li>
+</ol>
+<p><strong>Bước 2: Function Code</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">handler</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">event</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Extract parameters from event
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> { 
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">serviceName</span>, 
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">serviceUrl</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;https://httpbin.org/status/200&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">dependencies</span> <span style="color:#f92672">=</span> [],
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">timeout</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">30000</span> 
+</span></span><span style="display:flex;"><span>    } <span style="color:#f92672">=</span> <span style="color:#a6e22e">event</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`🔍 Starting health check for service: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">serviceName</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`📍 Endpoint: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">serviceUrl</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Start timing
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">startTime</span> <span style="color:#f92672">=</span> Date.<span style="color:#a6e22e">now</span>();
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Perform health check
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">healthResult</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">performHealthCheck</span>(<span style="color:#a6e22e">serviceUrl</span>, <span style="color:#a6e22e">timeout</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Check dependencies
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">dependencyResults</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">checkDependencies</span>(<span style="color:#a6e22e">dependencies</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Calculate response time
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">responseTime</span> <span style="color:#f92672">=</span> Date.<span style="color:#a6e22e">now</span>() <span style="color:#f92672">-</span> <span style="color:#a6e22e">startTime</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Determine overall status
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">overallStatus</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">determineOverallStatus</span>(<span style="color:#a6e22e">healthResult</span>, <span style="color:#a6e22e">dependencyResults</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">statusCode</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">200</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">body</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">serviceName</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">status</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">overallStatus</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">responseTime</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">timestamp</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">new</span> Date().<span style="color:#a6e22e">toISOString</span>(),
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">endpoint</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">serviceUrl</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">dependencies</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">dependencyResults</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">details</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">endpointHealth</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">healthResult</span>.<span style="color:#a6e22e">status</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">dependencyCount</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">dependencies</span>.<span style="color:#a6e22e">length</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">checks</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;endpoint&#39;</span>, <span style="color:#e6db74">&#39;dependencies&#39;</span>, <span style="color:#e6db74">&#39;responseTime&#39;</span>]
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`✅ Health check completed for </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">serviceName</span><span style="color:#e6db74">}</span><span style="color:#e6db74">: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">overallStatus</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">result</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">`❌ Health check failed for </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">serviceName</span><span style="color:#e6db74">}</span><span style="color:#e6db74">:`</span>, <span style="color:#a6e22e">error</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">statusCode</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">500</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">body</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">serviceName</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">status</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;UNHEALTHY&#39;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">error</span>.<span style="color:#a6e22e">message</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">timestamp</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">new</span> Date().<span style="color:#a6e22e">toISOString</span>(),
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">endpoint</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">serviceUrl</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Helper function for endpoint health check
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">performHealthCheck</span>(<span style="color:#a6e22e">url</span>, <span style="color:#a6e22e">timeout</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`🌐 Checking endpoint: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">url</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Simulate HTTP health check
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">mockResponse</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">simulateHttpRequest</span>(<span style="color:#a6e22e">url</span>, <span style="color:#a6e22e">timeout</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">status</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;HEALTHY&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">responseCode</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">mockResponse</span>.<span style="color:#a6e22e">status</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">responseTime</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">mockResponse</span>.<span style="color:#a6e22e">duration</span>
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">status</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;UNHEALTHY&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">error</span>.<span style="color:#a6e22e">message</span>
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Helper function for dependency checks
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">checkDependencies</span>(<span style="color:#a6e22e">dependencies</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`🔗 Checking </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">dependencies</span>.<span style="color:#a6e22e">length</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> dependencies`</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">results</span> <span style="color:#f92672">=</span> {};
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">dependency</span> <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">dependencies</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isHealthy</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">simulateDependencyCheck</span>(<span style="color:#a6e22e">dependency</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">results</span>[<span style="color:#a6e22e">dependency</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">isHealthy</span> <span style="color:#f92672">?</span> <span style="color:#e6db74">&#39;HEALTHY&#39;</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;UNHEALTHY&#39;</span>;
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">results</span>[<span style="color:#a6e22e">dependency</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;ERROR&#39;</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">results</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Determine overall health status
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">determineOverallStatus</span>(<span style="color:#a6e22e">healthResult</span>, <span style="color:#a6e22e">dependencyResults</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">healthResult</span>.<span style="color:#a6e22e">status</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;UNHEALTHY&#39;</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;UNHEALTHY&#39;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">dependencyStatuses</span> <span style="color:#f92672">=</span> Object.<span style="color:#a6e22e">values</span>(<span style="color:#a6e22e">dependencyResults</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">unhealthyDeps</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">dependencyStatuses</span>.<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">status</span> =&gt; <span style="color:#a6e22e">status</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#39;HEALTHY&#39;</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">unhealthyDeps</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;DEGRADED&#39;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;HEALTHY&#39;</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Simulation functions
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">simulateHttpRequest</span>(<span style="color:#a6e22e">url</span>, <span style="color:#a6e22e">timeout</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">await</span> <span style="color:#66d9ef">new</span> Promise(<span style="color:#a6e22e">resolve</span> =&gt; <span style="color:#a6e22e">setTimeout</span>(<span style="color:#a6e22e">resolve</span>, Math.<span style="color:#a6e22e">random</span>() <span style="color:#f92672">*</span> <span style="color:#ae81ff">200</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">50</span>));
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">scenarios</span> <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>        { <span style="color:#a6e22e">status</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">200</span>, <span style="color:#a6e22e">duration</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">150</span> }, <span style="color:#75715e">// Healthy
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        { <span style="color:#a6e22e">status</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">200</span>, <span style="color:#a6e22e">duration</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">300</span> }, <span style="color:#75715e">// Slow but healthy
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        { <span style="color:#a6e22e">status</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">503</span>, <span style="color:#a6e22e">duration</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">100</span> }  <span style="color:#75715e">// Service unavailable
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    ];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">scenario</span> <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">random</span>() <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.9</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">scenarios</span>[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">:</span> <span style="color:#a6e22e">scenarios</span>[<span style="color:#ae81ff">2</span>];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">scenario</span>.<span style="color:#a6e22e">status</span> <span style="color:#f92672">!==</span> <span style="color:#ae81ff">200</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">`HTTP </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">scenario</span>.<span style="color:#a6e22e">status</span><span style="color:#e6db74">}</span><span style="color:#e6db74">: Service unavailable`</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">scenario</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">simulateDependencyCheck</span>(<span style="color:#a6e22e">dependency</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`  📋 Checking dependency: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">dependency</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">await</span> <span style="color:#66d9ef">new</span> Promise(<span style="color:#a6e22e">resolve</span> =&gt; <span style="color:#a6e22e">setTimeout</span>(<span style="color:#a6e22e">resolve</span>, Math.<span style="color:#a6e22e">random</span>() <span style="color:#f92672">*</span> <span style="color:#ae81ff">100</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">25</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> Math.<span style="color:#a6e22e">random</span>() <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.95</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>Bước 3: Test Function</strong>
+Test event:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;serviceName&#34;</span>: <span style="color:#e6db74">&#34;auth&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;serviceUrl&#34;</span>: <span style="color:#e6db74">&#34;https://httpbin.org/status/200&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;dependencies&#34;</span>: [<span style="color:#e6db74">&#34;database&#34;</span>, <span style="color:#e6db74">&#34;redis&#34;</span>],
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;timeout&#34;</span>: <span style="color:#ae81ff">5000</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+<div class="notices tip" ><p><strong>Expected Output:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;statusCode&#34;</span>: <span style="color:#ae81ff">200</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;body&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;serviceName&#34;</span>: <span style="color:#e6db74">&#34;auth&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;HEALTHY&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;responseTime&#34;</span>: <span style="color:#ae81ff">156</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;timestamp&#34;</span>: <span style="color:#e6db74">&#34;2024-01-20T10:00:00.000Z&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;dependencies&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;database&#34;</span>: <span style="color:#e6db74">&#34;HEALTHY&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;redis&#34;</span>: <span style="color:#e6db74">&#34;HEALTHY&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></div>
+
+<h2 id="62-notification-function">6.2 Notification Function</h2>
+<h3 id="function-purpose-1">Function Purpose</h3>
+<p>Notification function xử lý việc gửi thông báo deployment status:</p>
+<ul>
+<li>Gửi thông báo thành công/thất bại</li>
+<li>Log deployment events</li>
+<li>Cập nhật monitoring systems</li>
+<li>Trigger downstream processes</li>
+</ul>
+<h3 id="implementation-1">Implementation</h3>
+<p><strong>Bước 1: Tạo Function</strong></p>
+<ol>
+<li>Function name: <code>restaurant-notification</code></li>
+<li>Runtime: Node.js 18.x</li>
+<li>Role: <code>Lambda-RestaurantServices-Role</code></li>
+</ol>
+<p><strong>Bước 2: Function Code</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">handler</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">event</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> { 
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">deploymentStatus</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">serviceName</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">message</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">timestamp</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Date().<span style="color:#a6e22e">toISOString</span>(),
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">deploymentDetails</span> <span style="color:#f92672">=</span> {}
+</span></span><span style="display:flex;"><span>    } <span style="color:#f92672">=</span> <span style="color:#a6e22e">event</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`📢 Processing notification for </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">serviceName</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`📊 Status: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">deploymentStatus</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`💬 Message: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">message</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Create notification payload
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">notification</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">service</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">serviceName</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">status</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">deploymentStatus</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">message</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">message</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">timestamp</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">timestamp</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">details</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">deploymentDetails</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">severity</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">getSeverityLevel</span>(<span style="color:#a6e22e">deploymentStatus</span>),
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">channels</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">getNotificationChannels</span>(<span style="color:#a6e22e">deploymentStatus</span>)
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Send notifications
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">results</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">sendNotifications</span>(<span style="color:#a6e22e">notification</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Log to CloudWatch
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">logDeploymentEvent</span>(<span style="color:#a6e22e">notification</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">statusCode</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">200</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">body</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">notificationSent</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">channels</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">results</span>.<span style="color:#a6e22e">channels</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">loggedAt</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">new</span> Date().<span style="color:#a6e22e">toISOString</span>()
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#39;❌ Notification failed:&#39;</span>, <span style="color:#a6e22e">error</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">statusCode</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">500</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">body</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">notificationSent</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">error</span>.<span style="color:#a6e22e">message</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">timestamp</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">new</span> Date().<span style="color:#a6e22e">toISOString</span>()
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getSeverityLevel</span>(<span style="color:#a6e22e">status</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">severityMap</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;SUCCESS&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;INFO&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;FAILED&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;ERROR&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;ROLLBACK&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;WARNING&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;TIMEOUT&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;ERROR&#39;</span>
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">severityMap</span>[<span style="color:#a6e22e">status</span>] <span style="color:#f92672">||</span> <span style="color:#e6db74">&#39;INFO&#39;</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getNotificationChannels</span>(<span style="color:#a6e22e">status</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">channels</span> <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;cloudwatch&#39;</span>];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">status</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;FAILED&#39;</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">status</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;ROLLBACK&#39;</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">channels</span>.<span style="color:#a6e22e">push</span>(<span style="color:#e6db74">&#39;slack&#39;</span>, <span style="color:#e6db74">&#39;email&#39;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">channels</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">sendNotifications</span>(<span style="color:#a6e22e">notification</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">results</span> <span style="color:#f92672">=</span> { <span style="color:#a6e22e">channels</span><span style="color:#f92672">:</span> [] };
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">channel</span> <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">notification</span>.<span style="color:#a6e22e">channels</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">switch</span> (<span style="color:#a6e22e">channel</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;cloudwatch&#39;</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">sendToCloudWatch</span>(<span style="color:#a6e22e">notification</span>);
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;slack&#39;</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">sendToSlack</span>(<span style="color:#a6e22e">notification</span>);
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;email&#39;</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">sendToEmail</span>(<span style="color:#a6e22e">notification</span>);
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">results</span>.<span style="color:#a6e22e">channels</span>.<span style="color:#a6e22e">push</span>({ <span style="color:#a6e22e">channel</span>, <span style="color:#a6e22e">status</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;SUCCESS&#39;</span> });
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">`Failed to send to </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">channel</span><span style="color:#e6db74">}</span><span style="color:#e6db74">:`</span>, <span style="color:#a6e22e">error</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">results</span>.<span style="color:#a6e22e">channels</span>.<span style="color:#a6e22e">push</span>({ <span style="color:#a6e22e">channel</span>, <span style="color:#a6e22e">status</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;FAILED&#39;</span>, <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">error</span>.<span style="color:#a6e22e">message</span> });
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">results</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">sendToCloudWatch</span>(<span style="color:#a6e22e">notification</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`📊 Sending to CloudWatch: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">notification</span>.<span style="color:#a6e22e">service</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> - </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">notification</span>.<span style="color:#a6e22e">status</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// CloudWatch Logs integration would go here
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">sendToSlack</span>(<span style="color:#a6e22e">notification</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`💬 Sending to Slack: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">notification</span>.<span style="color:#a6e22e">message</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Slack webhook integration would go here
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">sendToEmail</span>(<span style="color:#a6e22e">notification</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`📧 Sending email notification for </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">notification</span>.<span style="color:#a6e22e">service</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// SES email integration would go here
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">logDeploymentEvent</span>(<span style="color:#a6e22e">notification</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">logEntry</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">timestamp</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">notification</span>.<span style="color:#a6e22e">timestamp</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">service</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">notification</span>.<span style="color:#a6e22e">service</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">status</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">notification</span>.<span style="color:#a6e22e">status</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">message</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">notification</span>.<span style="color:#a6e22e">message</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">severity</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">notification</span>.<span style="color:#a6e22e">severity</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">details</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">notification</span>.<span style="color:#a6e22e">details</span>
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;📝 Deployment Event:&#39;</span>, <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">logEntry</span>, <span style="color:#66d9ef">null</span>, <span style="color:#ae81ff">2</span>));
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="63-rollback-coordinator-function">6.3 Rollback Coordinator Function</h2>
+<h3 id="function-purpose-2">Function Purpose</h3>
+<p>Rollback Coordinator xử lý việc phối hợp rollback khi deployment thất bại:</p>
+<ul>
+<li>Xác định scope của rollback</li>
+<li>Thực hiện rollback theo dependency order</li>
+<li>Validate rollback success</li>
+<li>Report rollback status</li>
+</ul>
+<h3 id="implementation-2">Implementation</h3>
+<p><strong>Bước 1: Tạo Function</strong></p>
+<ol>
+<li>Function name: <code>restaurant-rollback-coordinator</code></li>
+<li>Runtime: Node.js 18.x</li>
+<li>Role: <code>Lambda-RestaurantServices-Role</code></li>
+</ol>
+<p><strong>Bước 2: Function Code</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">handler</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">event</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> { 
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">failedService</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">deployedServices</span> <span style="color:#f92672">=</span> [],
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">rollbackReason</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">rollbackStrategy</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;reverse-dependency&#39;</span>
+</span></span><span style="display:flex;"><span>    } <span style="color:#f92672">=</span> <span style="color:#a6e22e">event</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`🔄 Initiating rollback coordination`</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`❌ Trigger: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">failedService</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> failed - </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">rollbackReason</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Create rollback plan
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">rollbackPlan</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">createRollbackPlan</span>(<span style="color:#a6e22e">failedService</span>, <span style="color:#a6e22e">deployedServices</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Execute rollback
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">rollbackResults</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">executeRollbackPlan</span>(<span style="color:#a6e22e">rollbackPlan</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Validate rollback
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">validationResults</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">validateRollback</span>(<span style="color:#a6e22e">rollbackPlan</span>.<span style="color:#a6e22e">services</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">statusCode</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">200</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">body</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">rollbackStatus</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;COMPLETED&#39;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">rollbackPlan</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">rollbackResults</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">validationResults</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">completedAt</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">new</span> Date().<span style="color:#a6e22e">toISOString</span>()
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#39;❌ Rollback coordination failed:&#39;</span>, <span style="color:#a6e22e">error</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">statusCode</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">500</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">body</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">rollbackStatus</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;FAILED&#39;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">error</span>.<span style="color:#a6e22e">message</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">partialResults</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">error</span>.<span style="color:#a6e22e">partialResults</span> <span style="color:#f92672">||</span> [],
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">failedAt</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">new</span> Date().<span style="color:#a6e22e">toISOString</span>()
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">createRollbackPlan</span>(<span style="color:#a6e22e">failedService</span>, <span style="color:#a6e22e">deployedServices</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`📋 Creating rollback plan for failure: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">failedService</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Service dependency mapping
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">dependencies</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;review&#39;</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;order&#39;</span>, <span style="color:#e6db74">&#39;auth&#39;</span>],
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;order&#39;</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;menu&#39;</span>, <span style="color:#e6db74">&#39;auth&#39;</span>], 
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;menu&#39;</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;auth&#39;</span>],
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;restaurant&#39;</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;auth&#39;</span>],
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;auth&#39;</span><span style="color:#f92672">:</span> []
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Determine services to rollback
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">servicesToRollback</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">determineRollbackScope</span>(<span style="color:#a6e22e">failedService</span>, <span style="color:#a6e22e">deployedServices</span>, <span style="color:#a6e22e">dependencies</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Create rollback order (reverse of deployment order)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">rollbackOrder</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">servicesToRollback</span>.<span style="color:#a6e22e">reverse</span>();
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">trigger</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">failedService</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">services</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">rollbackOrder</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">strategy</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;reverse-dependency&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">estimatedDuration</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">rollbackOrder</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">30</span>, <span style="color:#75715e">// 30 seconds per service
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#a6e22e">createdAt</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">new</span> Date().<span style="color:#a6e22e">toISOString</span>()
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">determineRollbackScope</span>(<span style="color:#a6e22e">failedService</span>, <span style="color:#a6e22e">deployedServices</span>, <span style="color:#a6e22e">dependencies</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">rollbackServices</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Set</span>();
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Add the failed service
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">rollbackServices</span>.<span style="color:#a6e22e">add</span>(<span style="color:#a6e22e">failedService</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Add services that depend on the failed service
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">const</span> [<span style="color:#a6e22e">service</span>, <span style="color:#a6e22e">deps</span>] <span style="color:#66d9ef">of</span> Object.<span style="color:#a6e22e">entries</span>(<span style="color:#a6e22e">dependencies</span>)) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">deps</span>.<span style="color:#a6e22e">includes</span>(<span style="color:#a6e22e">failedService</span>) <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">deployedServices</span>.<span style="color:#a6e22e">includes</span>(<span style="color:#a6e22e">service</span>)) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">rollbackServices</span>.<span style="color:#a6e22e">add</span>(<span style="color:#a6e22e">service</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> Array.<span style="color:#a6e22e">from</span>(<span style="color:#a6e22e">rollbackServices</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">executeRollbackPlan</span>(<span style="color:#a6e22e">rollbackPlan</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`🔄 Executing rollback plan for </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">rollbackPlan</span>.<span style="color:#a6e22e">services</span>.<span style="color:#a6e22e">length</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> services`</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">results</span> <span style="color:#f92672">=</span> [];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">service</span> <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">rollbackPlan</span>.<span style="color:#a6e22e">services</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`🔄 Rolling back service: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">service</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">rollbackResult</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">rollbackService</span>(<span style="color:#a6e22e">service</span>);
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">results</span>.<span style="color:#a6e22e">push</span>({
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">service</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">status</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;SUCCESS&#39;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">result</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">rollbackResult</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">timestamp</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">new</span> Date().<span style="color:#a6e22e">toISOString</span>()
+</span></span><span style="display:flex;"><span>            });
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">`❌ Rollback failed for </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">service</span><span style="color:#e6db74">}</span><span style="color:#e6db74">:`</span>, <span style="color:#a6e22e">error</span>);
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">results</span>.<span style="color:#a6e22e">push</span>({
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">service</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">status</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;FAILED&#39;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">error</span>.<span style="color:#a6e22e">message</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">timestamp</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">new</span> Date().<span style="color:#a6e22e">toISOString</span>()
+</span></span><span style="display:flex;"><span>            });
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">results</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">rollbackService</span>(<span style="color:#a6e22e">serviceName</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`🔄 Rolling back </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">serviceName</span><span style="color:#e6db74">}</span><span style="color:#e6db74">...`</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Simulate rollback process
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">await</span> <span style="color:#66d9ef">new</span> Promise(<span style="color:#a6e22e">resolve</span> =&gt; <span style="color:#a6e22e">setTimeout</span>(<span style="color:#a6e22e">resolve</span>, <span style="color:#ae81ff">2000</span>));
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Simulate different rollback scenarios
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">scenarios</span> <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>        { <span style="color:#a6e22e">success</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>, <span style="color:#a6e22e">message</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Service rolled back successfully&#39;</span> },
+</span></span><span style="display:flex;"><span>        { <span style="color:#a6e22e">success</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>, <span style="color:#a6e22e">message</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Rollback failed - manual intervention required&#39;</span> }
+</span></span><span style="display:flex;"><span>    ];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">scenario</span> <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">random</span>() <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.9</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">scenarios</span>[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">:</span> <span style="color:#a6e22e">scenarios</span>[<span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">scenario</span>.<span style="color:#a6e22e">success</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> Error(<span style="color:#a6e22e">scenario</span>.<span style="color:#a6e22e">message</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">service</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">serviceName</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">action</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;rollback&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">status</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;completed&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">message</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">scenario</span>.<span style="color:#a6e22e">message</span>
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">validateRollback</span>(<span style="color:#a6e22e">services</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`✅ Validating rollback for </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">services</span>.<span style="color:#a6e22e">length</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> services`</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">validationResults</span> <span style="color:#f92672">=</span> [];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">service</span> <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">services</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isValid</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">validateServiceRollback</span>(<span style="color:#a6e22e">service</span>);
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">validationResults</span>.<span style="color:#a6e22e">push</span>({
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">service</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">valid</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">isValid</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">timestamp</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">new</span> Date().<span style="color:#a6e22e">toISOString</span>()
+</span></span><span style="display:flex;"><span>            });
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">validationResults</span>.<span style="color:#a6e22e">push</span>({
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">service</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">valid</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">error</span>.<span style="color:#a6e22e">message</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">timestamp</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">new</span> Date().<span style="color:#a6e22e">toISOString</span>()
+</span></span><span style="display:flex;"><span>            });
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">validationResults</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">validateServiceRollback</span>(<span style="color:#a6e22e">serviceName</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`🔍 Validating rollback for </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">serviceName</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Simulate validation
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">await</span> <span style="color:#66d9ef">new</span> Promise(<span style="color:#a6e22e">resolve</span> =&gt; <span style="color:#a6e22e">setTimeout</span>(<span style="color:#a6e22e">resolve</span>, <span style="color:#ae81ff">1000</span>));
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> Math.<span style="color:#a6e22e">random</span>() <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.95</span>; <span style="color:#75715e">// 95% validation success rate
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><h2 id="64-testing-và-validation">6.4 Testing và Validation</h2>
+<h3 id="function-testing-strategy">Function Testing Strategy</h3>
+
+<div class="notices warning" ><p><strong>Quan trọng:</strong> Test kỹ lưỡng tất cả các functions trước khi integrate vào Step Functions workflow.</p>
+</div>
+
+<p><strong>Test Cases cho Health Check Function:</strong></p>
+<ol>
+<li><strong>Healthy Service Test</strong>: Service responding normally</li>
+<li><strong>Unhealthy Service Test</strong>: Service returning errors</li>
+<li><strong>Timeout Test</strong>: Service not responding within timeout</li>
+<li><strong>Dependency Failure Test</strong>: External dependencies failing</li>
+</ol>
+<p><strong>Test Cases cho Notification Function:</strong></p>
+<ol>
+<li><strong>Success Notification</strong>: Deployment thành công</li>
+<li><strong>Failure Notification</strong>: Deployment thất bại</li>
+<li><strong>Multiple Channel Test</strong>: Gửi qua nhiều channels</li>
+<li><strong>Error Handling</strong>: Notification service failures</li>
+</ol>
+<p><strong>Test Cases cho Rollback Coordinator:</strong></p>
+<ol>
+<li><strong>Single Service Rollback</strong>: Rollback một service</li>
+<li><strong>Multiple Service Rollback</strong>: Rollback nhiều services</li>
+<li><strong>Dependency Order Test</strong>: Rollback theo đúng thứ tự</li>
+<li><strong>Partial Rollback Failure</strong>: Một số services rollback thất bại</li>
+</ol>
+<h3 id="integration-testing">Integration Testing</h3>
+<p>Sau khi test individual functions, chúng ta sẽ test integration với Step Functions trong phần tiếp theo.</p>
+
+<div class="notices tip" ><p><strong>Best Practices:</strong></p>
+<ul>
+<li>Sử dụng environment variables cho configuration</li>
+<li>Implement proper error handling và logging</li>
+<li>Add metrics và monitoring</li>
+<li>Use IAM roles với least privilege principle</li>
+</ul>
+</div>
+
+<hr>
+<p><strong>Tiếp theo:</strong> Trong phần 7, chúng ta sẽ tích hợp các Lambda functions này vào Step Functions workflow để tạo ra một hệ thống orchestration hoàn chỉnh.</p>
+
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/5-setup/" title="Setup và Chuẩn bị"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/7-stepfunctions-workflow/" title="7. Step Functions Workflow" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1752194696"></script>
+    <script src="/js/perfect-scrollbar.min.js?1752194696"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1752194696"></script>
+    <script src="/js/jquery.sticky.js?1752194696"></script>
+    <script src="/js/featherlight.min.js?1752194696"></script>
+    <script src="/js/highlight.pack.js?1752194696"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1752194696"></script>
+    <script src="/js/learn.js?1752194696"></script>
+    <script src="/js/hugo-learn.js?1752194696"></script>
+
+    <link href="/mermaid/mermaid.css?1752194696" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1752194696"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-158079754-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>

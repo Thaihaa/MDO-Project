@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Update the AWS account on Create a new AWS account.</title>
+    <link>//localhost:1313/1-create-new-aws-account/1.2-update-account/</link>
+    <description>Recent content in Update the AWS account on Create a new AWS account.</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate></lastBuildDate>
+    <atom:link href="//localhost:1313/1-create-new-aws-account/1.2-update-account/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>

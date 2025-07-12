@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.148.0">
+    <meta name="description" content="">
+<meta name="author" content="journeyoftheaverageguy@gmail.com">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>12. Demo và Q&amp;A :: Create a new AWS account.</title>
+
+    
+    <link href="/css/nucleus.css?1752194696" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1752194696" rel="stylesheet">
+    <link href="/css/hybrid.css?1752194696" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1752194696" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1752194696" rel="stylesheet">
+    <link href="/css/auto-complete.css?1752194696" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1752194696" rel="stylesheet">
+    <link href="/css/theme.css?1752194696" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1752194696" rel="stylesheet">
+    
+    <link href="/css/theme-workshop.css?1752194696" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1752194696"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/12-demo-qa/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="/">
+
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff;}.cls-2{fill:#f90;fill-rule:evenodd;}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09,10.85a4.7,4.7,0,0,0,.19,1.48,7.73,7.73,0,0,0,.54,1.19.77.77,0,0,1,.12.38.64.64,0,0,1-.32.49l-1,.7a.83.83,0,0,1-.44.15.69.69,0,0,1-.49-.23,3.8,3.8,0,0,1-.6-.77q-.25-.42-.51-1a6.14,6.14,0,0,1-4.89,2.3,4.54,4.54,0,0,1-3.32-1.19,4.27,4.27,0,0,1-1.22-3.2A4.28,4.28,0,0,1,3.61,7.75,6.06,6.06,0,0,1,7.69,6.46a12.47,12.47,0,0,1,1.76.13q.92.13,1.91.36V5.73a3.65,3.65,0,0,0-.79-2.66A3.81,3.81,0,0,0,7.86,2.3a7.71,7.71,0,0,0-1.79.22,12.78,12.78,0,0,0-1.79.57,4.55,4.55,0,0,1-.58.22l-.26,0q-.35,0-.35-.52V2a1.09,1.09,0,0,1,.12-.58,1.2,1.2,0,0,1,.47-.35A10.88,10.88,0,0,1,5.77.32,10.19,10.19,0,0,1,8.36,0a6,6,0,0,1,4.35,1.35,5.49,5.49,0,0,1,1.38,4.09ZM7.34,13.38a5.36,5.36,0,0,0,1.72-.31A3.63,3.63,0,0,0,10.63,12,2.62,2.62,0,0,0,11.19,11a5.63,5.63,0,0,0,.16-1.44v-.7a14.35,14.35,0,0,0-1.53-.28,12.37,12.37,0,0,0-1.56-.1,3.84,3.84,0,0,0-2.47.67A2.34,2.34,0,0,0,5,11a2.35,2.35,0,0,0,.61,1.76A2.4,2.4,0,0,0,7.34,13.38Zm13.35,1.8a1,1,0,0,1-.64-.16,1.3,1.3,0,0,1-.35-.65L15.81,1.51a3,3,0,0,1-.15-.67.36.36,0,0,1,.41-.41H17.7a1,1,0,0,1,.65.16,1.4,1.4,0,0,1,.33.65l2.79,11,2.59-11A1.17,1.17,0,0,1,24.39.6a1.1,1.1,0,0,1,.67-.16H26.4a1.1,1.1,0,0,1,.67.16,1.17,1.17,0,0,1,.32.65L30,12.39,32.88,1.25A1.39,1.39,0,0,1,33.22.6a1,1,0,0,1,.65-.16h1.54a.36.36,0,0,1,.41.41,1.36,1.36,0,0,1,0,.26,3.64,3.64,0,0,1-.12.41l-4,12.86a1.3,1.3,0,0,1-.35.65,1,1,0,0,1-.64.16H29.25a1,1,0,0,1-.67-.17,1.26,1.26,0,0,1-.32-.67L25.67,3.64,23.11,14.34a1.26,1.26,0,0,1-.32.67,1,1,0,0,1-.67.17Zm21.36.44a11.28,11.28,0,0,1-2.56-.29,7.44,7.44,0,0,1-1.92-.67,1,1,0,0,1-.61-.93v-.84q0-.52.38-.52a.9.9,0,0,1,.31.06l.42.17a8.77,8.77,0,0,0,1.83.58,9.78,9.78,0,0,0,2,.2,4.48,4.48,0,0,0,2.43-.55,1.76,1.76,0,0,0,.86-1.57,1.61,1.61,0,0,0-.45-1.16A4.29,4.29,0,0,0,43,9.22l-2.41-.76A5.15,5.15,0,0,1,38,6.78a3.94,3.94,0,0,1-.83-2.41,3.7,3.7,0,0,1,.45-1.85,4.47,4.47,0,0,1,1.19-1.37A5.27,5.27,0,0,1,40.51.29,7.4,7.4,0,0,1,42.6,0a8.87,8.87,0,0,1,1.12.07q.57.07,1.08.19t.95.26a4.27,4.27,0,0,1,.7.29,1.59,1.59,0,0,1,.49.41.94.94,0,0,1,.15.55v.79q0,.52-.38.52a1.76,1.76,0,0,1-.64-.2,7.74,7.74,0,0,0-3.2-.64,4.37,4.37,0,0,0-2.21.47,1.6,1.6,0,0,0-.79,1.48,1.58,1.58,0,0,0,.49,1.18,4.94,4.94,0,0,0,1.83.92L44.55,7a5.08,5.08,0,0,1,2.57,1.6A3.76,3.76,0,0,1,47.9,11a4.21,4.21,0,0,1-.44,1.93,4.4,4.4,0,0,1-1.21,1.47,5.43,5.43,0,0,1-1.85.93A8.25,8.25,0,0,1,42.05,15.62Z"></path><path class="cls-2" d="M45.19,23.81C39.72,27.85,31.78,30,25,30A36.64,36.64,0,0,1,.22,20.57c-.51-.46-.06-1.09.56-.74A49.78,49.78,0,0,0,25.53,26.4,49.23,49.23,0,0,0,44.4,22.53C45.32,22.14,46.1,23.14,45.19,23.81Z"></path><path class="cls-2" d="M47.47,21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74,3.13-2.2,8.27-1.57,8.86-.83s-.16,5.89-3.09,8.35c-.45.38-.88.18-.68-.32C46.69,25.8,48.17,22.11,47.47,21.21Z"></path></svg>
+
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1752194696"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1752194696"></script>
+<script type="text/javascript">
+    
+        var baseurl = "\/\/localhost:1313\/";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1752194696"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/1-introduction/" title="Giới thiệu Workshop" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/1-introduction/">
+          <b>1. </b>Giới thiệu Workshop
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-orchestration-theory/" title="Service Orchestration Theory" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-orchestration-theory/">
+          <b>2. </b>Service Orchestration Theory
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/3-business-domain/" title="Restaurant Business Domain" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/3-business-domain/">
+          <b>3. </b>Restaurant Business Domain
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/4-architecture-overview/" title="Architecture Overview" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/4-architecture-overview/">
+          <b>4. </b>Architecture Overview
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/5-setup/" title="Setup và Chuẩn bị" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/5-setup/">
+          <b>5. </b>Setup và Chuẩn bị
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/6-lambda-development/" title="6. Lambda Functions Development" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/6-lambda-development/">
+          <b>6. </b>6. Lambda Functions Development
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/7-stepfunctions-workflow/" title="7. Step Functions Workflow" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/7-stepfunctions-workflow/">
+          <b>7. </b>7. Step Functions Workflow
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/8-error-handling/" title="8. Error Handling và Rollback" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/8-error-handling/">
+          <b>8. </b>8. Error Handling và Rollback
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/9-monitoring/" title="9. Monitoring và Observability" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/9-monitoring/">
+          <b>9. </b>9. Monitoring và Observability
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/10-scalability-testing/" title="10. Scalability Testing" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/10-scalability-testing/">
+          <b>10. </b>10. Scalability Testing
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/11-production-practices/" title="11. Production Best Practices" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/11-production-practices/">
+          <b>11. </b>11. Production Best Practices
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/12-demo-qa/" title="12. Demo và Q&amp;A" class="dd-item 
+        
+        active
+        
+        ">
+      <a href="/12-demo-qa/">
+          <b>12. </b>12. Demo và Q&amp;A
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://aws.amazon.com/blogs"><i class='fab fa-aws'></i> AWS Study Group - Blog</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://www.facebook.com/groups/awsstudygroupfcj"><i class='fab fa-facebook'></i> AWS Study Group - FB Group</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="en" value="//localhost:1313/12-demo-qa/" selected>English</option>
+                    
+                  
+              
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <left>
+    
+     <b> Workshop</b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830891&style=0038&nbdigits=9&type=page&initCount=0" title="Migrate" Alt="web counter"   border="0" /></a>  <br>
+     <b> <a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830807&style=0038&nbdigits=9&type=page&initCount=0" title="Total CLoud Journey" Alt="web counter"   border="0"   />
+     
+</left>
+<left>
+    <br>
+    <br>
+        <b> Last Updated </b> <br>
+        <i><font color=orange>26-11-2023</font></i>
+    </left>
+    <left>
+        <br>
+        <br>
+            <b> Team </b> <br>
+           
+            <i>
+                <a href="https://www.linkedin.com/in/jotaguy"  style="color:orange">Gia Hưng</a>
+        </i>
+        </left>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            <a href='/'>Microservices Deployment và Orchestration với AWS Step Functions</a> > 12. Demo và Q&A
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#demo-session-và-qa">Demo Session và Q&amp;A</a></li>
+    <li><a href="#121-live-demo-script">12.1 Live Demo Script</a>
+      <ul>
+        <li><a href="#demo-preparation">Demo Preparation</a></li>
+        <li><a href="#demo-flow-15-minutes">Demo Flow (15 minutes)</a></li>
+      </ul>
+    </li>
+    <li><a href="#122-qa-preparation">12.2 Q&amp;A Preparation</a>
+      <ul>
+        <li><a href="#common-questions-và-answers">Common Questions và Answers</a></li>
+        <li><a href="#scenario-2-failure-và-recovery">Scenario 2: Failure và Recovery</a></li>
+        <li><a href="#scenario-3-load-testing">Scenario 3: Load Testing</a></li>
+      </ul>
+    </li>
+    <li><a href="#-congratulations">🎉 Congratulations!</a>
+      <ul>
+        <li><a href="#what-youve-accomplished">What You&rsquo;ve Accomplished</a></li>
+        <li><a href="#your-journey-continues">Your Journey Continues</a></li>
+        <li><a href="#thank-you">Thank You!</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              12. Demo và Q&amp;A
+            </h1>
+          
+
+        
+
+
+
+	<h2 id="demo-session-và-qa">Demo Session và Q&amp;A</h2>
+<p>Trong phần cuối này, chúng ta sẽ thực hiện live demo của toàn bộ hệ thống và giải đáp các câu hỏi thường gặp.</p>
+
+<div class="notices info" ><p><strong>Mục tiêu phần này:</strong></p>
+<ul>
+<li>Thực hiện comprehensive demo của hệ thống</li>
+<li>Trả lời các câu hỏi kỹ thuật</li>
+<li>Chia sẻ best practices từ thực tế</li>
+<li>Cung cấp resources để học tập tiếp</li>
+</ul>
+</div>
+
+<h2 id="121-live-demo-script">12.1 Live Demo Script</h2>
+<h3 id="demo-preparation">Demo Preparation</h3>
+<p><strong>Before Starting:</strong></p>
+<ol>
+<li>✅ AWS Console open với appropriate tabs</li>
+<li>✅ Step Functions state machine ready</li>
+<li>✅ Lambda functions deployed và tested</li>
+<li>✅ CloudWatch dashboard configured</li>
+<li>✅ Demo scenarios prepared</li>
+</ol>
+<h3 id="demo-flow-15-minutes">Demo Flow (15 minutes)</h3>
+<h4 id="part-1-architecture-overview-3-minutes">Part 1: Architecture Overview (3 minutes)</h4>
+<pre tabindex="0"><code>&#34;Welcome! Tôi sẽ demo enterprise-grade microservices orchestration 
+sử dụng AWS Step Functions.
+
+Hệ thống này manage deployment của 5 microservices cho restaurant platform:
+- Auth, Menu, Restaurant, Order, và Review services
+- Complex dependency management
+- Automatic error handling và rollback
+- Real-time monitoring và alerting
+
+Let&#39;s see it in action!&#34;
+</code></pre><h4 id="part-2-step-functions-execution-5-minutes">Part 2: Step Functions Execution (5 minutes)</h4>
+<pre tabindex="0"><code>&#34;Đây là AWS Step Functions Console. Tôi sẽ start một deployment execution.
+
+[Click Start execution]
+[Show input JSON]
+[Start execution]
+
+Bạn có thể thấy real-time visual workflow:
+- Green: Successful states
+- Blue: Currently executing  
+- Red: Failed states (nếu có)
+
+[Point out parallel execution]
+[Show state details]
+[Explain dependency management]&#34;
+</code></pre><p><strong>Demo Input JSON:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;deploymentId&#34;</span>: <span style="color:#e6db74">&#34;demo-deployment-001&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;environment&#34;</span>: <span style="color:#e6db74">&#34;development&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;services&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;auth&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#e6db74">&#34;1.2.3&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;url&#34;</span>: <span style="color:#e6db74">&#34;https://httpbin.org/status/200&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;menu&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#e6db74">&#34;1.1.0&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;url&#34;</span>: <span style="color:#e6db74">&#34;https://httpbin.org/status/200&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;restaurant&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#e6db74">&#34;1.0.5&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;url&#34;</span>: <span style="color:#e6db74">&#34;https://httpbin.org/status/200&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;order&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#e6db74">&#34;2.0.1&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;url&#34;</span>: <span style="color:#e6db74">&#34;https://httpbin.org/status/200&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;review&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#e6db74">&#34;1.3.2&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;url&#34;</span>: <span style="color:#e6db74">&#34;https://httpbin.org/status/200&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="part-3-error-handling-demo-4-minutes">Part 3: Error Handling Demo (4 minutes)</h4>
+<pre tabindex="0"><code>&#34;Bây giờ tôi sẽ demo error handling. Tôi sẽ simulate một service failure.
+
+[Start execution với failure simulation]
+[Show retry attempts]
+[Show rollback coordination]
+
+Notice how the system automatically:
+1. Retries transient failures
+2. Catches permanent errors  
+3. Initiates rollback cho affected services
+4. Sends notifications về failure&#34;
+</code></pre><p><strong>Error Simulation Input:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;deploymentId&#34;</span>: <span style="color:#e6db74">&#34;demo-error-001&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;environment&#34;</span>: <span style="color:#e6db74">&#34;testing&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;simulateFailure&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;service&#34;</span>: <span style="color:#e6db74">&#34;menu&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;errorType&#34;</span>: <span style="color:#e6db74">&#34;timeout&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;probability&#34;</span>: <span style="color:#ae81ff">1.0</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="part-4-monitoring-dashboard-3-minutes">Part 4: Monitoring Dashboard (3 minutes)</h4>
+<pre tabindex="0"><code>&#34;Let&#39;s check the monitoring dashboard in CloudWatch.
+
+[Switch to CloudWatch]
+[Show dashboard widgets]
+
+Real-time metrics showing:
+- Execution success/failure rates
+- Lambda function performance
+- Error patterns
+- System health status
+
+All integrated với AWS managed services - no custom infrastructure needed!&#34;
+</code></pre><h2 id="122-qa-preparation">12.2 Q&amp;A Preparation</h2>
+<h3 id="common-questions-và-answers">Common Questions và Answers</h3>
+<h4 id="q-how-does-this-compare-to-jenkins-pipelines">Q: &ldquo;How does this compare to Jenkins pipelines?&rdquo;</h4>
+<p><strong>A:</strong> &ldquo;Step Functions provides several advantages:</p>
+<ul>
+<li><strong>Visual workflow designer</strong>: Easy to understand và modify</li>
+<li><strong>Built-in error handling</strong>: Retry logic và catch blocks</li>
+<li><strong>Serverless execution</strong>: No server management required</li>
+<li><strong>Native AWS integration</strong>: Seamless với other AWS services</li>
+<li><strong>Automatic scaling</strong>: Handles load without configuration</li>
+<li><strong>Pay-per-execution</strong>: Cost-effective pricing model</li>
+</ul>
+<p>Jenkins is great for CI/CD, but Step Functions excels at runtime orchestration.&rdquo;</p>
+<h4 id="q-what-about-vendor-lock-in">Q: &ldquo;What about vendor lock-in?&rdquo;</h4>
+<p><strong>A:</strong> &ldquo;While Step Functions is AWS-specific, the patterns are portable:</p>
+<ul>
+<li><strong>Workflow definitions</strong>: Can be translated to other platforms</li>
+<li><strong>Lambda functions</strong>: Standard code that can run anywhere</li>
+<li><strong>Architecture principles</strong>: Apply universally</li>
+<li><strong>Business logic</strong>: Remains independent of infrastructure</li>
+</ul>
+<p>The benefits often outweigh the lock-in concerns, especially với AWS&rsquo;s reliability và feature set.&rdquo;</p>
+<h4 id="q-how-do-you-handle-secrets-và-configuration">Q: &ldquo;How do you handle secrets và configuration?&rdquo;</h4>
+<p><strong>A:</strong> &ldquo;Security best practices include:</p>
+<ul>
+<li><strong>AWS Secrets Manager</strong>: For sensitive data like API keys</li>
+<li><strong>Parameter Store</strong>: For configuration values</li>
+<li><strong>Environment variables</strong>: For Lambda-specific settings</li>
+<li><strong>IAM roles</strong>: For permission management</li>
+<li><strong>No hardcoded credentials</strong>: Ever in code</li>
+</ul>
+<p>Example implementation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">secrets</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">secretsManager</span>.<span style="color:#a6e22e">getSecretValue</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">SecretId</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;restaurant-app-secrets&#39;</span>
+</span></span><span style="display:flex;"><span>}).<span style="color:#a6e22e">promise</span>();
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">```&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">#### Q: &#34;Can this scale to hundreds of microservices?&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">**A:** &#34;Absolutely! Step Functions supports:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">- **25,000 parallel executions** per region
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">- **Hierarchical workflows**: State machines calling other state machines
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">- **Map states**: For dynamic parallelism
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">- **Express workflows**: For high-volume scenarios (1M+ executions)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">- **Cross-region deployment**: For global scale
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">We&#39;ve seen customers orchestrate 100+ microservices successfully.&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">#### Q: &#34;What about testing và CI/CD integration?&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">**A:** &#34;Complete testing strategy includes:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">- **Unit tests**: For individual Lambda functions
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">- **Integration tests**: For workflow paths
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">- **Load testing**: Using our scalability framework
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">- **Infrastructure as Code**: CloudFormation/Terraform
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">- **Blue/green deployments**: With AWS CodeDeploy
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Example test:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">```</span><span style="color:#a6e22e">javascript</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">stepfunctions</span>.<span style="color:#a6e22e">startExecution</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">stateMachineArn</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">input</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">testInput</span>)
+</span></span><span style="display:flex;"><span>}).<span style="color:#a6e22e">promise</span>();
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">```&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">#### Q: &#34;Cost implications for production?&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">**A:** &#34;Very cost-effective:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">- **Step Functions**: $0.025 per 1,000 state transitions
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">- **Lambda**: $0.20 per 1M requests + duration
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">- **No idle costs**: Pay only for what you use
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">- **Typical production**: $50-200/month for most workloads
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">- **Free tier**: Covers development và testing
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">ROI is typically positive within months due to reduced operational overhead.&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">### Advanced Discussion Topics
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">#### Multi-Region Deployments
+</span></span></span></code></pre></div><p>&ldquo;For global applications, you can:</p>
+<ul>
+<li>Deploy state machines in multiple regions</li>
+<li>Use cross-region Lambda invocations</li>
+<li>Implement region failover logic</li>
+<li>Coordinate global rollouts</li>
+</ul>
+<p>Example architecture:</p>
+<ul>
+<li>Primary region: us-east-1</li>
+<li>Secondary region: eu-west-1</li>
+<li>Failover logic in Route 53</li>
+<li>Cross-region state machine calls&rdquo;</li>
+</ul>
+<pre tabindex="0"><code>
+#### Enterprise Integration
+</code></pre><p>&ldquo;Enterprise patterns include:</p>
+<ul>
+<li>SAML/OIDC integration cho authentication</li>
+<li>VPC deployment cho network isolation</li>
+<li>Custom KMS keys cho encryption</li>
+<li>Compliance logging và auditing</li>
+<li>Integration với existing ITSM tools</li>
+</ul>
+<p>Many enterprises start with pilot projects và expand gradually.&rdquo;</p>
+<pre tabindex="0"><code>
+#### Performance Optimization
+</code></pre><p>&ldquo;Production optimizations:</p>
+<ul>
+<li>Lambda provisioned concurrency cho consistent performance</li>
+<li>Express workflows cho sub-second executions</li>
+<li>Connection pooling và caching strategies</li>
+<li>Asynchronous patterns cho better throughput</li>
+</ul>
+<p>Key is to measure first, then optimize based on actual bottlenecks.&rdquo;</p>
+<pre tabindex="0"><code>
+## 12.3 Workshop Wrap-up
+
+### Key Takeaways Summary
+
+#### Technical Skills Learned
+- ✅ **AWS Step Functions**: Workflow design và implementation
+- ✅ **Lambda Functions**: Development cho orchestration
+- ✅ **Error Handling**: Retry strategies và rollback mechanisms
+- ✅ **CloudWatch**: Monitoring và alerting setup
+- ✅ **Production**: Deployment best practices
+
+#### Business Value Delivered
+- ✅ **Reduced deployment time**: From hours to minutes
+- ✅ **Improved reliability**: Automatic error handling
+- ✅ **Better observability**: Into deployment processes
+- ✅ **Scalable architecture**: For future growth
+- ✅ **Cost-effective**: Serverless solution
+
+### Next Steps
+
+#### 1. Practice
+- Implement trong your own projects
+- Start with simple workflows
+- Gradually add complexity
+- Experiment với different patterns
+
+#### 2. Extend
+- Add more services to the orchestration
+- Implement different deployment strategies
+- Integrate với your existing tools
+- Explore advanced Step Functions features
+
+#### 3. Learn
+- AWS Step Functions workshops
+- Serverless patterns và best practices
+- Advanced AWS services integration
+- Community resources và examples
+
+#### 4. Certify
+- AWS Certified Solutions Architect
+- AWS Certified Developer
+- AWS Certified DevOps Engineer
+- Serverless specialization
+
+#### 5. Share
+- Present learnings to your team
+- Contribute to open source projects
+- Write blog posts về your experience
+- Participate in AWS community events
+
+## 12.4 Resources for Continued Learning
+
+### AWS Documentation
+- [Step Functions Developer Guide](https://docs.aws.amazon.com/step-functions/)
+- [Lambda Best Practices](https://docs.aws.amazon.com/lambda/latest/dg/best-practices.html)
+- [CloudWatch User Guide](https://docs.aws.amazon.com/cloudwatch/)
+- [Well-Architected Framework](https://aws.amazon.com/architecture/well-architected/)
+
+### Sample Projects
+- **E-commerce order processing**: Complex business workflows
+- **Data ETL pipelines**: Batch processing orchestration
+- **Image processing workflows**: Media processing chains
+- **IoT device management**: Device lifecycle orchestration
+
+### Community Resources
+- [AWS Step Functions Workshop](https://step-functions-workshop.go-aws.com/)
+- [Serverless Framework Examples](https://github.com/serverless/examples)
+- [AWS Samples Repository](https://github.com/aws-samples)
+- [AWS Architecture Center](https://aws.amazon.com/architecture/)
+
+### Tools và Frameworks
+- **Serverless Framework**: Infrastructure as Code
+- **AWS CDK**: Cloud Development Kit
+- **Terraform**: Multi-cloud infrastructure
+- **LocalStack**: Local AWS development
+
+## 12.5 Workshop Feedback
+
+### Feedback Form Topics
+- **Content clarity**: Was the material easy to understand?
+- **Hands-on effectiveness**: Were the exercises helpful?
+- **Demo quality**: Was the demo relevant và clear?
+- **Instructor knowledge**: Technical expertise và presentation
+- **Overall value**: Would you recommend this workshop?
+- **Improvement suggestions**: What could be better?
+
+### Contact Information
+- **Workshop materials**: [GitHub Repository]
+- **Questions**: [Email Address]
+- **Follow-up sessions**: [Calendar Link]
+- **Community**: [Slack/Discord Channels]
+
+## 12.6 Final Demo Scenarios
+
+### Scenario 1: Success Path
+```json
+{
+  &#34;deploymentId&#34;: &#34;success-demo-001&#34;,
+  &#34;environment&#34;: &#34;production&#34;,
+  &#34;services&#34;: [&#34;auth&#34;, &#34;menu&#34;, &#34;restaurant&#34;, &#34;order&#34;, &#34;review&#34;],
+  &#34;strategy&#34;: &#34;rolling&#34;,
+  &#34;healthCheckTimeout&#34;: 30000
+}
+</code></pre><h3 id="scenario-2-failure-và-recovery">Scenario 2: Failure và Recovery</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;deploymentId&#34;</span>: <span style="color:#e6db74">&#34;failure-demo-001&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;environment&#34;</span>: <span style="color:#e6db74">&#34;testing&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;simulateFailure&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;service&#34;</span>: <span style="color:#e6db74">&#34;order&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;errorType&#34;</span>: <span style="color:#e6db74">&#34;service_unavailable&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;afterSeconds&#34;</span>: <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="scenario-3-load-testing">Scenario 3: Load Testing</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;deploymentId&#34;</span>: <span style="color:#e6db74">&#34;load-test-demo-001&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;testType&#34;</span>: <span style="color:#e6db74">&#34;concurrency&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;concurrentExecutions&#34;</span>: <span style="color:#ae81ff">10</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;environment&#34;</span>: <span style="color:#e6db74">&#34;development&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+<div class="notices tip" ><p><strong>Demo Tips:</strong></p>
+<ul>
+<li>Keep explanations concise và focused</li>
+<li>Show real-time execution flows</li>
+<li>Highlight key features như parallel execution</li>
+<li>Demonstrate error handling clearly</li>
+<li>Answer questions as they arise</li>
+<li>Provide practical examples</li>
+</ul>
+</div>
+
+<hr>
+<h2 id="-congratulations">🎉 Congratulations!</h2>
+<p>Bạn đã hoàn thành workshop <strong>&ldquo;Microservices Deployment và Orchestration với AWS Step Functions&rdquo;</strong>!</p>
+<h3 id="what-youve-accomplished">What You&rsquo;ve Accomplished</h3>
+<p>✅ <strong>Mastered serverless orchestration</strong> với AWS Step Functions<br>
+✅ <strong>Built production-ready</strong> microservices deployment system<br>
+✅ <strong>Implemented comprehensive</strong> error handling và monitoring<br>
+✅ <strong>Learned enterprise best practices</strong> for cloud architecture<br>
+✅ <strong>Gained hands-on experience</strong> với real-world scenarios</p>
+<h3 id="your-journey-continues">Your Journey Continues</h3>
+<p>This workshop is just the beginning. You now have the foundation to:</p>
+<ul>
+<li>Build complex serverless applications</li>
+<li>Orchestrate enterprise workflows</li>
+<li>Implement reliable deployment pipelines</li>
+<li>Design scalable cloud architectures</li>
+</ul>
+<h3 id="thank-you">Thank You!</h3>
+<p>Thank you for participating in this workshop. Your engagement và questions made this session valuable for everyone.</p>
+<p><strong>Happy orchestrating!</strong> 🚀</p>
+
+<div class="notices info" ><p><strong>Remember</strong>: The best way to learn is by doing. Take what you&rsquo;ve learned today và apply it to your own projects. Start small, think big, và iterate frequently.</p>
+</div>
+
+<hr>
+<p><em>Workshop completed successfully! 🎯</em></p>
+
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/11-production-practices/" title="11. Production Best Practices"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/1-introduction/" title="Giới thiệu Workshop" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1752194696"></script>
+    <script src="/js/perfect-scrollbar.min.js?1752194696"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1752194696"></script>
+    <script src="/js/jquery.sticky.js?1752194696"></script>
+    <script src="/js/featherlight.min.js?1752194696"></script>
+    <script src="/js/highlight.pack.js?1752194696"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1752194696"></script>
+    <script src="/js/learn.js?1752194696"></script>
+    <script src="/js/hugo-learn.js?1752194696"></script>
+
+    <link href="/mermaid/mermaid.css?1752194696" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1752194696"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-158079754-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>

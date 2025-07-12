@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.148.0">
+    <meta name="description" content="">
+<meta name="author" content="journeyoftheaverageguy@gmail.com">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>7. Step Functions Workflow :: Create a new AWS account.</title>
+
+    
+    <link href="/css/nucleus.css?1752194696" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1752194696" rel="stylesheet">
+    <link href="/css/hybrid.css?1752194696" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1752194696" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1752194696" rel="stylesheet">
+    <link href="/css/auto-complete.css?1752194696" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1752194696" rel="stylesheet">
+    <link href="/css/theme.css?1752194696" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1752194696" rel="stylesheet">
+    
+    <link href="/css/theme-workshop.css?1752194696" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1752194696"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/7-stepfunctions-workflow/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="/">
+
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff;}.cls-2{fill:#f90;fill-rule:evenodd;}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09,10.85a4.7,4.7,0,0,0,.19,1.48,7.73,7.73,0,0,0,.54,1.19.77.77,0,0,1,.12.38.64.64,0,0,1-.32.49l-1,.7a.83.83,0,0,1-.44.15.69.69,0,0,1-.49-.23,3.8,3.8,0,0,1-.6-.77q-.25-.42-.51-1a6.14,6.14,0,0,1-4.89,2.3,4.54,4.54,0,0,1-3.32-1.19,4.27,4.27,0,0,1-1.22-3.2A4.28,4.28,0,0,1,3.61,7.75,6.06,6.06,0,0,1,7.69,6.46a12.47,12.47,0,0,1,1.76.13q.92.13,1.91.36V5.73a3.65,3.65,0,0,0-.79-2.66A3.81,3.81,0,0,0,7.86,2.3a7.71,7.71,0,0,0-1.79.22,12.78,12.78,0,0,0-1.79.57,4.55,4.55,0,0,1-.58.22l-.26,0q-.35,0-.35-.52V2a1.09,1.09,0,0,1,.12-.58,1.2,1.2,0,0,1,.47-.35A10.88,10.88,0,0,1,5.77.32,10.19,10.19,0,0,1,8.36,0a6,6,0,0,1,4.35,1.35,5.49,5.49,0,0,1,1.38,4.09ZM7.34,13.38a5.36,5.36,0,0,0,1.72-.31A3.63,3.63,0,0,0,10.63,12,2.62,2.62,0,0,0,11.19,11a5.63,5.63,0,0,0,.16-1.44v-.7a14.35,14.35,0,0,0-1.53-.28,12.37,12.37,0,0,0-1.56-.1,3.84,3.84,0,0,0-2.47.67A2.34,2.34,0,0,0,5,11a2.35,2.35,0,0,0,.61,1.76A2.4,2.4,0,0,0,7.34,13.38Zm13.35,1.8a1,1,0,0,1-.64-.16,1.3,1.3,0,0,1-.35-.65L15.81,1.51a3,3,0,0,1-.15-.67.36.36,0,0,1,.41-.41H17.7a1,1,0,0,1,.65.16,1.4,1.4,0,0,1,.33.65l2.79,11,2.59-11A1.17,1.17,0,0,1,24.39.6a1.1,1.1,0,0,1,.67-.16H26.4a1.1,1.1,0,0,1,.67.16,1.17,1.17,0,0,1,.32.65L30,12.39,32.88,1.25A1.39,1.39,0,0,1,33.22.6a1,1,0,0,1,.65-.16h1.54a.36.36,0,0,1,.41.41,1.36,1.36,0,0,1,0,.26,3.64,3.64,0,0,1-.12.41l-4,12.86a1.3,1.3,0,0,1-.35.65,1,1,0,0,1-.64.16H29.25a1,1,0,0,1-.67-.17,1.26,1.26,0,0,1-.32-.67L25.67,3.64,23.11,14.34a1.26,1.26,0,0,1-.32.67,1,1,0,0,1-.67.17Zm21.36.44a11.28,11.28,0,0,1-2.56-.29,7.44,7.44,0,0,1-1.92-.67,1,1,0,0,1-.61-.93v-.84q0-.52.38-.52a.9.9,0,0,1,.31.06l.42.17a8.77,8.77,0,0,0,1.83.58,9.78,9.78,0,0,0,2,.2,4.48,4.48,0,0,0,2.43-.55,1.76,1.76,0,0,0,.86-1.57,1.61,1.61,0,0,0-.45-1.16A4.29,4.29,0,0,0,43,9.22l-2.41-.76A5.15,5.15,0,0,1,38,6.78a3.94,3.94,0,0,1-.83-2.41,3.7,3.7,0,0,1,.45-1.85,4.47,4.47,0,0,1,1.19-1.37A5.27,5.27,0,0,1,40.51.29,7.4,7.4,0,0,1,42.6,0a8.87,8.87,0,0,1,1.12.07q.57.07,1.08.19t.95.26a4.27,4.27,0,0,1,.7.29,1.59,1.59,0,0,1,.49.41.94.94,0,0,1,.15.55v.79q0,.52-.38.52a1.76,1.76,0,0,1-.64-.2,7.74,7.74,0,0,0-3.2-.64,4.37,4.37,0,0,0-2.21.47,1.6,1.6,0,0,0-.79,1.48,1.58,1.58,0,0,0,.49,1.18,4.94,4.94,0,0,0,1.83.92L44.55,7a5.08,5.08,0,0,1,2.57,1.6A3.76,3.76,0,0,1,47.9,11a4.21,4.21,0,0,1-.44,1.93,4.4,4.4,0,0,1-1.21,1.47,5.43,5.43,0,0,1-1.85.93A8.25,8.25,0,0,1,42.05,15.62Z"></path><path class="cls-2" d="M45.19,23.81C39.72,27.85,31.78,30,25,30A36.64,36.64,0,0,1,.22,20.57c-.51-.46-.06-1.09.56-.74A49.78,49.78,0,0,0,25.53,26.4,49.23,49.23,0,0,0,44.4,22.53C45.32,22.14,46.1,23.14,45.19,23.81Z"></path><path class="cls-2" d="M47.47,21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74,3.13-2.2,8.27-1.57,8.86-.83s-.16,5.89-3.09,8.35c-.45.38-.88.18-.68-.32C46.69,25.8,48.17,22.11,47.47,21.21Z"></path></svg>
+
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1752194696"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1752194696"></script>
+<script type="text/javascript">
+    
+        var baseurl = "\/\/localhost:1313\/";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1752194696"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/1-introduction/" title="Giới thiệu Workshop" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/1-introduction/">
+          <b>1. </b>Giới thiệu Workshop
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-orchestration-theory/" title="Service Orchestration Theory" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-orchestration-theory/">
+          <b>2. </b>Service Orchestration Theory
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/3-business-domain/" title="Restaurant Business Domain" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/3-business-domain/">
+          <b>3. </b>Restaurant Business Domain
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/4-architecture-overview/" title="Architecture Overview" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/4-architecture-overview/">
+          <b>4. </b>Architecture Overview
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/5-setup/" title="Setup và Chuẩn bị" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/5-setup/">
+          <b>5. </b>Setup và Chuẩn bị
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/6-lambda-development/" title="6. Lambda Functions Development" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/6-lambda-development/">
+          <b>6. </b>6. Lambda Functions Development
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/7-stepfunctions-workflow/" title="7. Step Functions Workflow" class="dd-item 
+        
+        active
+        
+        ">
+      <a href="/7-stepfunctions-workflow/">
+          <b>7. </b>7. Step Functions Workflow
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/8-error-handling/" title="8. Error Handling và Rollback" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/8-error-handling/">
+          <b>8. </b>8. Error Handling và Rollback
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/9-monitoring/" title="9. Monitoring và Observability" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/9-monitoring/">
+          <b>9. </b>9. Monitoring và Observability
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/10-scalability-testing/" title="10. Scalability Testing" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/10-scalability-testing/">
+          <b>10. </b>10. Scalability Testing
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/11-production-practices/" title="11. Production Best Practices" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/11-production-practices/">
+          <b>11. </b>11. Production Best Practices
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/12-demo-qa/" title="12. Demo và Q&amp;A" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/12-demo-qa/">
+          <b>12. </b>12. Demo và Q&amp;A
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://aws.amazon.com/blogs"><i class='fab fa-aws'></i> AWS Study Group - Blog</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://www.facebook.com/groups/awsstudygroupfcj"><i class='fab fa-facebook'></i> AWS Study Group - FB Group</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="en" value="//localhost:1313/7-stepfunctions-workflow/" selected>English</option>
+                    
+                  
+              
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <left>
+    
+     <b> Workshop</b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830891&style=0038&nbdigits=9&type=page&initCount=0" title="Migrate" Alt="web counter"   border="0" /></a>  <br>
+     <b> <a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830807&style=0038&nbdigits=9&type=page&initCount=0" title="Total CLoud Journey" Alt="web counter"   border="0"   />
+     
+</left>
+<left>
+    <br>
+    <br>
+        <b> Last Updated </b> <br>
+        <i><font color=orange>26-11-2023</font></i>
+    </left>
+    <left>
+        <br>
+        <br>
+            <b> Team </b> <br>
+           
+            <i>
+                <a href="https://www.linkedin.com/in/jotaguy"  style="color:orange">Gia Hưng</a>
+        </i>
+        </left>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            <a href='/'>Microservices Deployment và Orchestration với AWS Step Functions</a> > 7. Step Functions Workflow
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#thiết-lập-step-functions-workflow">Thiết lập Step Functions Workflow</a></li>
+    <li><a href="#71-workflow-design-principles">7.1 Workflow Design Principles</a>
+      <ul>
+        <li><a href="#core-principles">Core Principles</a></li>
+        <li><a href="#workflow-architecture">Workflow Architecture</a></li>
+      </ul>
+    </li>
+    <li><a href="#72-state-machine-implementation">7.2 State Machine Implementation</a>
+      <ul>
+        <li><a href="#bước-1-tạo-state-machine">Bước 1: Tạo State Machine</a></li>
+        <li><a href="#bước-2-basic-workflow-definition">Bước 2: Basic Workflow Definition</a></li>
+      </ul>
+    </li>
+    <li><a href="#73-advanced-workflow-features">7.3 Advanced Workflow Features</a>
+      <ul>
+        <li><a href="#enhanced-error-handling">Enhanced Error Handling</a></li>
+        <li><a href="#parallel-execution-optimization">Parallel Execution Optimization</a></li>
+      </ul>
+    </li>
+    <li><a href="#74-workflow-configuration-và-deployment">7.4 Workflow Configuration và Deployment</a>
+      <ul>
+        <li><a href="#bước-1-configure-state-machine">Bước 1: Configure State Machine</a></li>
+        <li><a href="#bước-2-iam-role-configuration">Bước 2: IAM Role Configuration</a></li>
+        <li><a href="#bước-3-test-workflow">Bước 3: Test Workflow</a></li>
+      </ul>
+    </li>
+    <li><a href="#75-monitoring-và-observability">7.5 Monitoring và Observability</a>
+      <ul>
+        <li><a href="#cloudwatch-integration">CloudWatch Integration</a></li>
+        <li><a href="#metrics-và-alarms">Metrics và Alarms</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              7. Step Functions Workflow
+            </h1>
+          
+
+        
+
+
+
+	<h2 id="thiết-lập-step-functions-workflow">Thiết lập Step Functions Workflow</h2>
+<p>Trong phần này, chúng ta sẽ tạo Step Functions workflow để orchestrate việc deployment các microservices theo đúng thứ tự dependency và xử lý các tình huống lỗi.</p>
+
+<div class="notices info" ><p><strong>Mục tiêu phần này:</strong></p>
+<ul>
+<li>Thiết kế workflow architecture cho microservices deployment</li>
+<li>Implement parallel và sequential execution</li>
+<li>Tích hợp error handling và retry mechanisms</li>
+<li>Tạo comprehensive monitoring và logging</li>
+</ul>
+</div>
+
+<h2 id="71-workflow-design-principles">7.1 Workflow Design Principles</h2>
+<h3 id="core-principles">Core Principles</h3>
+<ol>
+<li><strong>Modularity</strong>: Mỗi state có single responsibility</li>
+<li><strong>Resilience</strong>: Built-in error handling và retry logic</li>
+<li><strong>Observability</strong>: Comprehensive logging và metrics</li>
+<li><strong>Scalability</strong>: Parallel execution khi có thể</li>
+</ol>
+<h3 id="workflow-architecture">Workflow Architecture</h3>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">graph TD
+    A[Initialize Deployment] --&gt; B[Validate Services]
+    B --&gt; C[Deploy Layer 1: Auth Service]
+    C --&gt; D[Health Check Auth]
+    D --&gt; E[Deploy Layer 2: Menu &amp; Restaurant]
+    E --&gt; F[Health Check Layer 2]
+    F --&gt; G[Deploy Layer 3: Order Service]
+    G --&gt; H[Health Check Order]
+    H --&gt; I[Deploy Layer 4: Review Service]
+    I --&gt; J[Health Check Review]
+    J --&gt; K[Send Success Notification]
+    
+    D --&gt; L[Rollback Coordinator]
+    F --&gt; L
+    H --&gt; L
+    J --&gt; L
+    L --&gt; M[Send Failure Notification]
+    
+    style A fill:#e1f5fe
+    style K fill:#c8e6c9
+    style L fill:#ffcdd2
+    style M fill:#ffcdd2
+</code></pre><h2 id="72-state-machine-implementation">7.2 State Machine Implementation</h2>
+<h3 id="bước-1-tạo-state-machine">Bước 1: Tạo State Machine</h3>
+<ol>
+<li>Truy cập AWS Console → Services → Step Functions</li>
+<li>Click &ldquo;Create state machine&rdquo;</li>
+<li>Choose &ldquo;Write your workflow in code&rdquo;</li>
+</ol>
+<h3 id="bước-2-basic-workflow-definition">Bước 2: Basic Workflow Definition</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;Comment&#34;</span>: <span style="color:#e6db74">&#34;Restaurant Microservices Deployment Orchestration&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;StartAt&#34;</span>: <span style="color:#e6db74">&#34;InitializeDeployment&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;States&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;InitializeDeployment&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Pass&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Comment&#34;</span>: <span style="color:#e6db74">&#34;Initialize deployment context and validate inputs&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Result&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;deploymentId&#34;</span>: <span style="color:#e6db74">&#34;restaurant-deployment&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;timestamp&#34;</span>: <span style="color:#e6db74">&#34;2024-01-20T00:00:00Z&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;services&#34;</span>: {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;auth&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;order&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;dependencies&#34;</span>: [],
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;url&#34;</span>: <span style="color:#e6db74">&#34;https://httpbin.org/status/200&#34;</span>
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;menu&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;order&#34;</span>: <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;dependencies&#34;</span>: [<span style="color:#e6db74">&#34;auth&#34;</span>],
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;url&#34;</span>: <span style="color:#e6db74">&#34;https://httpbin.org/status/200&#34;</span>
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;restaurant&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;order&#34;</span>: <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;dependencies&#34;</span>: [<span style="color:#e6db74">&#34;auth&#34;</span>],
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;url&#34;</span>: <span style="color:#e6db74">&#34;https://httpbin.org/status/200&#34;</span>
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;order&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;order&#34;</span>: <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;dependencies&#34;</span>: [<span style="color:#e6db74">&#34;auth&#34;</span>, <span style="color:#e6db74">&#34;menu&#34;</span>],
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;url&#34;</span>: <span style="color:#e6db74">&#34;https://httpbin.org/status/200&#34;</span>
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;review&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;order&#34;</span>: <span style="color:#ae81ff">4</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;dependencies&#34;</span>: [<span style="color:#e6db74">&#34;auth&#34;</span>, <span style="color:#e6db74">&#34;order&#34;</span>],
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;url&#34;</span>: <span style="color:#e6db74">&#34;https://httpbin.org/status/200&#34;</span>
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;deploymentConfig&#34;</span>: {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;strategy&#34;</span>: <span style="color:#e6db74">&#34;rolling&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;timeout&#34;</span>: <span style="color:#ae81ff">300</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;retryAttempts&#34;</span>: <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;healthCheckInterval&#34;</span>: <span style="color:#ae81ff">30</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      },
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;ResultPath&#34;</span>: <span style="color:#e6db74">&#34;$.deploymentContext&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Next&#34;</span>: <span style="color:#e6db74">&#34;ValidateServices&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;ValidateServices&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Pass&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Comment&#34;</span>: <span style="color:#e6db74">&#34;Validate service configuration and dependencies&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Next&#34;</span>: <span style="color:#e6db74">&#34;DeployAuthService&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;DeployAuthService&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Task&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Resource&#34;</span>: <span style="color:#e6db74">&#34;arn:aws:lambda:REGION:ACCOUNT:function:restaurant-health-check&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Comment&#34;</span>: <span style="color:#e6db74">&#34;Deploy and health check Auth service&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Parameters&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;serviceName&#34;</span>: <span style="color:#e6db74">&#34;auth&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;serviceUrl.$&#34;</span>: <span style="color:#e6db74">&#34;$.deploymentContext.services.auth.url&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;dependencies.$&#34;</span>: <span style="color:#e6db74">&#34;$.deploymentContext.services.auth.dependencies&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;timeout&#34;</span>: <span style="color:#ae81ff">30000</span>
+</span></span><span style="display:flex;"><span>      },
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Retry&#34;</span>: [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;ErrorEquals&#34;</span>: [<span style="color:#e6db74">&#34;States.TaskFailed&#34;</span>],
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;IntervalSeconds&#34;</span>: <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;MaxAttempts&#34;</span>: <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;BackoffRate&#34;</span>: <span style="color:#ae81ff">2.0</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      ],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Catch&#34;</span>: [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;ErrorEquals&#34;</span>: [<span style="color:#e6db74">&#34;States.ALL&#34;</span>],
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;Next&#34;</span>: <span style="color:#e6db74">&#34;HandleAuthFailure&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;ResultPath&#34;</span>: <span style="color:#e6db74">&#34;$.error&#34;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      ],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Next&#34;</span>: <span style="color:#e6db74">&#34;CheckAuthHealth&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;CheckAuthHealth&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Choice&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Comment&#34;</span>: <span style="color:#e6db74">&#34;Check if Auth service is healthy&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Choices&#34;</span>: [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;Variable&#34;</span>: <span style="color:#e6db74">&#34;$.body.status&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;StringEquals&#34;</span>: <span style="color:#e6db74">&#34;HEALTHY&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;Next&#34;</span>: <span style="color:#e6db74">&#34;DeployLayer2Services&#34;</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;Variable&#34;</span>: <span style="color:#e6db74">&#34;$.body.status&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;StringEquals&#34;</span>: <span style="color:#e6db74">&#34;DEGRADED&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;Next&#34;</span>: <span style="color:#e6db74">&#34;DeployLayer2Services&#34;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      ],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Default&#34;</span>: <span style="color:#e6db74">&#34;HandleAuthFailure&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;DeployLayer2Services&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Parallel&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Comment&#34;</span>: <span style="color:#e6db74">&#34;Deploy Menu and Restaurant services in parallel&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Branches&#34;</span>: [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;StartAt&#34;</span>: <span style="color:#e6db74">&#34;DeployMenuService&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;States&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;DeployMenuService&#34;</span>: {
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Task&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;Resource&#34;</span>: <span style="color:#e6db74">&#34;arn:aws:lambda:REGION:ACCOUNT:function:restaurant-health-check&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;Parameters&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;serviceName&#34;</span>: <span style="color:#e6db74">&#34;menu&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;serviceUrl.$&#34;</span>: <span style="color:#e6db74">&#34;$.deploymentContext.services.menu.url&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;dependencies.$&#34;</span>: <span style="color:#e6db74">&#34;$.deploymentContext.services.menu.dependencies&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;timeout&#34;</span>: <span style="color:#ae81ff">30000</span>
+</span></span><span style="display:flex;"><span>              },
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;Retry&#34;</span>: [
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                  <span style="color:#f92672">&#34;ErrorEquals&#34;</span>: [<span style="color:#e6db74">&#34;States.TaskFailed&#34;</span>],
+</span></span><span style="display:flex;"><span>                  <span style="color:#f92672">&#34;IntervalSeconds&#34;</span>: <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>                  <span style="color:#f92672">&#34;MaxAttempts&#34;</span>: <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>                  <span style="color:#f92672">&#34;BackoffRate&#34;</span>: <span style="color:#ae81ff">2.0</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>              ],
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;End&#34;</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;StartAt&#34;</span>: <span style="color:#e6db74">&#34;DeployRestaurantService&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;States&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;DeployRestaurantService&#34;</span>: {
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Task&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;Resource&#34;</span>: <span style="color:#e6db74">&#34;arn:aws:lambda:REGION:ACCOUNT:function:restaurant-health-check&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;Parameters&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;serviceName&#34;</span>: <span style="color:#e6db74">&#34;restaurant&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;serviceUrl.$&#34;</span>: <span style="color:#e6db74">&#34;$.deploymentContext.services.restaurant.url&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;dependencies.$&#34;</span>: <span style="color:#e6db74">&#34;$.deploymentContext.services.restaurant.dependencies&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;timeout&#34;</span>: <span style="color:#ae81ff">30000</span>
+</span></span><span style="display:flex;"><span>              },
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;Retry&#34;</span>: [
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                  <span style="color:#f92672">&#34;ErrorEquals&#34;</span>: [<span style="color:#e6db74">&#34;States.TaskFailed&#34;</span>],
+</span></span><span style="display:flex;"><span>                  <span style="color:#f92672">&#34;IntervalSeconds&#34;</span>: <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>                  <span style="color:#f92672">&#34;MaxAttempts&#34;</span>: <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>                  <span style="color:#f92672">&#34;BackoffRate&#34;</span>: <span style="color:#ae81ff">2.0</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>              ],
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;End&#34;</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      ],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Catch&#34;</span>: [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;ErrorEquals&#34;</span>: [<span style="color:#e6db74">&#34;States.ALL&#34;</span>],
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;Next&#34;</span>: <span style="color:#e6db74">&#34;HandleLayer2Failure&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;ResultPath&#34;</span>: <span style="color:#e6db74">&#34;$.error&#34;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      ],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Next&#34;</span>: <span style="color:#e6db74">&#34;CheckLayer2Health&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;CheckLayer2Health&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Choice&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Comment&#34;</span>: <span style="color:#e6db74">&#34;Check if Layer 2 services are healthy&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Choices&#34;</span>: [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;And&#34;</span>: [
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;Variable&#34;</span>: <span style="color:#e6db74">&#34;$[0].body.status&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;StringMatches&#34;</span>: <span style="color:#e6db74">&#34;HEALTHY&#34;</span>
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;Variable&#34;</span>: <span style="color:#e6db74">&#34;$[1].body.status&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;StringMatches&#34;</span>: <span style="color:#e6db74">&#34;HEALTHY&#34;</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>          ],
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;Next&#34;</span>: <span style="color:#e6db74">&#34;DeployOrderService&#34;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      ],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Default&#34;</span>: <span style="color:#e6db74">&#34;HandleLayer2Failure&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;DeployOrderService&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Task&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Resource&#34;</span>: <span style="color:#e6db74">&#34;arn:aws:lambda:REGION:ACCOUNT:function:restaurant-health-check&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Comment&#34;</span>: <span style="color:#e6db74">&#34;Deploy Order service&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Parameters&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;serviceName&#34;</span>: <span style="color:#e6db74">&#34;order&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;serviceUrl.$&#34;</span>: <span style="color:#e6db74">&#34;$.deploymentContext.services.order.url&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;dependencies.$&#34;</span>: <span style="color:#e6db74">&#34;$.deploymentContext.services.order.dependencies&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;timeout&#34;</span>: <span style="color:#ae81ff">30000</span>
+</span></span><span style="display:flex;"><span>      },
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Retry&#34;</span>: [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;ErrorEquals&#34;</span>: [<span style="color:#e6db74">&#34;States.TaskFailed&#34;</span>],
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;IntervalSeconds&#34;</span>: <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;MaxAttempts&#34;</span>: <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;BackoffRate&#34;</span>: <span style="color:#ae81ff">2.0</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      ],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Catch&#34;</span>: [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;ErrorEquals&#34;</span>: [<span style="color:#e6db74">&#34;States.ALL&#34;</span>],
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;Next&#34;</span>: <span style="color:#e6db74">&#34;HandleOrderFailure&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;ResultPath&#34;</span>: <span style="color:#e6db74">&#34;$.error&#34;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      ],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Next&#34;</span>: <span style="color:#e6db74">&#34;CheckOrderHealth&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;CheckOrderHealth&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Choice&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Comment&#34;</span>: <span style="color:#e6db74">&#34;Check if Order service is healthy&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Choices&#34;</span>: [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;Variable&#34;</span>: <span style="color:#e6db74">&#34;$.body.status&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;StringEquals&#34;</span>: <span style="color:#e6db74">&#34;HEALTHY&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;Next&#34;</span>: <span style="color:#e6db74">&#34;DeployReviewService&#34;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      ],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Default&#34;</span>: <span style="color:#e6db74">&#34;HandleOrderFailure&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;DeployReviewService&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Task&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Resource&#34;</span>: <span style="color:#e6db74">&#34;arn:aws:lambda:REGION:ACCOUNT:function:restaurant-health-check&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Comment&#34;</span>: <span style="color:#e6db74">&#34;Deploy Review service&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Parameters&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;serviceName&#34;</span>: <span style="color:#e6db74">&#34;review&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;serviceUrl.$&#34;</span>: <span style="color:#e6db74">&#34;$.deploymentContext.services.review.url&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;dependencies.$&#34;</span>: <span style="color:#e6db74">&#34;$.deploymentContext.services.review.dependencies&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;timeout&#34;</span>: <span style="color:#ae81ff">30000</span>
+</span></span><span style="display:flex;"><span>      },
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Retry&#34;</span>: [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;ErrorEquals&#34;</span>: [<span style="color:#e6db74">&#34;States.TaskFailed&#34;</span>],
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;IntervalSeconds&#34;</span>: <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;MaxAttempts&#34;</span>: <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;BackoffRate&#34;</span>: <span style="color:#ae81ff">2.0</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      ],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Catch&#34;</span>: [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;ErrorEquals&#34;</span>: [<span style="color:#e6db74">&#34;States.ALL&#34;</span>],
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;Next&#34;</span>: <span style="color:#e6db74">&#34;HandleReviewFailure&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;ResultPath&#34;</span>: <span style="color:#e6db74">&#34;$.error&#34;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      ],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Next&#34;</span>: <span style="color:#e6db74">&#34;CheckReviewHealth&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;CheckReviewHealth&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Choice&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Comment&#34;</span>: <span style="color:#e6db74">&#34;Check if Review service is healthy&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Choices&#34;</span>: [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;Variable&#34;</span>: <span style="color:#e6db74">&#34;$.body.status&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;StringEquals&#34;</span>: <span style="color:#e6db74">&#34;HEALTHY&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;Next&#34;</span>: <span style="color:#e6db74">&#34;SendSuccessNotification&#34;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      ],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Default&#34;</span>: <span style="color:#e6db74">&#34;HandleReviewFailure&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;SendSuccessNotification&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Task&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Resource&#34;</span>: <span style="color:#e6db74">&#34;arn:aws:lambda:REGION:ACCOUNT:function:restaurant-notification&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Comment&#34;</span>: <span style="color:#e6db74">&#34;Send deployment success notification&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Parameters&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;deploymentStatus&#34;</span>: <span style="color:#e6db74">&#34;SUCCESS&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;serviceName&#34;</span>: <span style="color:#e6db74">&#34;all-services&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;message&#34;</span>: <span style="color:#e6db74">&#34;All restaurant microservices deployed successfully&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;deploymentDetails&#34;</span>: {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;servicesDeployed&#34;</span>: [<span style="color:#e6db74">&#34;auth&#34;</span>, <span style="color:#e6db74">&#34;menu&#34;</span>, <span style="color:#e6db74">&#34;restaurant&#34;</span>, <span style="color:#e6db74">&#34;order&#34;</span>, <span style="color:#e6db74">&#34;review&#34;</span>],
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;deploymentDuration.$&#34;</span>: <span style="color:#e6db74">&#34;$.deploymentContext.timestamp&#34;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      },
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;End&#34;</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;HandleAuthFailure&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Task&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Resource&#34;</span>: <span style="color:#e6db74">&#34;arn:aws:lambda:REGION:ACCOUNT:function:restaurant-rollback-coordinator&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Comment&#34;</span>: <span style="color:#e6db74">&#34;Handle Auth service failure&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Parameters&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;failedService&#34;</span>: <span style="color:#e6db74">&#34;auth&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;deployedServices&#34;</span>: [],
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;rollbackReason&#34;</span>: <span style="color:#e6db74">&#34;Auth service deployment failed&#34;</span>
+</span></span><span style="display:flex;"><span>      },
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Next&#34;</span>: <span style="color:#e6db74">&#34;SendFailureNotification&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;HandleLayer2Failure&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Task&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Resource&#34;</span>: <span style="color:#e6db74">&#34;arn:aws:lambda:REGION:ACCOUNT:function:restaurant-rollback-coordinator&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Comment&#34;</span>: <span style="color:#e6db74">&#34;Handle Layer 2 services failure&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Parameters&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;failedService&#34;</span>: <span style="color:#e6db74">&#34;layer2&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;deployedServices&#34;</span>: [<span style="color:#e6db74">&#34;auth&#34;</span>],
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;rollbackReason&#34;</span>: <span style="color:#e6db74">&#34;Menu or Restaurant service deployment failed&#34;</span>
+</span></span><span style="display:flex;"><span>      },
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Next&#34;</span>: <span style="color:#e6db74">&#34;SendFailureNotification&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;HandleOrderFailure&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Task&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Resource&#34;</span>: <span style="color:#e6db74">&#34;arn:aws:lambda:REGION:ACCOUNT:function:restaurant-rollback-coordinator&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Comment&#34;</span>: <span style="color:#e6db74">&#34;Handle Order service failure&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Parameters&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;failedService&#34;</span>: <span style="color:#e6db74">&#34;order&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;deployedServices&#34;</span>: [<span style="color:#e6db74">&#34;auth&#34;</span>, <span style="color:#e6db74">&#34;menu&#34;</span>, <span style="color:#e6db74">&#34;restaurant&#34;</span>],
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;rollbackReason&#34;</span>: <span style="color:#e6db74">&#34;Order service deployment failed&#34;</span>
+</span></span><span style="display:flex;"><span>      },
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Next&#34;</span>: <span style="color:#e6db74">&#34;SendFailureNotification&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;HandleReviewFailure&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Task&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Resource&#34;</span>: <span style="color:#e6db74">&#34;arn:aws:lambda:REGION:ACCOUNT:function:restaurant-rollback-coordinator&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Comment&#34;</span>: <span style="color:#e6db74">&#34;Handle Review service failure&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Parameters&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;failedService&#34;</span>: <span style="color:#e6db74">&#34;review&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;deployedServices&#34;</span>: [<span style="color:#e6db74">&#34;auth&#34;</span>, <span style="color:#e6db74">&#34;menu&#34;</span>, <span style="color:#e6db74">&#34;restaurant&#34;</span>, <span style="color:#e6db74">&#34;order&#34;</span>],
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;rollbackReason&#34;</span>: <span style="color:#e6db74">&#34;Review service deployment failed&#34;</span>
+</span></span><span style="display:flex;"><span>      },
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Next&#34;</span>: <span style="color:#e6db74">&#34;SendFailureNotification&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;SendFailureNotification&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Task&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Resource&#34;</span>: <span style="color:#e6db74">&#34;arn:aws:lambda:REGION:ACCOUNT:function:restaurant-notification&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Comment&#34;</span>: <span style="color:#e6db74">&#34;Send deployment failure notification&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Parameters&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;deploymentStatus&#34;</span>: <span style="color:#e6db74">&#34;FAILED&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;serviceName.$&#34;</span>: <span style="color:#e6db74">&#34;$.body.failedService&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;message&#34;</span>: <span style="color:#e6db74">&#34;Deployment failed and rollback initiated&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;deploymentDetails&#34;</span>: {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;rollbackStatus.$&#34;</span>: <span style="color:#e6db74">&#34;$.body.rollbackStatus&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;rollbackResults.$&#34;</span>: <span style="color:#e6db74">&#34;$.body.rollbackResults&#34;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      },
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;End&#34;</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="73-advanced-workflow-features">7.3 Advanced Workflow Features</h2>
+<h3 id="enhanced-error-handling">Enhanced Error Handling</h3>
+
+<div class="notices warning" ><p><strong>Quan trọng:</strong> Implement comprehensive error handling để đảm bảo system reliability.</p>
+</div>
+
+<p><strong>Advanced Retry Configuration:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;Retry&#34;</span>: [
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;ErrorEquals&#34;</span>: [<span style="color:#e6db74">&#34;States.TaskFailed&#34;</span>],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;IntervalSeconds&#34;</span>: <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;MaxAttempts&#34;</span>: <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;BackoffRate&#34;</span>: <span style="color:#ae81ff">2.0</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Comment&#34;</span>: <span style="color:#e6db74">&#34;Exponential backoff for transient failures&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;ErrorEquals&#34;</span>: [<span style="color:#e6db74">&#34;States.Timeout&#34;</span>], 
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;IntervalSeconds&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;MaxAttempts&#34;</span>: <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;BackoffRate&#34;</span>: <span style="color:#ae81ff">1.5</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Comment&#34;</span>: <span style="color:#e6db74">&#34;Quick retry for timeouts&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;ErrorEquals&#34;</span>: [<span style="color:#e6db74">&#34;Lambda.ServiceException&#34;</span>],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;IntervalSeconds&#34;</span>: <span style="color:#ae81ff">5</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;MaxAttempts&#34;</span>: <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Comment&#34;</span>: <span style="color:#e6db74">&#34;AWS service issues&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>Comprehensive Catch Blocks:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;Catch&#34;</span>: [
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;ErrorEquals&#34;</span>: [<span style="color:#e6db74">&#34;States.TaskFailed&#34;</span>],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Next&#34;</span>: <span style="color:#e6db74">&#34;HandleServiceFailure&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;ResultPath&#34;</span>: <span style="color:#e6db74">&#34;$.error&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Comment&#34;</span>: <span style="color:#e6db74">&#34;Catch task failures and route to error handler&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;ErrorEquals&#34;</span>: [<span style="color:#e6db74">&#34;States.Timeout&#34;</span>],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Next&#34;</span>: <span style="color:#e6db74">&#34;HandleTimeout&#34;</span>, 
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;ResultPath&#34;</span>: <span style="color:#e6db74">&#34;$.timeoutError&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;ErrorEquals&#34;</span>: [<span style="color:#e6db74">&#34;States.ALL&#34;</span>],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Next&#34;</span>: <span style="color:#e6db74">&#34;HandleUnknownError&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;ResultPath&#34;</span>: <span style="color:#e6db74">&#34;$.unknownError&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Comment&#34;</span>: <span style="color:#e6db74">&#34;Fallback for unexpected errors&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="parallel-execution-optimization">Parallel Execution Optimization</h3>
+<p><strong>Optimized Layer 2 Deployment:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;DeployLayer2Services&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Parallel&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;Comment&#34;</span>: <span style="color:#e6db74">&#34;Deploy Menu and Restaurant services in parallel&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;Branches&#34;</span>: [
+</span></span><span style="display:flex;"><span>      {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;StartAt&#34;</span>: <span style="color:#e6db74">&#34;DeployMenuService&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;States&#34;</span>: {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;DeployMenuService&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Task&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;Resource&#34;</span>: <span style="color:#e6db74">&#34;arn:aws:lambda:REGION:ACCOUNT:function:restaurant-health-check&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;Parameters&#34;</span>: {
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;serviceName&#34;</span>: <span style="color:#e6db74">&#34;menu&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;serviceUrl.$&#34;</span>: <span style="color:#e6db74">&#34;$.deploymentContext.services.menu.url&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;dependencies.$&#34;</span>: <span style="color:#e6db74">&#34;$.deploymentContext.services.menu.dependencies&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;timeout&#34;</span>: <span style="color:#ae81ff">30000</span>
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;Retry&#34;</span>: [
+</span></span><span style="display:flex;"><span>              {
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;ErrorEquals&#34;</span>: [<span style="color:#e6db74">&#34;States.TaskFailed&#34;</span>],
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;IntervalSeconds&#34;</span>: <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;MaxAttempts&#34;</span>: <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;BackoffRate&#34;</span>: <span style="color:#ae81ff">2.0</span>
+</span></span><span style="display:flex;"><span>              }
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;Next&#34;</span>: <span style="color:#e6db74">&#34;ValidateMenuDeployment&#34;</span>
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;ValidateMenuDeployment&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Choice&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;Choices&#34;</span>: [
+</span></span><span style="display:flex;"><span>              {
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;Variable&#34;</span>: <span style="color:#e6db74">&#34;$.body.status&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;StringEquals&#34;</span>: <span style="color:#e6db74">&#34;HEALTHY&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;Next&#34;</span>: <span style="color:#e6db74">&#34;MenuDeploymentSuccess&#34;</span>
+</span></span><span style="display:flex;"><span>              }
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;Default&#34;</span>: <span style="color:#e6db74">&#34;MenuDeploymentFailure&#34;</span>
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;MenuDeploymentSuccess&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Pass&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;Result&#34;</span>: {
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;service&#34;</span>: <span style="color:#e6db74">&#34;menu&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;SUCCESS&#34;</span>
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;End&#34;</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;MenuDeploymentFailure&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Fail&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;Error&#34;</span>: <span style="color:#e6db74">&#34;MenuDeploymentFailed&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;Cause&#34;</span>: <span style="color:#e6db74">&#34;Menu service deployment failed health check&#34;</span>
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      },
+</span></span><span style="display:flex;"><span>      {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;StartAt&#34;</span>: <span style="color:#e6db74">&#34;DeployRestaurantService&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;States&#34;</span>: {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;DeployRestaurantService&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Task&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;Resource&#34;</span>: <span style="color:#e6db74">&#34;arn:aws:lambda:REGION:ACCOUNT:function:restaurant-health-check&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;Parameters&#34;</span>: {
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;serviceName&#34;</span>: <span style="color:#e6db74">&#34;restaurant&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;serviceUrl.$&#34;</span>: <span style="color:#e6db74">&#34;$.deploymentContext.services.restaurant.url&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;dependencies.$&#34;</span>: <span style="color:#e6db74">&#34;$.deploymentContext.services.restaurant.dependencies&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;timeout&#34;</span>: <span style="color:#ae81ff">30000</span>
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;Retry&#34;</span>: [
+</span></span><span style="display:flex;"><span>              {
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;ErrorEquals&#34;</span>: [<span style="color:#e6db74">&#34;States.TaskFailed&#34;</span>],
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;IntervalSeconds&#34;</span>: <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;MaxAttempts&#34;</span>: <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;BackoffRate&#34;</span>: <span style="color:#ae81ff">2.0</span>
+</span></span><span style="display:flex;"><span>              }
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;Next&#34;</span>: <span style="color:#e6db74">&#34;ValidateRestaurantDeployment&#34;</span>
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;ValidateRestaurantDeployment&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Choice&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;Choices&#34;</span>: [
+</span></span><span style="display:flex;"><span>              {
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;Variable&#34;</span>: <span style="color:#e6db74">&#34;$.body.status&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;StringEquals&#34;</span>: <span style="color:#e6db74">&#34;HEALTHY&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;Next&#34;</span>: <span style="color:#e6db74">&#34;RestaurantDeploymentSuccess&#34;</span>
+</span></span><span style="display:flex;"><span>              }
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;Default&#34;</span>: <span style="color:#e6db74">&#34;RestaurantDeploymentFailure&#34;</span>
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;RestaurantDeploymentSuccess&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Pass&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;Result&#34;</span>: {
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;service&#34;</span>: <span style="color:#e6db74">&#34;restaurant&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;SUCCESS&#34;</span>
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;End&#34;</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;RestaurantDeploymentFailure&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;Type&#34;</span>: <span style="color:#e6db74">&#34;Fail&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;Error&#34;</span>: <span style="color:#e6db74">&#34;RestaurantDeploymentFailed&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;Cause&#34;</span>: <span style="color:#e6db74">&#34;Restaurant service deployment failed health check&#34;</span>
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    ],
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;Catch&#34;</span>: [
+</span></span><span style="display:flex;"><span>      {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;ErrorEquals&#34;</span>: [<span style="color:#e6db74">&#34;States.ALL&#34;</span>],
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;Next&#34;</span>: <span style="color:#e6db74">&#34;HandleLayer2Failure&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;ResultPath&#34;</span>: <span style="color:#e6db74">&#34;$.error&#34;</span>
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    ],
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;Next&#34;</span>: <span style="color:#e6db74">&#34;CheckLayer2Health&#34;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="74-workflow-configuration-và-deployment">7.4 Workflow Configuration và Deployment</h2>
+<h3 id="bước-1-configure-state-machine">Bước 1: Configure State Machine</h3>
+<ol>
+<li><strong>Name</strong>: <code>restaurant-deployment-orchestrator</code></li>
+<li><strong>Type</strong>: Standard workflow</li>
+<li><strong>Role</strong>: Tạo IAM role với permissions:
+<ul>
+<li>Lambda invoke permissions</li>
+<li>CloudWatch logs permissions</li>
+<li>Step Functions execution permissions</li>
+</ul>
+</li>
+</ol>
+<h3 id="bước-2-iam-role-configuration">Bước 2: IAM Role Configuration</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;Version&#34;</span>: <span style="color:#e6db74">&#34;2012-10-17&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;Statement&#34;</span>: [
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Effect&#34;</span>: <span style="color:#e6db74">&#34;Allow&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Action&#34;</span>: [
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;lambda:InvokeFunction&#34;</span>
+</span></span><span style="display:flex;"><span>      ],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Resource&#34;</span>: [
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;arn:aws:lambda:*:*:function:restaurant-health-check&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;arn:aws:lambda:*:*:function:restaurant-notification&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;arn:aws:lambda:*:*:function:restaurant-rollback-coordinator&#34;</span>
+</span></span><span style="display:flex;"><span>      ]
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Effect&#34;</span>: <span style="color:#e6db74">&#34;Allow&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Action&#34;</span>: [
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;logs:CreateLogGroup&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;logs:CreateLogStream&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;logs:PutLogEvents&#34;</span>
+</span></span><span style="display:flex;"><span>      ],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;Resource&#34;</span>: <span style="color:#e6db74">&#34;arn:aws:logs:*:*:*&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="bước-3-test-workflow">Bước 3: Test Workflow</h3>
+<p><strong>Test Input:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;deploymentId&#34;</span>: <span style="color:#e6db74">&#34;test-deployment-001&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;environment&#34;</span>: <span style="color:#e6db74">&#34;development&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;services&#34;</span>: [<span style="color:#e6db74">&#34;auth&#34;</span>, <span style="color:#e6db74">&#34;menu&#34;</span>, <span style="color:#e6db74">&#34;restaurant&#34;</span>, <span style="color:#e6db74">&#34;order&#34;</span>, <span style="color:#e6db74">&#34;review&#34;</span>]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>Expected Flow:</strong></p>
+<ol>
+<li>Initialize deployment context</li>
+<li>Deploy Auth service</li>
+<li>Deploy Menu và Restaurant services (parallel)</li>
+<li>Deploy Order service</li>
+<li>Deploy Review service</li>
+<li>Send success notification</li>
+</ol>
+<h2 id="75-monitoring-và-observability">7.5 Monitoring và Observability</h2>
+<h3 id="cloudwatch-integration">CloudWatch Integration</h3>
+
+<div class="notices tip" ><p><strong>Best Practice:</strong> Enable detailed logging để track workflow execution.</p>
+</div>
+
+<p><strong>Log Configuration:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;level&#34;</span>: <span style="color:#e6db74">&#34;ALL&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;includeExecutionData&#34;</span>: <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;destinations&#34;</span>: [
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;cloudWatchLogsLogGroup&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;logGroupArn&#34;</span>: <span style="color:#e6db74">&#34;arn:aws:logs:region:account:log-group:/aws/stepfunctions/restaurant-deployment&#34;</span>
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="metrics-và-alarms">Metrics và Alarms</h3>
+<p><strong>Key Metrics to Monitor:</strong></p>
+<ul>
+<li>Execution duration</li>
+<li>Success/failure rates</li>
+<li>Individual service deployment times</li>
+<li>Error rates by service</li>
+<li>Rollback frequency</li>
+</ul>
+<p><strong>CloudWatch Alarms:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Deployment failure rate alarm</span>
+</span></span><span style="display:flex;"><span>aws cloudwatch put-metric-alarm <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --alarm-name <span style="color:#e6db74">&#34;RestaurantDeploymentFailureRate&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --alarm-description <span style="color:#e6db74">&#34;Alert when deployment failure rate exceeds 20%&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --metric-name <span style="color:#e6db74">&#34;ExecutionsFailed&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --namespace <span style="color:#e6db74">&#34;AWS/States&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --statistic <span style="color:#e6db74">&#34;Sum&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --period <span style="color:#ae81ff">300</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --threshold <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --comparison-operator <span style="color:#e6db74">&#34;GreaterThanThreshold&#34;</span>
+</span></span></code></pre></div><hr>
+<p><strong>Tiếp theo:</strong> Trong phần 8, chúng ta sẽ tìm hiểu về Error Handling và Rollback strategies chi tiết hơn.</p>
+
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/6-lambda-development/" title="6. Lambda Functions Development"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/8-error-handling/" title="8. Error Handling và Rollback" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1752194696"></script>
+    <script src="/js/perfect-scrollbar.min.js?1752194696"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1752194696"></script>
+    <script src="/js/jquery.sticky.js?1752194696"></script>
+    <script src="/js/featherlight.min.js?1752194696"></script>
+    <script src="/js/highlight.pack.js?1752194696"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1752194696"></script>
+    <script src="/js/learn.js?1752194696"></script>
+    <script src="/js/hugo-learn.js?1752194696"></script>
+
+    <link href="/mermaid/mermaid.css?1752194696" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1752194696"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-158079754-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>
